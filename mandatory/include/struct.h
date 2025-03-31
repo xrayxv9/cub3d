@@ -3,8 +3,7 @@
 
 // includes
 
-# include "../../MacroLibX/includes/mlx.h"
-# include <stdio.h>
+# include "cub3D.h"
 
 // structs
 
