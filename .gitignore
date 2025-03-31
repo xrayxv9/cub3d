@@ -4,6 +4,9 @@ mandatory/src/raycasting/*.o
 mandatory/src/render/*.o
 libft/*.o
 libft/ft_printf/*.o
+libft/ft_printf/libftprintf.a
+libft/get_next_line/*.o
+libft/get_next_line/libftgnl.a
 .nfs*
 out
 here
