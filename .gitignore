@@ -3,6 +3,7 @@ mandatory/src/parsing/*.o
 mandatory/src/raycasting/*.o
 mandatory/src/render/*.o
 libft/*.o
+libft/ft_printf/*.o
 .nfs*
 out
 here
