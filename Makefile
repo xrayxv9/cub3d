@@ -1,69 +1,86 @@
-CFLAGS = -g -Wall -Wextra -Werror
-
 NAME = cub3D
-MAKE = make --no-print-directory
 
-OBJS = $(SRCS:.c=.o)
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -g
 
-#-------------------------------------------------------COLORS--------------------------------------------------#
+# Couleurs pour les messages
+GREEN = \033[32m
+RED = \033[31m
+YELLOW = \033[33m
+BLUE = \033[38;2;15;101;214m
+RESET = \033[0m
 
-BLACK = "\e[30m"
-RED = "\e[31m"
-GREEN = "\e[32m"
-YELLOW = "\e[33m"
-BLUE = "\e[34m"
-MAGENTA = "\e[35m"
-CYAN = "\e[36m"
-LIGHT_GRAY = "\e[37m"
-DARK_GRAY = "\e[90m"
-LIGHT_RED = "\e[91m"
-LIGHT_GREEN = "\e[92m"
-LIGHT_YELLOW = "\e[93m"
-LIGHT_BLUE = "\e[94m"
-LIGHT_MAGENTA = "\e[95m"
-LIGHT_CYAN = "\e[96m"
-WHITE = "\e[97m"
-DEFAULT = "\e[39m"
+LIBFT_DIR = libft/
+LIBFT_FILE = libft.a
+MLX_DIR = MacroLibX/
+MLX_FILE = libmlx.so
 
-#-------------------------------------------------------SRCS----------------------------------------------------#
+OBJ_PATH = obj/
+RENDER_PATH = mandatory/src/render/
+PARSING_PATH = mandatory/src/parsing/
+SIGNALS_PATH = mandatory/src/raycasting/
 
-LIBFT_PATH = libft
-LIBFT = $(LIBFT_PATH)/libft.a
 
-MLX_PATH = MacroLibX
-MLX = $(MLX_PATH)/libmlx.so
+RAYCASTING = 
+PARSING = 
+RENDER = main.c
 
-SRCS = 
+RAYCASTING = $(addprefix $(RAYCASTING_PATH), $(RAYCASTING))
+RENDER = $(addprefix $(RENDER_PATH), $(RENDER))
+PARSING = $(addprefix $(PARSING_PATH), $(PARSING))
 
-#-----------------------------------------------------RULES-----------------------------------------------#
+
+OBJ_PARSING = $(PARSING:.c=.o)
+OBJ_RENDER = $(RENDER:.c=.o)
+OBJ_RAYCASTING = $(RAYCASTING:.c=.o)
+
+OBJS_PARSING = $(addprefix $(OBJ_PATH), $(OBJ_PARSING))
+OBJS_RENDER = $(addprefix $(OBJ_PATH), $(OBJ_RENDER))
+OBJS_RAYCASTING = $(addprefix $(OBJ_PATH), $(OBJ_RAYCASTING))
+
+
+LIBFT_LIB = $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
+MLX_LIB = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
 all: $(NAME)
+	@:	
 
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_PATH)
+$(NAME): $(LIBFT_LIB) $(OBJS_RENDER) $(OBJS_PARSING) $(OBJS_RAYCASTING)
+	@$(CC) $(CFLAGS) $(OBJS_RENDER) $(OBJS_RAYCASTING) $(OBJS_PARSING) -o -lm -lSDL2 $@
+	@echo "$(GREEN)>>>	CUBE COMPILED	<<<"
 
-$(MLX):
-	@$(MAKE) -C $(MLX_PATH) -s -j
+$(LIBFT_LIB):
+	@make --no-print-directory -C $(LIBFT_DIR) bonus
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
-	
-%.o: %.c
-	@echo -n $(CYAN)
-	$(CC) $(CFLAGS) -c -o $@ $<
-	@echo -n $(DEFAULT)
+$(MLX_LIB):
+	@make --no-print-directory -C $(MLX_DIR) -s -j
+
+$(OBJ_PATH)%.o: $(PARSING_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_PATH)%.o: $(RENDER_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_PATH)%.o: $(RAYCASTING_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+
 
 clean:
-	@$(MAKE) -C $(LIBFT_PATH) clean
-	@$(MAKE) -C $(MLX_PATH) clean
-	@rm -f $(OBJS)
-	
-fclean: clean
-	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@$(MAKE) -C $(MLX_PATH) fclean
-	@rm -f $(NAME)
+	@echo ">>> $(RED)SUPPRESSION DES FICHIERS .o $(RESET)<<<"
+	@rm -rf $(OBJ_PATH)
+	@make --no-print-directory -C $(LIBFT_DIR) clean
 
+fclean: clean
+	@echo ">>> $(RED)SUPPRESSION DE L'EXECUTABLE $(RESET)<<<"
+	@rm -f $(NAME)
+	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
 re: fclean all
+	@echo "$(RESET)"
 
 .PHONY: all clean fclean re
+
