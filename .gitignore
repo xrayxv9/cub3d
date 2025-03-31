@@ -1,2 +1,9 @@
-
+cub3D
+mandatory/src/parsing/*.o
+mandatory/src/raycasting/*.o
+mandatory/src/render/*.o
+libft/*.o
+.nfs*
+out
+here
 compile_commands.json
