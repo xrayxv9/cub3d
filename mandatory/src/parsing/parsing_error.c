@@ -1,5 +1,4 @@
-#include "../../include/cub3D.h"
-#include <MacroLibX/includes/mlx.h>
+#include "cub3D.h"
 
 void	parsing_error(t_parse *parse, int i)
 {
@@ -14,9 +13,23 @@ void	destroy_textures(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->textures[i])
+	while (i < 6)
 	{
-		mlx_destroy_image(data->game, data->textures[i]);
+		if (data->textures[i])
+			mlx_destroy_image(data->game, data->textures[i]);
 		i++;
 	}
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

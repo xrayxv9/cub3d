@@ -6,7 +6,7 @@
 #    By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 16:45:26 by mpendilh          #+#    #+#              #
-#    Updated: 2024/11/20 10:41:33 by mpendilh         ###   ########.fr        #
+#    Updated: 2025/04/01 16:12:54 by mpendilh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CFLAGS = -Wall -Werror -Wextra
@@ -45,10 +45,6 @@ PRINTF_OBJ = $(PRINTF_PATH)/ft_hexa.o \
 		 	$(PRINTF_PATH)/ft_putchar.o \
 		 	$(PRINTF_PATH)/ft_putnbr.o \
 		 	$(PRINTF_PATH)/ft_putstr.o
-
-GNL_PATH = get_next_line
-GNL_OBJ = $(GNL_PATH)/gnl.c \
-	  $(GNL_PATH)/gnl_utils.c
 
 SRCS = 		ft_atoi.c \
 			ft_bzero.c \
@@ -95,7 +91,9 @@ SRCS = 		ft_atoi.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
 			ft_lstmap.c \
-			ft_strcmp.c
+			ft_strcmp.c \
+			gnl.c \
+			gnl_utils.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
@@ -106,20 +104,17 @@ all: $(NAME)
 
 $(NAME): $(OBJS) 
 	@make --no-print-directory -C $(PRINTF_PATH)
-	@make --no-print-directory -C $(GNL_PATH)
-	@ar -rc $(NAME) $(OBJS) $(PRINTF_OBJ) $(GNL_OBJ)
+	@ar -rc $(NAME) $(OBJS) $(PRINTF_OBJ)
 	@echo -n $(GREEN)
 	@echo ">>>   Libft is compiled ✅  <<<"
 	@echo -n $(DEFAULT)
 
 clean:
 	@make --no-print-directory -C $(PRINTF_PATH) clean
-	@make --no-print-directory -C $(GNL_PATH) clean
 	@rm -f $(OBJS) 
 
 fclean: clean
 	@make --no-print-directory -C $(PRINTF_PATH) fclean
-	@make --no-print-directory -C $(GNL_PATH) fclean
 	@rm -f $(NAME)
 	@echo -n $(YELLOW)
 	@echo ">>>   Libft is cleaned 🧹  <<<"

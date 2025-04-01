@@ -32,8 +32,8 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	ft_bzero((char *)&data, sizeof(t_data));
+	init_window(&data);
 	if (!parsing(&data, av[1]))
 		return (0);
-	init_window(&data);
 	return (0);
 }

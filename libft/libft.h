@@ -6,14 +6,14 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:46:25 by mpendilh          #+#    #+#             */
-/*   Updated: 2024/11/20 10:41:19 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:11:46 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include "ft_printf/ft_printf.h"
-# include "get_next_line/gnl.h"
+# include "gnl.h"
 # include <stdlib.h>
 # include <unistd.h>
 

@@ -5,9 +5,12 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "../../libft/libft.h"
+# include <SDL2/SDL_scancode.h>
+# include "libft.h"
 # include "parsing.h"
 # include "struct.h"
-# include <SDL2/SDL_scancode.h>
+
+# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1920
 
 #endif

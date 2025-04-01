@@ -3,7 +3,7 @@
 
 // includes
 
-# include "../../MacroLibX/includes/mlx.h"
+# include "mlx.h"
 
 // enum
 
@@ -39,6 +39,7 @@ typedef struct s_parse
 	char	*map_to_split;
 
 	int		fd;
+	int		counter;
 }	t_parse;
 
 typedef struct s_data
@@ -46,8 +47,8 @@ typedef struct s_data
 	mlx_context				game;
 	mlx_window_create_info	info;
 	mlx_window				window;
+	mlx_image				textures[6];
 
-	void					*textures[6];
 	char					**map;
 
 	t_player				player;

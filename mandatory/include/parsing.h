@@ -23,5 +23,11 @@ int		check_file(char *map_name, t_parse *parse);
 // handle errors
 
 void	parsing_error(t_parse *parse, int i);
+void	free_tab(char **tab);
+void	destroy_textures(t_data *data);
+
+// utils
+
+int		tab_len(char **tab);
 
 #endif

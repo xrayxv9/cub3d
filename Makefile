@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -I mandatory/include/ -I libft -I MacroLibX/includes
 
 NAME = cub3D
 MAKE = make --no-print-directory
@@ -41,6 +41,7 @@ RENDER_PATH = mandatory/src/render
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/parsing_error.c \
 	   $(PARSING_PATH)/filename.c \
+	   $(PARSING_PATH)/utils.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
 	   $(RENDER_PATH)/main.c
 
