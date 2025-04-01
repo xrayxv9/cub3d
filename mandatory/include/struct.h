@@ -3,8 +3,6 @@
 
 // includes
 
-# include "cub3D.h"
-
 // structs
 
 typedef enum e_pos
@@ -19,6 +17,9 @@ typedef enum e_pos
 
 typedef struct s_parse
 {
+	char	*map_to_split;
+
+	int		fd;
 }	t_parse;
 
 typedef struct s_data
