@@ -3,6 +3,8 @@
 
 // includes
 
+# include "../../MacroLibX/includes/mlx.h"
+
 // structs
 
 typedef enum e_pos
@@ -24,8 +26,12 @@ typedef struct s_parse
 
 typedef struct s_data
 {
-	void	*textures[6];
-	char	**map;
+	mlx_context				game;
+	mlx_window_create_info	info;
+	mlx_window				window;
+
+	void					*textures[6];
+	char					**map;
 }			t_data;
 
 #endif

@@ -16,5 +16,7 @@ int	check_file(char *map_name, t_data *data)
 
 int	parsing(t_data *data, char *filename)
 {
+	(void)data;
+	(void)filename;
 	return (1);
 }

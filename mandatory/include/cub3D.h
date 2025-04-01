@@ -5,8 +5,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "../../MacroLibX/includes/mlx.h"
+# include "../../libft/libft.h"
 # include "parsing.h"
 # include "struct.h"
+# include <SDL2/SDL_scancode.h>
 
 #endif
