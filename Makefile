@@ -39,6 +39,8 @@ RAYCASTING_PATH = mandatory/src/raycasting
 RENDER_PATH = mandatory/src/render
 
 SRCS = $(PARSING_PATH)/parsing.c \
+	   $(PARSING_PATH)/parsing_error.c \
+	   $(PARSING_PATH)/filename.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
 	   $(RENDER_PATH)/main.c
 
