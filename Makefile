@@ -40,7 +40,9 @@ RENDER_PATH = mandatory/src/render
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
-	   $(RENDER_PATH)/main.c
+	   $(RENDER_PATH)/main.c \
+	   $(RENDER_PATH)/background.c \
+	   $(RENDER_PATH)/utils.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
