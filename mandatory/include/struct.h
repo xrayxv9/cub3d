@@ -5,7 +5,7 @@
 
 # include "../../MacroLibX/includes/mlx.h"
 
-// structs
+// enum
 
 typedef enum e_pos
 {
@@ -16,6 +16,23 @@ typedef enum e_pos
 	SKY,
 	FLOOR
 }	t_pos;
+
+typedef enum e_angle
+{
+	SPAWN_NORTH = 0,
+	SPAWN_EAST = 90,
+	SPAWN_SOUTH = 180,
+	SPAWN_WEST = 270
+}	t_angle;
+
+// structs
+
+typedef struct s_player
+{
+	float	angle;
+	float	x;
+	float	y;
+}	t_player;
 
 typedef struct s_parse
 {
@@ -32,6 +49,8 @@ typedef struct s_data
 
 	void					*textures[6];
 	char					**map;
+
+	t_player				player;
 }			t_data;
 
 #endif

@@ -1,4 +1,5 @@
 #include "../../include/cub3D.h"
+#include <mandatory/include/parsing.h>
 
 void	key_hook(int key, t_data *data)
 {
@@ -25,11 +26,14 @@ void	init_window(t_data *data)
 	mlx_loop(data->game);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
+	(void)ac;
 	ft_bzero((char *)&data, sizeof(t_data));
+	if (!parsing(&data, av[1]))
+		return (0);
 	init_window(&data);
 	return (0);
 }
