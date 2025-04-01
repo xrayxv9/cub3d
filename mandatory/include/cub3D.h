@@ -6,5 +6,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "../../MacroLibX/includes/mlx.h"
+# include "parsing.h"
+# include "struct.h"
 
 #endif
