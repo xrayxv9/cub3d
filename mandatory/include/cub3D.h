@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "../../libft/libft.h"
 # include "parsing.h"
 # include "struct.h"

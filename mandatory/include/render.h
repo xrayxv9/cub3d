@@ -5,7 +5,7 @@
 
 void	background(void *da);
 
-char	**read_map( void );
+t_map read_map( void );
 
 void	destroy_all(t_data *data);
 

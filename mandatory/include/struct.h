@@ -38,6 +38,13 @@ typedef struct s_player
 	
 }	t_player;
 
+typedef struct s_map
+{
+	char	**map;
+	int		x;
+	int		y;
+}	t_map;
+
 typedef struct s_data
 {
 	mlx_context				game;
@@ -45,16 +52,14 @@ typedef struct s_data
 	mlx_window_create_info	info;
 	mlx_window				window;
 	t_image					textures[6];
-	char					**map;
+	t_map					map;
 }			t_data;
 
-typedef struct s_dict
+typedef struct s_halfs
 {
-	char	key;
-	char	c;
-	int		i;
-	float	f;
-	struct s_dict	*next;
-}	t_dict;
+	int	begin;
+	int half;
+	int	end;
+}	t_halfs;
 
 #endif

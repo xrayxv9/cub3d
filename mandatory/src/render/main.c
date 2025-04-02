@@ -37,6 +37,7 @@ void	init_window(t_data *data)
 	mlx_on_event(data->game, data->window, MLX_WINDOW_EVENT,
 		(void *)window_hook, data);
 	mlx_add_loop_hook(data->game, (void *)background, data);
+	mlx_add_loop_hook(data->game, (void *)raycasting, data);
 	mlx_loop(data->game);
 }
 
@@ -52,39 +53,44 @@ static void	free_all(char **t)
 	free(tmp);
 }
 
-char **read_map( void )
+t_map read_map( void )
 {
 	int fd = open("mandatory/textures/map.cub", O_RDONLY);
-	char **map = NULL;
+	t_map map;
 	char *line;
 	char **tmp;
 	int	i = 1;
 
+	map.map = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (map)
+		if (map.map)
 		{
 			tmp = malloc((i + 1) * sizeof(char *));
-			for (int x = 0; map[x]; x++)
+			for (int x = 0; map.map[x]; x++)
 			{
-				tmp[x] = ft_strdup(map[x]);	
+				tmp[x] = ft_strdup(map.map[x]);	
 			}
 			tmp[i - 1] = ft_strdup(line);
 			tmp[i] = NULL;
-			free_all(map);
-			map = tmp;
+			free_all(map.map);
+			map.map = tmp;
 		}
 		else
 		{
-			map = malloc((i + 1) * sizeof(char *)); 
-			map[i - 1] = ft_strdup(line);
-			map[i] = NULL;
+			map.map = malloc((i + 1) * sizeof(char *)); 
+			map.map[i - 1] = ft_strdup(line);
+			map.map[i] = NULL;
 		}
 		i++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	for (map.x = 0; map.map[map.x]; map.x++)
+		;
+	for (map.y = 0; map.map[0][map.y]; map.y++)
+		;
 	return (map);
 }
 
