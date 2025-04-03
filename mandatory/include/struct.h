@@ -62,4 +62,20 @@ typedef struct s_halfs
 	int	end;
 }	t_halfs;
 
+typedef struct s_ray
+{
+	int		mapX;
+	int		mapY;
+	double	dirX;
+	double	dirY;
+	double	deltaX;
+	double	deltaY;
+	double	posX;
+	double	posY;
+	double	sideX;
+	double	sideY;
+	double	stepX;
+	double	stepY;
+}	t_ray;
+
 #endif

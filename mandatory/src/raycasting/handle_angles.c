@@ -13,7 +13,7 @@ void	get_angle(t_halfs *ha, t_player player)
 	}
 	else if (angle < 45)
 	{
-		ha->begin = (360 - (angle - 45));
+		ha->begin = (360 - (45 - angle));
 		ha->end = angle + 45;
 	}
 	else if (angle > 315)

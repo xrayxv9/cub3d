@@ -40,6 +40,10 @@ RENDER_PATH = mandatory/src/render
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
+	   $(RAYCASTING_PATH)/casting.c \
+	   $(RAYCASTING_PATH)/handle_angles.c \
+	   $(RAYCASTING_PATH)/utils.c \
+	   $(RAYCASTING_PATH)/init.c \
 	   $(RENDER_PATH)/main.c \
 	   $(RENDER_PATH)/background.c \
 	   $(RENDER_PATH)/utils.c
@@ -56,6 +60,7 @@ $(MLX):
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
+	@echo ">>> CUB3D COMPILED <<<"
 	
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<

@@ -17,7 +17,7 @@ t_player	player_init(void)
 {
 	t_player player;
 	
-	player.angle = 0.0f;
+	player.angle = 180.0f;
 	player.x = 6.0f;
 	player.y = 17.0f;
 	return (player);
@@ -37,7 +37,8 @@ void	init_window(t_data *data)
 	mlx_on_event(data->game, data->window, MLX_WINDOW_EVENT,
 		(void *)window_hook, data);
 	mlx_add_loop_hook(data->game, (void *)background, data);
-	mlx_add_loop_hook(data->game, (void *)raycasting, data);
+	// mlx_add_loop_hook(data->game, (void *)raycasting, data);
+	raycasting((void *)data);
 	mlx_loop(data->game);
 }
 
