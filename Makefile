@@ -40,7 +40,7 @@ RENDER_PATH = mandatory/src/render
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/parsing_error.c \
-	   $(PARSING_PATH)/filename.c \
+	   $(PARSING_PATH)/textures.c \
 	   $(PARSING_PATH)/utils.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
 	   $(RENDER_PATH)/main.c
@@ -60,6 +60,9 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
+
+run: all
+	@./$(NAME)
 
 clean:
 	@$(MAKE) -C $(LIBFT_PATH) clean

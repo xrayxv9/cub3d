@@ -19,11 +19,11 @@ void	init_window(t_data *data)
 	data->info.height = 1080;
 	data->info.width = 1920;
 	data->info.title = "test";
-	data->window = mlx_new_window(data->game, &data->info);
-	mlx_on_event(data->game, data->window, MLX_KEYDOWN, (void *)key_hook, data);
-	mlx_on_event(data->game, data->window, MLX_WINDOW_EVENT,
-		(void *)window_hook, data);
-	mlx_loop(data->game);
+	// data->window = mlx_new_window(data->game, &data->info);
+	// mlx_on_event(data->game, data->window, MLX_KEYDOWN, (void *)key_hook, data);
+	// mlx_on_event(data->game, data->window, MLX_WINDOW_EVENT,
+		// (void *)window_hook, data);
+	// mlx_loop(data->game);
 }
 
 int	main(int ac, char **av)

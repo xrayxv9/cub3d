@@ -1,11 +1,18 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+// includes
+
+# include "mlx.h"
+
 // error messages
 
 # define ERROR "Error\n"
 # define FILENAME_ERROR "Invalid map, please retry with a valid map\n"
 # define PLAYER_ERROR "The map must contain only 1 player\n"
+# define FD_ERROR "The path to the file doesn't exist\n"
+# define MORE_TEXTURES "There is too many textures in the file\n"
+# define LESS_TEXTURES "There is too few textures in the file\n"
 
 // typedef for structs
 
@@ -14,20 +21,26 @@ typedef struct s_data	t_data;
 
 // parsing
 
-int		parsing(t_data *data, char *filename);
+int			parsing(t_data *data, char *filename);
 
-// handle map
+// handle textures
 
-int		check_file(char *map_name, t_parse *parse);
+int			create_textures(t_parse *parse, mlx_image image[6],
+				mlx_context game);
 
 // handle errors
 
-void	parsing_error(t_parse *parse, int i);
-void	free_tab(char **tab);
-void	destroy_textures(t_data *data);
+void		parsing_error(t_parse *parse, int i);
+void		free_tab(char **tab);
+int			destroy_textures_free_tab(mlx_image textures[6],
+				char **tab, mlx_context game);
+int			free_gnl(int fd, char *line);
 
 // utils
 
-int		tab_len(char **tab);
+int			tab_len(char **tab);
+mlx_color	set_colors(char **rgba);
+int			check_file(char *map_name, t_parse *parse);
+int			map_is_start(char *line);
 
 #endif

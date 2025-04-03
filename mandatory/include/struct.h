@@ -34,12 +34,21 @@ typedef struct s_player
 	float	y;
 }	t_player;
 
+typedef struct s_map
+{
+	char	**map;
+
+	int		w;
+	int		h;
+}	t_map;
+
 typedef struct s_parse
 {
 	char	*map_to_split;
 
 	int		fd;
 	int		counter;
+	int		is_map;
 }	t_parse;
 
 typedef struct s_data
@@ -49,7 +58,7 @@ typedef struct s_data
 	mlx_window				window;
 	mlx_image				textures[6];
 
-	char					**map;
+	t_map					map;
 
 	t_player				player;
 }			t_data;
