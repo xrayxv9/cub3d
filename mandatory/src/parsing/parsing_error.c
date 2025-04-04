@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "ft_printf/ft_printf.h"
 
 void	parsing_error(t_parse *parse, int i)
 {
@@ -12,6 +13,12 @@ void	parsing_error(t_parse *parse, int i)
 		ft_putstr_fd(MORE_TEXTURES, 2);
 	if (i == 3)
 		ft_putstr_fd(LESS_TEXTURES, 2);
+	if (i == 4)
+		ft_putstr_fd(MAP_CHAR_ERROR, 2);
+	if (i == 5)
+		ft_putstr_fd(CLOSE_MAP_ERROR, 2);
+	if (i == 6)
+		ft_putstr_fd(NO_MAP_ERROR, 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -27,11 +34,10 @@ int	destroy_textures_free_tab(mlx_image textures[6],
 			mlx_destroy_image(game, textures[i]);
 		i++;
 	}
-	free_tab(tab);
-	return (0);
+	return (free_tab(tab));
 }
 
-void	free_tab(char **tab)
+int	free_tab(char **tab)
 {
 	int	i;
 
@@ -42,6 +48,7 @@ void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+	return (0);
 }
 
 int	free_gnl(int fd, char *line)

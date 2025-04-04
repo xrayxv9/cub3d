@@ -53,5 +53,6 @@ int	map_is_start(char *line)
 
 int	is_map_character(int c)
 {
-	return (c == '1' || c == '0');
+	return (c == '1' || c == '0' || c == 'W' || c == 'E' || c == 'N'
+		|| c == 'S' || ft_is_isspace(c));
 }

@@ -1,5 +1,6 @@
 #include "cub3D.h"
 #include "gnl.h"
+#include "parsing.h"
 
 static int	check_textures(char **textures)
 {
@@ -20,25 +21,22 @@ static int	load_floor_and_sky(mlx_image image, char *rgba,
 	char		**split_rgba;
 	mlx_color	color;
 
-	y = 0;
+	y = -1;
 	split_rgba = ft_split(rgba, ',');
 	if (!split_rgba)
 		return (0);
 	if (tab_len(split_rgba) != 3)
-		return (0);
+		return (free_tab(split_rgba));
 	color = set_colors(split_rgba);
 	image = mlx_new_image(game, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
-	while (y < SCREEN_HEIGHT / 2)
+	while (++y < SCREEN_HEIGHT / 2)
 	{
-		x = 0;
-		while (x < SCREEN_WIDTH)
-		{
+		x = -1;
+		while (++x < SCREEN_WIDTH)
 			mlx_set_image_pixel(game, image, x, y, color);
-			x++;
-		}
-		y++;
 	}
 	(*counter)++;
+	free_tab(split_rgba);
 	return (1);
 }
 

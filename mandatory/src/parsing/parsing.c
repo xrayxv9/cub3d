@@ -1,36 +1,25 @@
 #include "cub3D.h"
 
-int	check_line(char **map_to_split, char *line)
+int	check_all_map(char **map)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	if (*map_to_split)
+	if (!check_line(map[0])
+		|| !check_line(map[tab_len(map) - 1]))
+		return (free_tab(map));
+	i = 1;
+	while (i < tab_len(map) - 1)
 	{
-		while ((*map_to_split)[i])
+		j = 0;
+		while (map[i][j])
 		{
-			if ((*map_to_split)[i] != '1')
-			i++;
+			if (map[i][j] == '0')
+				if (!check_around(map, i, j))
+					return (0);
+			j++;
 		}
-	}
-	else if (line)
-	{
-		while (line[i])
-		{
-			i++;
-		}
-	}
-	return (1);
-}
-
-int	create_map(t_map *map, float *angle, char **map_to_split, int fd)
-{
-	char	*line;
-
-	check_line(map_to_split, NULL);
-	line = get_next_line(fd);
-	while (line)
-	{
+		i++;
 	}
 	return (1);
 }
@@ -51,6 +40,13 @@ int	parsing(t_data *data, char *filename)
 		parsing_error(&parse, 2);
 	if (parse.counter < 6)
 		parsing_error(&parse, 3);
-	create_map(&data->map, &data->player.angle, &parse.map_to_split, parse.fd);
+	if (!parse.map_to_split)
+		parsing_error(&parse, 6);
+	if (!create_map(&parse.map_to_split, parse.fd))
+		parsing_error(&parse, 4);
+	data->map.map = ft_split(parse.map_to_split, '\n');
+	free(parse.map_to_split);
+	if (!check_all_map(data->map.map))
+		parsing_error(&parse, 5);
 	return (1);
 }

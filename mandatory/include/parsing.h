@@ -13,6 +13,10 @@
 # define FD_ERROR "The path to the file doesn't exist\n"
 # define MORE_TEXTURES "There is too many textures in the file\n"
 # define LESS_TEXTURES "There is too few textures in the file\n"
+# define MAP_CHAR_ERROR "Please ensure that there is only known character like\
+: '0' or '1'\n"
+# define CLOSE_MAP_ERROR "Please ensure that the map is entirely close\n"
+# define NO_MAP_ERROR "Please ensure that there is a map\n"
 
 // typedef for structs
 
@@ -31,7 +35,7 @@ int			create_textures(t_parse *parse, mlx_image image[6],
 // handle errors
 
 void		parsing_error(t_parse *parse, int i);
-void		free_tab(char **tab);
+int			free_tab(char **tab);
 int			destroy_textures_free_tab(mlx_image textures[6],
 				char **tab, mlx_context game);
 int			free_gnl(int fd, char *line);
@@ -42,5 +46,13 @@ int			tab_len(char **tab);
 mlx_color	set_colors(char **rgba);
 int			check_file(char *map_name, t_parse *parse);
 int			map_is_start(char *line);
+int			is_map_character(int c);
+
+// map
+
+int			create_map(char **map_to_split, int fd);
+int			is_second_map_character(int c);
+int			check_around(char **map, int i, int j);
+int			check_line(char *line);
 
 #endif
