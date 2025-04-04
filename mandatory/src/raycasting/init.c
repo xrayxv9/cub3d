@@ -27,10 +27,13 @@ void init_side(t_ray *ray)
 		ray->sideY = (ray->mapY + 1 - ray->posY) * ray->deltaY;
 }
 
-void	init(t_ray *ray, t_player player, float angle)
+t_ray	init(t_ray *ray, t_player *player, float angle)
 {
-	ray->posX = player.x;
-	ray->posY = player.y;
+	ray->planeX = 0;
+	ray->planeY = 0.66f;
+	ray->cameraX = 2 * angle / WIN_W - 1;
+	ray->posX = player->x;
+	ray->posY = player->y;
 	ray->dirX = cos(convert_to_radian(angle));
 	ray->dirY = sin(convert_to_radian(angle));
 	ray->deltaX = sqrt(1 + pow(ray->dirY, 2) / pow(ray->dirX, 2));
@@ -39,4 +42,5 @@ void	init(t_ray *ray, t_player player, float angle)
 	ray->mapY = floor(ray->posY);
 	init_step(ray);
 	init_side(ray);
+	return (*ray);
 }

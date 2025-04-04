@@ -13,4 +13,9 @@
 # include "render.h"
 # include <SDL2/SDL_scancode.h>
 
+# define WIN_H 1080
+# define WIN_W 1920
+# define VER 1
+# define HOR 0
+
 #endif

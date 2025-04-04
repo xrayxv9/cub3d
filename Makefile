@@ -46,7 +46,8 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(RAYCASTING_PATH)/init.c \
 	   $(RENDER_PATH)/main.c \
 	   $(RENDER_PATH)/background.c \
-	   $(RENDER_PATH)/utils.c
+	   $(RENDER_PATH)/utils.c \
+	   $(RENDER_PATH)/render.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 

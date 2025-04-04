@@ -66,6 +66,11 @@ typedef struct s_ray
 {
 	int		mapX;
 	int		mapY;
+	int		side;
+	int		line_height;
+	int		line_start;
+	int		line_end;
+	double	wall_distance;
 	double	dirX;
 	double	dirY;
 	double	deltaX;
@@ -76,6 +81,10 @@ typedef struct s_ray
 	double	sideY;
 	double	stepX;
 	double	stepY;
+	double	wallX;
+	double	cameraX;
+	double	planeX;
+	double	planeY;
 }	t_ray;
 
 #endif
