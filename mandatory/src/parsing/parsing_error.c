@@ -1,5 +1,4 @@
 #include "cub3D.h"
-#include "ft_printf/ft_printf.h"
 
 void	parsing_error(t_parse *parse, int i)
 {
@@ -19,6 +18,8 @@ void	parsing_error(t_parse *parse, int i)
 		ft_putstr_fd(CLOSE_MAP_ERROR, 2);
 	if (i == 6)
 		ft_putstr_fd(NO_MAP_ERROR, 2);
+	if (i == 7)
+		ft_putstr_fd(MULTI_SPAWN_ERROR, 2);
 	exit(EXIT_FAILURE);
 }
 

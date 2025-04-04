@@ -17,6 +17,7 @@
 : '0' or '1'\n"
 # define CLOSE_MAP_ERROR "Please ensure that the map is entirely close\n"
 # define NO_MAP_ERROR "Please ensure that there is a map\n"
+# define MULTI_SPAWN_ERROR "Please ensure that there is only one player spawn\n"
 
 // typedef for structs
 
