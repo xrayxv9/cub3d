@@ -2,7 +2,7 @@
 
 int	is_wall(t_map *map, t_ray *ray)
 {
-	if (ray->map_x < 0 || ray->map_x >= map->x)
+	if (ray->map_x < 0 || ray->map_x >= map->h)
 		return (0);
 	else if (ray->map_y < 0 || ray->map_y >= ft_strlen(map->map[ray->map_x]))
 		return (0);

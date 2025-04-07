@@ -35,13 +35,6 @@ typedef enum e_angle
 
 // structs
 
-typedef struct s_map
-{
-	char	**map;
-
-	int		h;
-}	t_map;
-
 typedef struct s_parse
 {
 	char	*map_to_split;
@@ -64,8 +57,7 @@ typedef struct s_player
 typedef struct s_map
 {
 	char	**map;
-	int		x;
-	int		y;
+	int		h;
 }	t_map;
 
 typedef struct s_data
@@ -76,8 +68,6 @@ typedef struct s_data
 	mlx_window				window;
 	t_image					textures[6];
 	t_map					map;
-	t_map					map;
-	t_player				player;
 }			t_data;
 
 typedef struct s_ray

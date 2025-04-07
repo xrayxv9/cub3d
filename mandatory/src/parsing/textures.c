@@ -26,11 +26,11 @@ static int	load_floor_and_sky(mlx_image image, char *rgba,
 	if (tab_len(split_rgba) != 3)
 		return (free_tab(split_rgba));
 	color = set_colors(split_rgba);
-	image = mlx_new_image(game, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
-	while (++y < SCREEN_HEIGHT / 2)
+	image = mlx_new_image(game, WIN_W, WIN_H / 2);
+	while (++y < WIN_H / 2)
 	{
 		x = -1;
-		while (++x < SCREEN_WIDTH)
+		while (++x < WIN_W)
 			mlx_set_image_pixel(game, image, x, y, color);
 	}
 	(*counter)++;
