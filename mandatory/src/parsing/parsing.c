@@ -31,28 +31,31 @@ int	is_position(int c)
 	return (c == 'W' || c == 'E' || c == 'S' || c == 'N');
 }
 
-void	set_position(int c, double *dir_x, double *dir_y, double *plane_x)
+void	set_position(int c, t_player *player)
 {
-	(*plane_x) = 0.66f;
 	if (c == 'W')
 	{
-		(*dir_x) = -1;
-		(*dir_y) = 0;
+		player->plane_y = -0.66f;
+		player->dir_x = -1;
+		player->dir_y = 0;
 	}
 	if (c == 'E')
 	{
-		(*dir_x) = 1;
-		(*dir_y) = 0;
+		player->plane_y = 0.66f;
+		player->dir_x = 1;
+		player->dir_y = 0;
 	}
 	if (c == 'N')
 	{
-		(*dir_x) = 0;
-		(*dir_y) = -1;
+		player->plane_x = -0.66;
+		player->dir_x = 0;
+		player->dir_y = -1;
 	}
 	if (c == 'S')
 	{
-		(*dir_x) = 0;
-		(*dir_y) = 1;
+		player->plane_x = 0.66;
+		player->dir_x = 0;
+		player->dir_y = 1;
 	}
 }
 
@@ -71,8 +74,7 @@ int	set_angle_height(t_map *map, t_player *player)
 			if (is_position(map->map[i][j]))
 			{
 				if (player->dir_x != -1 && player->dir_y != -1)
-					set_position(map->map[i][j], &player->dir_x,
-						&player->dir_y, &player->plane_x);
+					set_position(map->map[i][j], player);
 				else
 					return (0);
 			}
