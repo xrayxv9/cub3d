@@ -22,7 +22,7 @@ typedef struct s_image
 	void	*texture;
 	int		h;
 	int		w;
-} t_image;
+}	t_image;
 
 typedef struct s_parse
 {
@@ -32,10 +32,13 @@ typedef struct s_parse
 
 typedef struct s_player
 {
-	float	angle;
-	float	x;
-	float	y;
-	
+	double	angle;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_map
@@ -55,36 +58,25 @@ typedef struct s_data
 	t_map					map;
 }			t_data;
 
-typedef struct s_halfs
-{
-	int	begin;
-	int half;
-	int	end;
-}	t_halfs;
-
 typedef struct s_ray
 {
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 	int		side;
 	int		line_height;
 	int		line_start;
 	int		line_end;
 	double	wall_distance;
-	double	dirX;
-	double	dirY;
-	double	deltaX;
-	double	deltaY;
-	double	posX;
-	double	posY;
-	double	sideX;
-	double	sideY;
-	double	stepX;
-	double	stepY;
-	double	wallX;
-	double	cameraX;
-	double	planeX;
-	double	planeY;
+	double	dir_x;
+	double	dir_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	double	step_x;
+	double	step_y;
+	double	wall_x;
+	double	camera_x;
 }	t_ray;
 
 #endif

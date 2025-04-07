@@ -5,42 +5,43 @@
 
 void	init_step(t_ray *ray)
 {
-	if (ray->dirX > 0)
-		ray->stepX = 1;
+	if (ray->dir_x > 0)
+		ray->step_x = 1;
 	else
-		ray->stepX = -1;
-	if (ray->dirY > 0)
-		ray->stepY = 1;
+		ray->step_x = -1;
+	if (ray->dir_y > 0)
+		ray->step_y = 1;
 	else
-		ray->stepY = -1;
+		ray->step_y = -1;
 }
 
-void init_side(t_ray *ray)
+void	init_side(t_ray *ray, t_player *player)
 {
-	if (ray->stepX < 0)
-		ray->sideX = (ray->posX - ray->mapX) * ray->deltaX;
+	if (ray->step_x < 0)
+		ray->side_x = (player->x - (double)ray->map_x) * ray->delta_x;
 	else
-		ray->sideX = (ray->mapX + 1 - ray->posX) * ray->deltaX;
-	if (ray->stepY < 0)
-		ray->sideY = (ray->posY - ray->mapY) * ray->deltaY;
+		ray->side_x = ((double)ray->map_x + 1 - player->x) * ray->delta_x;
+	if (ray->step_y < 0)
+		ray->side_y = (player->y - (double)ray->map_y) * ray->delta_y;
 	else
-		ray->sideY = (ray->mapY + 1 - ray->posY) * ray->deltaY;
+		ray->side_y = ((double)ray->map_y + 1 - player->y) * ray->delta_y;
 }
 
 t_ray	init(t_ray *ray, t_player *player, float angle)
 {
-	ray->planeX = 0;
-	ray->planeY = 0.66f;
-	ray->cameraX = 2 * angle / WIN_W - 1;
-	ray->posX = player->x;
-	ray->posY = player->y;
-	ray->dirX = cos(convert_to_radian(angle));
-	ray->dirY = sin(convert_to_radian(angle));
-	ray->deltaX = sqrt(1 + pow(ray->dirY, 2) / pow(ray->dirX, 2));
-	ray->deltaY = sqrt(1 + pow(ray->dirX, 2) / pow(ray->dirY, 2));
-	ray->mapX = floor(ray->posX);
-	ray->mapY = floor(ray->posY);
+	ray->dir_x = cos(convert_to_radian(angle));
+	ray->dir_y = sin(convert_to_radian(angle));
+	ray->map_x = (int)player->x;
+	ray->map_y = (int)player->y;
+	if (ray->dir_x == 0)
+		ray->delta_x = exp(30);
+	else
+		ray->delta_x = fabs(1 / ray->dir_x);
+	if (ray->dir_y == 0)
+		ray->delta_y = exp(30);
+	else
+		ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
-	init_side(ray);
+	init_side(ray, player);
 	return (*ray);
 }

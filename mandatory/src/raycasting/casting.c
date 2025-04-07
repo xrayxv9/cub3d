@@ -2,45 +2,40 @@
 
 int	is_wall(t_map *map, t_ray *ray)
 {
-	if (ray->mapX < 0 || ray->mapX >= map->x)
+	if (ray->map_x < 0 || ray->map_x >= map->x)
 		return (0);
-	else if (ray->mapY < 0 || ray->mapY >= ft_strlen(map->map[ray->mapX]))
+	else if (ray->map_y < 0 || ray->map_y >= ft_strlen(map->map[ray->map_x]))
 		return (0);
-	else if (map->map[ray->mapX][ray->mapY] == '1')
+	else if (map->map[ray->map_x][ray->map_y] == '1')
 		return (1);
 	return (0);
 }
 
 void	main_while(t_ray *ray, t_map *map)
 {
-	// int	i;
-
-	// i = 0;
 	while (!is_wall(map, ray))
 	{
-		if (ray->sideX > ray->sideY)
+		if (ray->side_x < ray->side_y)
 		{
-			ray->sideX += ray->deltaX;
-			ray->mapX += ray->stepX;
+			ray->side_x += ray->delta_x;
+			ray->map_x += ray->step_x;
 			ray->side = VER;
 		}
 		else
 		{
-			ray->sideY += ray->deltaY;
-			ray->mapY += ray->mapY;
+			ray->side_y += ray->delta_y;
+			ray->map_y += ray->map_y;
 			ray->side = HOR;
 		}
-		// i++;
 	}
-	printf("here is the map : (%d,%d)\n", ray->mapX, ray->mapY);
 }
 
 void	line_handle(t_ray *ray, t_player *player)
 {
 	if (ray->side == VER)
-		ray->wall_distance = (ray->sideX - ray->deltaX);
+		ray->wall_distance = (ray->side_x - ray->delta_x);
 	else
-		ray->wall_distance = (ray->sideY - ray->deltaY);
+		ray->wall_distance = (ray->side_y - ray->delta_y);
 	ray->line_height = (int)(WIN_H / ray->wall_distance);
 	ray->line_start = WIN_H * 0.5 - ray->line_height * 0.5;
 	if (ray->line_start < 0)
@@ -49,26 +44,31 @@ void	line_handle(t_ray *ray, t_player *player)
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
 	if (ray->side == 0)
-		ray->wallX = player->y + ray->wall_distance * ray->dirY;
+		ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
 	else
-		ray->wallX = player->x + ray->wall_distance * ray->dirX;
-	ray->wallX -= floor(ray->wallX);
+		ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
+	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	cast_ray(t_data *data, t_map map, t_halfs ha)
+void	cast_ray(t_data *data, t_map *map)
 {
 	t_ray	ray;
 	int		i;
-	(void)ha;
-	// 90 - 33
+	double	angle;
+	double	delta_angle;
+	double	end_angle;
 
-	i = 0; 
-	while (i <= 1920)
+	i = 0;
+	end_angle = data->player.angle + 45;
+	angle = data->player.angle - 45;
+	delta_angle = 90.0 / 1920;
+	while (angle <= end_angle)
 	{
-		ray = init(&ray, &data->player, i);
-		main_while(&ray, &map);
+		ray = init(&ray, &data->player, angle);
+		main_while(&ray, map);
 		line_handle(&ray, &(data->player));
-		render_walls(data, &ray);
+		render_walls(data, &ray, i);
 		i++;
+		angle += delta_angle;
 	}
 }
