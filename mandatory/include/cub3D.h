@@ -6,12 +6,12 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
-# include "../../libft/libft.h"
 # include "parsing.h"
 # include "struct.h"
 # include "raycast.h"
 # include "render.h"
 # include <SDL2/SDL_scancode.h>
+# include "libft.h"
 
 # define WIN_H 1080
 # define WIN_W 1920

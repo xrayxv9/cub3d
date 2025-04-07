@@ -1,6 +1,4 @@
-#include "../../include/cub3D.h"
-#include <MacroLibX/includes/mlx.h>
-#include <mandatory/include/raycast.h>
+#include "cub3D.h"
 
 void	key_hook(int key, t_data *data)
 {
@@ -42,13 +40,18 @@ void	init_window(t_data *data)
 	mlx_loop(data->game);
 }
 
-// funtion to remove
-
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data;
 
+  if (ac != 2)
+  {
+    ft_putstr_fd("mange tes morts\n", 2);
+    return (0);
+  }
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_window(&data);
+	if (!parsing(&data, av[1]))
+		return (0);
 	return (0);
 }
