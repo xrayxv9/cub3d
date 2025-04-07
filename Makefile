@@ -44,7 +44,11 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/map.c \
 	   $(PARSING_PATH)/utils.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
-	   $(RENDER_PATH)/main.c
+	   $(RAYCASTING_PATH)/casting.c \
+	   $(RAYCASTING_PATH)/utils.c \
+	   $(RAYCASTING_PATH)/init.c \
+	   $(RENDER_PATH)/main.c \
+	   $(RENDER_PATH)/render.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
@@ -58,6 +62,7 @@ $(MLX):
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
+	@echo ">>> CUB3D COMPILED <<<"
 	
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
