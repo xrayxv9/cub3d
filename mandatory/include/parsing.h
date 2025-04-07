@@ -4,6 +4,7 @@
 // includes
 
 # include "mlx.h"
+# include "struct.h"
 
 // error messages
 
@@ -25,6 +26,7 @@ on the textures\n"
 
 typedef struct s_parse	t_parse;
 typedef struct s_data	t_data;
+typedef struct s_image	t_image;
 
 // parsing
 
@@ -32,14 +34,14 @@ int			parsing(t_data *data, char *filename);
 
 // handle textures
 
-int			create_textures(t_parse *parse, mlx_image image[6],
+int			create_textures(t_parse *parse, t_image image[6],
 				mlx_context game);
 
 // handle errors
 
 void		parsing_error(t_parse *parse, int i);
 int			free_tab(char **tab);
-int			destroy_textures_free_tab(mlx_image textures[6],
+int			destroy_textures_free_tab(t_image textures[6],
 				char **tab, mlx_context game);
 int			free_gnl(int fd, char *line);
 

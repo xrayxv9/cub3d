@@ -11,7 +11,7 @@ static int	check_textures(char **textures)
 	return (1);
 }
 
-static int	load_floor_and_sky(mlx_image image, char *rgba,
+static int	load_floor_sky(mlx_image image, char *rgba,
 		mlx_context game, int *counter)
 {
 	int			y;
@@ -60,7 +60,7 @@ static int	load_image(mlx_image image, char *filename,
 	return (1);
 }
 
-static int	fill_with_textures(char *line, mlx_image image[6],
+static int	fill_with_textures(char *line, t_image image[6],
 		mlx_context game, int *counter)
 {
 	char	**textures;
@@ -69,28 +69,28 @@ static int	fill_with_textures(char *line, mlx_image image[6],
 	if (!check_textures(textures))
 		return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "NO"))
-		if (!load_image(image[NORTH], textures[1], game, counter))
+		if (!load_image(image[NORTH].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "SO"))
-		if (!load_image(image[SOUTH], textures[1], game, counter))
+		if (!load_image(image[SOUTH].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "WE"))
-		if (!load_image(image[WEST], textures[1], game, counter))
+		if (!load_image(image[WEST].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "EA"))
-		if (!load_image(image[EAST], textures[1], game, counter))
+		if (!load_image(image[EAST].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "F"))
-		if (!load_floor_and_sky(image[FLOOR], textures[1], game, counter))
+		if (!load_floor_sky(image[FLOOR].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	if (!ft_strcmp(textures[0], "C"))
-		if (!load_floor_and_sky(image[SKY], textures[1], game, counter))
+		if (!load_floor_sky(image[SKY].texture, textures[1], game, counter))
 			return (destroy_textures_free_tab(image, textures, game));
 	free_tab(textures);
 	return (1);
 }
 
-int	create_textures(t_parse *parse, mlx_image image[6],
+int	create_textures(t_parse *parse, t_image image[6],
 		mlx_context game)
 {
 	char	*line;

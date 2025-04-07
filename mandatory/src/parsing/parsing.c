@@ -31,56 +31,45 @@ int	is_position(int c)
 	return (c == 'W' || c == 'E' || c == 'S' || c == 'N');
 }
 
-void	set_position(int c, t_player *player)
+void	set_position(int c, t_player *player, int *counter, t_vector *vec)
 {
+	player->x = vec->j;
+	player->y = vec->i;
 	if (c == 'W')
-	{
-		player->plane_y = -0.66f;
-		player->dir_x = -1;
-		player->dir_y = 0;
-	}
+		player->angle = SPAWN_WEST;
 	if (c == 'E')
-	{
-		player->plane_y = 0.66f;
-		player->dir_x = 1;
-		player->dir_y = 0;
-	}
+		player->angle = SPAWN_EAST;
 	if (c == 'N')
-	{
-		player->plane_x = -0.66;
-		player->dir_x = 0;
-		player->dir_y = -1;
-	}
+		player->angle = SPAWN_NORTH;
 	if (c == 'S')
-	{
-		player->plane_x = 0.66;
-		player->dir_x = 0;
-		player->dir_y = 1;
-	}
+		player->angle = SPAWN_SOUTH;
+	(*counter)++;
 }
 
 int	set_angle_height(t_map *map, t_player *player)
 {
-	int	i;
-	int	j;
+	int			counter;
+	t_vector	vec;
 
-	i = 0;
+	ft_bzero((char *)&vec, sizeof(t_vector));
 	map->h = tab_len(map->map);
-	while (map->map[i])
+	counter = 0;
+	while (map->map[vec.i])
 	{
-		j = 0;
-		while (map->map[i][j])
+		vec.j = 0;
+		while (map->map[vec.i][vec.j])
 		{
-			if (is_position(map->map[i][j]))
+			if (is_position(map->map[vec.i][vec.j]))
 			{
-				if (player->dir_x != -1 && player->dir_y != -1)
-					set_position(map->map[i][j], player);
-				else
+				if (player->angle == -1 && !counter)
+					set_position(map->map[vec.i][vec.j],
+						player, &counter, &vec);
+				else if (counter >= 2)
 					return (0);
 			}
-			j++;
+			(vec.j)++;
 		}
-		i++;
+		(vec.i)++;
 	}
 	return (1);
 }
@@ -89,12 +78,11 @@ int	parsing(t_data *data, char *filename)
 {
 	t_parse	parse;
 
-	data->player.dir_x = -1;
-	data->player.dir_y = -1;
+	data->player.angle = -1;
 	ft_bzero((char *)&parse, sizeof(t_parse));
 	if (!check_file(filename, &parse))
 		parsing_error(&parse, 0);
-	if (!create_textures(&parse, data->textures->texture, data->game)
+	if (!create_textures(&parse, data->textures, data->game)
 		&& parse.counter == 6)
 		parsing_error(&parse, 1);
 	if (parse.counter == -1)

@@ -11,10 +11,15 @@ int	is_wall(t_map *map, t_ray *ray)
 	return (0);
 }
 
-void	main_while(t_ray *ray, t_map *map)
+int	main_while(t_ray *ray, t_map *map)
 {
+	// int	i;
+
+	// i = 0;
+	// printf("start\n");
 	while (!is_wall(map, ray))
 	{
+		// printf("before : co : %d, %d\n", ray->map_x, ray->map_y);
 		if (ray->side_x < ray->side_y)
 		{
 			ray->side_x += ray->delta_x;
@@ -24,10 +29,16 @@ void	main_while(t_ray *ray, t_map *map)
 		else
 		{
 			ray->side_y += ray->delta_y;
-			ray->map_y += ray->map_y;
+			ray->map_y += ray->step_y;
 			ray->side = HOR;
 		}
+		// printf("after : co : %d, %d\n", ray->map_x, ray->map_y);
+		// i++;
 	}
+	// printf("%d.end\n", i);
+	// if (i == 31)
+	// 	return (0);
+	return (1);
 }
 
 void	line_handle(t_ray *ray, t_player *player)
@@ -65,9 +76,11 @@ void	cast_ray(t_data *data, t_map *map)
 	while (angle <= end_angle)
 	{
 		ray = init(&ray, &data->player, angle);
-		main_while(&ray, map);
-		line_handle(&ray, &(data->player));
-		render_walls(data, &ray, i);
+		if (main_while(&ray, map))
+		{
+			line_handle(&ray, &(data->player));
+			render_walls(data, &ray, i);
+		}
 		i++;
 		angle += delta_angle;
 	}

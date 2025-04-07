@@ -1,7 +1,4 @@
-#include "../../include/cub3D.h"
-#include <mandatory/include/raycast.h>
-#include <math.h>
-// side = (posY - mapY )* deltaY
+#include "cub3D.h"
 
 void	init_step(t_ray *ray)
 {

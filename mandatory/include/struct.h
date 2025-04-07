@@ -17,7 +17,6 @@ typedef enum e_pos
 	FLOOR
 }	t_pos;
 
-
 typedef struct s_image
 {
 	void	*texture;
@@ -69,6 +68,12 @@ typedef struct s_data
 	t_image					textures[6];
 	t_map					map;
 }			t_data;
+
+typedef struct s_vector
+{
+	int	i;
+	int	j;
+}	t_vector;
 
 typedef struct s_ray
 {
