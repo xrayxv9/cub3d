@@ -31,19 +31,32 @@ int	is_position(int c)
 	return (c == 'W' || c == 'E' || c == 'S' || c == 'N');
 }
 
-void	set_position(int c, float *angle)
+void	set_position(int c, double *dir_x, double *dir_y, double *plane_y)
 {
+	(*plane_y) = 0.66f;
 	if (c == 'W')
-		(*angle) = SPAWN_WEST;
+	{
+		(*dir_x) = -1;
+		(*dir_y) = 0;
+	}
 	if (c == 'E')
-		(*angle) = SPAWN_EAST;
+	{
+		(*dir_x) = 1;
+		(*dir_y) = 0;
+	}
 	if (c == 'N')
-		(*angle) = SPAWN_NORTH;
+	{
+		(*dir_x) = 0;
+		(*dir_y) = -1;
+	}
 	if (c == 'S')
-		(*angle) = SPAWN_SOUTH;
+	{
+		(*dir_x) = 0;
+		(*dir_y) = 1;
+	}
 }
 
-int	set_angle_and_height(t_map *map, float *angle)
+int	set_angle_height(t_map *map, t_player *player)
 {
 	int	i;
 	int	j;
@@ -57,8 +70,9 @@ int	set_angle_and_height(t_map *map, float *angle)
 		{
 			if (is_position(map->map[i][j]))
 			{
-				if (*angle == -1)
-					set_position(map->map[i][j], angle);
+				if (player->dir_x != -1 && player->dir_y != -1)
+					set_position(map->map[i][j], &player->dir_x,
+						&player->dir_y, &player->plane_y);
 				else
 					return (0);
 			}
@@ -73,7 +87,8 @@ int	parsing(t_data *data, char *filename)
 {
 	t_parse	parse;
 
-	data->player.angle = -1;
+	data->player.dir_x = -1;
+	data->player.dir_y = -1;
 	ft_bzero((char *)&parse, sizeof(t_parse));
 	if (!check_file(filename, &parse))
 		parsing_error(&parse, 0);
@@ -92,7 +107,7 @@ int	parsing(t_data *data, char *filename)
 		parsing_error(&parse, 4);
 	if (!check_all_map(parse.map_to_split, &data->map))
 		parsing_error(&parse, 5);
-	if (!set_angle_and_height(&data->map, &data->player.angle))
+	if (!set_angle_height(&data->map, &data->player))
 		parsing_error(&parse, 7);
 	return (1);
 }

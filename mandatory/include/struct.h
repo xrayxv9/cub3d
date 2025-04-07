@@ -29,9 +29,13 @@ typedef enum e_angle
 
 typedef struct s_player
 {
-	float	angle;
 	float	x;
 	float	y;
+
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_map
