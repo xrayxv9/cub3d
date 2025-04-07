@@ -9,6 +9,8 @@
 
 # define ERROR "Error\n"
 # define FILENAME_ERROR "Invalid map, please retry with a valid map\n"
+# define PERM_ERROR "Please ensure that you have the permissions \
+on the textures\n"
 # define PLAYER_ERROR "The map must contain only 1 player\n"
 # define FD_ERROR "The path to the file doesn't exist\n"
 # define MORE_TEXTURES "There is too many textures in the file\n"

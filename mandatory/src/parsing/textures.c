@@ -1,6 +1,4 @@
 #include "cub3D.h"
-#include "gnl.h"
-#include "parsing.h"
 
 static int	check_textures(char **textures)
 {
@@ -50,7 +48,10 @@ static int	load_image(mlx_image image, char *filename,
 	filename[ft_strlen(filename) - 1] = '\0';
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
+	{
+		(*counter) = -1;
 		return (0);
+	}
 	close(fd);
 	image = mlx_new_image_from_file(game, filename, &w, &h);
 	if (!image)

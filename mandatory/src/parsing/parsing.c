@@ -1,21 +1,23 @@
 #include "cub3D.h"
 
-int	check_all_map(char **map)
+int	check_all_map(char *map_to_split, t_map *map)
 {
 	int	i;
 	int	j;
 
-	if (!check_line(map[0])
-		|| !check_line(map[tab_len(map) - 1]))
-		return (free_tab(map));
+	map->map = ft_split(map_to_split, '\n');
+	free(map_to_split);
+	if (!check_line(map->map[0])
+		|| !check_line(map->map[tab_len(map->map) - 1]))
+		return (free_tab(map->map));
 	i = 1;
-	while (i < tab_len(map) - 1)
+	while (i < tab_len(map->map) - 1)
 	{
 		j = 0;
-		while (map[i][j])
+		while (map->map[i][j])
 		{
-			if (map[i][j] == '0')
-				if (!check_around(map, i, j))
+			if (map->map[i][j] == '0')
+				if (!check_around(map->map, i, j))
 					return (0);
 			j++;
 		}
@@ -71,7 +73,6 @@ int	parsing(t_data *data, char *filename)
 {
 	t_parse	parse;
 
-	filename = "maps/ma.cub";
 	data->player.angle = -1;
 	ft_bzero((char *)&parse, sizeof(t_parse));
 	if (!check_file(filename, &parse))
@@ -79,6 +80,8 @@ int	parsing(t_data *data, char *filename)
 	if (!create_textures(&parse, data->textures, data->game)
 		&& parse.counter == 6)
 		parsing_error(&parse, 1);
+	if (parse.counter == -1)
+		parsing_error(&parse, 8);
 	if (parse.counter > 6)
 		parsing_error(&parse, 2);
 	if (parse.counter < 6)
@@ -87,9 +90,7 @@ int	parsing(t_data *data, char *filename)
 		parsing_error(&parse, 6);
 	if (!create_map(&parse.map_to_split, parse.fd))
 		parsing_error(&parse, 4);
-	data->map.map = ft_split(parse.map_to_split, '\n');
-	free(parse.map_to_split);
-	if (!check_all_map(data->map.map))
+	if (!check_all_map(parse.map_to_split, &data->map))
 		parsing_error(&parse, 5);
 	if (!set_angle_and_height(&data->map, &data->player.angle))
 		parsing_error(&parse, 7);
