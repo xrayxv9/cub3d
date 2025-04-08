@@ -12,6 +12,7 @@
 # include "render.h"
 # include <SDL2/SDL_scancode.h>
 # include "libft.h"
+# include "../../MacroLibX/includes/mlx_extended.h"
 
 # define WIN_H 1080
 # define WIN_W 1920

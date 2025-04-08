@@ -65,7 +65,8 @@ typedef struct s_data
 	t_player				player;
 	mlx_window_create_info	info;
 	mlx_window				window;
-	t_image					textures[6];
+	t_image					textures[7];
+	mlx_image				image;
 	t_map					map;
 }			t_data;
 

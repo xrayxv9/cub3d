@@ -1,9 +1,4 @@
 #include "../../include/cub3D.h"
-#include "mlx.h"
-#include "raycast.h"
-#include "render.h"
-#include "struct.h"
-#include <stdio.h>
 
 int	is_wall(t_map *map, t_ray *ray)
 {
@@ -18,8 +13,13 @@ int	is_wall(t_map *map, t_ray *ray)
 
 int	main_while(t_ray *ray, t_map *map)
 {
+	// int	i;
+
+	// i = 0;
+	// printf("start\n");
 	while (!is_wall(map, ray))
 	{
+		// printf("before : co : %d, %d\n", ray->map_x, ray->map_y);
 		if (ray->side_x < ray->side_y)
 		{
 			ray->side_x += ray->delta_x;
@@ -32,8 +32,12 @@ int	main_while(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = HOR;
 		}
+		// printf("after : co : %d, %d\n", ray->map_x, ray->map_y);
 		// i++;
 	}
+	// printf("%d.end\n", i);
+	// if (i == 31)
+	// 	return (0);
 	return (1);
 }
 
@@ -57,7 +61,7 @@ void	line_handle(t_ray *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	cast_ray(t_data *data)
+void	cast_ray(t_data *data, t_map *map)
 {
 	t_ray	ray;
 	int		i;
@@ -66,16 +70,14 @@ void	cast_ray(t_data *data)
 	double	end_angle;
 
 	i = 0;
-	if (data->player.angle >= 360)
-		data->player.angle -= 360;
+	printf("");
 	end_angle = data->player.angle + 45;
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
-	render_bg(data);
 	while (angle <= end_angle)
 	{
 		ray = init(&ray, &data->player, angle);
-		if (main_while(&ray, &data->map))
+		if (main_while(&ray, map))
 		{
 			line_handle(&ray, &(data->player));
 			render_walls(data, &ray, i);

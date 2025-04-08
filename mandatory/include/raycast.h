@@ -5,9 +5,9 @@
 
 // functions
 
-void	raycasting(void *da);
+void	raycasting(t_data *data);
 
-void	cast_ray(t_data *data, t_map *map);
+void	cast_ray(t_data *data);
 
 double	convert_to_radian(float angle);
 
@@ -17,6 +17,5 @@ t_ray	init(t_ray *ray, t_player *player, float angle);
 
 void	line_handle(t_ray *ray, t_player *player);
 
-void	render_walls(t_data *data, t_ray *ray, int i);
 
 #endif

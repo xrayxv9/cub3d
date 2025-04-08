@@ -75,12 +75,12 @@ run2: all
 
 clean:
 	@$(MAKE) -C $(LIBFT_PATH) clean
-	@# @$(MAKE) -C $(MLX_PATH) clean
+	@# $(MAKE) -C $(MLX_PATH) clean
 	@rm -f $(OBJS)
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@# @$(MAKE) -C $(MLX_PATH) fclean
+	@# $(MAKE) -C $(MLX_PATH) fclean
 	@rm -f $(NAME)
 
 

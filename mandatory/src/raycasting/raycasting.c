@@ -1,9 +1,8 @@
 #include "../../include/cub3D.h"
+#include "raycast.h"
+#include "render.h"
 
-void	raycasting(void *da)
+void	raycasting(t_data *data)
 {
-	t_data	*data;
-
-	data = (t_data *)da;
-	cast_ray(data, &data->map);
+	cast_ray(data);
 }
