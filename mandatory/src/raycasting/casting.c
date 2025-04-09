@@ -32,7 +32,6 @@ int	main_while(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = HOR;
 		}
-		// i++;
 	}
 	return (1);
 }
@@ -57,6 +56,14 @@ void	line_handle(t_ray *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+void	handle_angle(t_player *player)
+{
+	if (player->angle >= 360)
+		player->angle -= 360;
+	if (player->angle < 0)
+		player->angle = 360 + player->angle;
+}
+
 void	cast_ray(t_data *data)
 {
 	t_ray	ray;
@@ -66,8 +73,8 @@ void	cast_ray(t_data *data)
 	double	end_angle;
 
 	i = 0;
-	if (data->player.angle >= 360)
-		data->player.angle -= 360;
+	mlx_clear_window(data->game, data->window, (mlx_color){.rgba = 0x0000FFFF});
+	handle_angle(&data->player);
 	end_angle = data->player.angle + 45;
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
@@ -78,9 +85,10 @@ void	cast_ray(t_data *data)
 		if (main_while(&ray, &data->map))
 		{
 			line_handle(&ray, &(data->player));
-			render_walls(data, &ray, i);
+			render_walls(data, &ray, i++);
 		}
-		i++;
 		angle += delta_angle;
 	}
+	mlx_put_image_to_window(data->game, data->window,
+		data->textures[6].texture, 0, 0);
 }

@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra -Werror -I mandatory/include/ -I libft -I MacroLibX/includes
+CFLAGS = -Wall -Wextra -Werror -O2 -I mandatory/include/ -I libft -I MacroLibX/includes
 
 NAME = cub3D
 MAKE = make --no-print-directory

@@ -13,7 +13,7 @@ void	render_celling(t_data *data, mlx_color color)
 		j = 0;
 		while (WIN_W > j)
 		{
-			mlx_set_image_pixel(data->game, data->textures[6].texture, j, i, color);
+			mlx_pixel_put(data->game, data->window, j, i, color);
 			j++;
 		}
 		i++;
@@ -31,44 +31,36 @@ void	render_floor(t_data *data, mlx_color color)
 		j = 0;
 		while (WIN_W > j)
 		{
-			mlx_set_image_pixel(data->game, data->textures[6].texture, j, i, color);
+			mlx_pixel_put(data->game, data->window, j, i, color);
 			j++;
 		}
 		i++;
 	}
-
 }
 
 void	render_bg(t_data *data)
 {
 	mlx_color	color;
-	
+
 	color.r = 255;
 	color.g = 0;
 	color.b = 0;
-	color.a = 125;
+	color.a = 255;
 	render_floor(data, color);
 	color.r = 0;
 	color.g = 255;
 	render_celling(data, color);
-	mlx_put_image_to_window(data->game, data->window, data->textures[6].texture, 0, 0);(void)data;
 }
 
-void	render_walls(t_data *data, t_ray *ray, int angle)
+void	render_walls(t_data *data, t_ray *ray, int x)
 {
 	int	i;
-	mlx_color color;
 
-	color.r = 0;
-	color.g = 0;
-	color.b = 255;
-	color.a = 125;
 	i = ray->line_start;
 	while (ray->line_end >= i)
 	{
-		mlx_set_image_pixel(data->game, data->textures[6].texture, angle, i, color);
+		mlx_pixel_put(data->game, data->window, x, i,
+			(mlx_color){.rgba = 0x0000FFFF});
 		i++;
 	}
-
 }
-

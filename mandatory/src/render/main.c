@@ -7,9 +7,9 @@ void	key_hook(int key, t_data *data)
 	if (key == SDL_SCANCODE_ESCAPE)
 		mlx_loop_end(data->game);
 	if (key == SDL_SCANCODE_RIGHT)
-		data->player.angle += 5.0f;
+		data->player.angle += 0.5f;
 	if (key == SDL_SCANCODE_LEFT)
-		data->player.angle -= 5.0f;
+		data->player.angle -= 0.5f;
 }
 
 void	window_hook(int event, t_data *data)
@@ -44,9 +44,8 @@ int	main(int ac, char **av)
 	mlx_on_event(data.game, data.window, MLX_WINDOW_EVENT,
 		(void *)window_hook, &data);
 	data.textures[6].texture = mlx_new_image(data.game, 1920, 1080);
-	
 	mlx_add_loop_hook(data.game, (void *)raycasting, &data);
 	mlx_loop(data.game);
-	destroy_textures_free_tab(data.textures, NULL, data.game);
+	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	return (0);
 }

@@ -33,8 +33,8 @@ int	is_position(int c)
 
 void	set_position(int c, t_player *player, int *counter, t_vector *vec)
 {
-	player->x = vec->j;
-	player->y = vec->i;
+	player->x = vec->j + 0.5f;
+	player->y = vec->i + 0.5f;
 	if (c == 'W')
 		player->angle = SPAWN_WEST;
 	if (c == 'E')

@@ -26,8 +26,8 @@ void	init_side(t_ray *ray, t_player *player)
 
 t_ray	init(t_ray *ray, t_player *player, float angle)
 {
-	ray->dir_x = cos(convert_to_radian(angle));
-	ray->dir_y = sin(convert_to_radian(angle));
+	ray->dir_x = cos(convert_to_radian(angle)) * 0.5;
+	ray->dir_y = sin(convert_to_radian(angle)) * 0.5;
 	ray->map_x = (int)player->x;
 	ray->map_y = (int)player->y;
 	if (ray->dir_x == 0)
