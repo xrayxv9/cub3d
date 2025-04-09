@@ -14,7 +14,10 @@ int	is_wall(t_map *map, t_ray *ray)
 
 int	main_while(t_ray *ray, t_map *map)
 {
-	while (!is_wall(map, ray))
+	int	i;
+
+	i = 0;
+	while (i <= 50 && !is_wall(map, ray))
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -29,6 +32,8 @@ int	main_while(t_ray *ray, t_map *map)
 			ray->side = HOR;
 		}
 	}
+	if (i == 51)
+		return (0);
 	return (1);
 }
 

@@ -1,14 +1,33 @@
 #include "cub3D.h"
 #include "mlx.h"
+#include "raycast.h"
 
 void	key_down(int key, t_data *data)
 {
 	if (key == SDL_SCANCODE_ESCAPE)
 		mlx_loop_end(data->game);
 	if (key == SDL_SCANCODE_RIGHT)
+	{
 		data->player.move_angle = 2.5f;
+		raycasting(data);
+	}
 	if (key == SDL_SCANCODE_LEFT)
+	{
 		data->player.move_angle = -2.5f;
+		raycasting(data);
+	}
+	if (key == SDL_SCANCODE_W)
+	{
+		data->player.x += cos(convert_to_radian(data->player.angle)) * 0.5;
+		data->player.y += sin(convert_to_radian(data->player.angle)) * 0.5;
+		raycasting(data);
+	}
+	if (key == SDL_SCANCODE_S)
+	{
+		data->player.x += cos(convert_to_radian(data->player.angle - 180));
+		data->player.y += sin(convert_to_radian(data->player.angle - 180));
+		raycasting(data);
+	}
 }
 
 void	key_up(int key, t_data *data)
@@ -51,7 +70,7 @@ int	main(int ac, char **av)
 	mlx_on_event(data.game, data.window, MLX_WINDOW_EVENT,
 		(void *)window_hook, &data);
 	mlx_on_event(data.game, data.window, MLX_KEYUP, (void *)key_up, &data);
-	mlx_add_loop_hook(data.game, (void *)raycasting, &data);
+	raycasting(&data);
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	return (0);
