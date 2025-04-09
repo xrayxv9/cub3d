@@ -34,8 +34,7 @@ int			parsing(t_data *data, char *filename);
 
 // handle textures
 
-int			create_textures(t_parse *parse, t_image image[6],
-				mlx_context game);
+int			create_textures(t_parse *parse, t_data *data);
 
 // handle errors
 
@@ -52,6 +51,7 @@ mlx_color	set_colors(char **rgba);
 int			check_file(char *map_name, t_parse *parse);
 int			map_is_start(char *line);
 int			is_map_character(int c);
+int			check_textures(char **textures);
 
 // map
 
