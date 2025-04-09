@@ -1,15 +1,20 @@
 #include "cub3D.h"
 #include "mlx.h"
-#include "parsing.h"
 
-void	key_hook(int key, t_data *data)
+void	key_down(int key, t_data *data)
 {
 	if (key == SDL_SCANCODE_ESCAPE)
 		mlx_loop_end(data->game);
 	if (key == SDL_SCANCODE_RIGHT)
-		data->player.angle += 0.5f;
+		data->player.move_angle = 2.5f;
 	if (key == SDL_SCANCODE_LEFT)
-		data->player.angle -= 0.5f;
+		data->player.move_angle = -2.5f;
+}
+
+void	key_up(int key, t_data *data)
+{
+	if (key == SDL_SCANCODE_RIGHT || key == SDL_SCANCODE_LEFT)
+		data->player.move_angle = 0.0f;
 }
 
 void	window_hook(int event, t_data *data)
@@ -40,9 +45,11 @@ int	main(int ac, char **av)
 	init_window(&data);
 	if (!parsing(&data, av[1]))
 		return (0);
-	mlx_on_event(data.game, data.window, MLX_KEYDOWN, (void *)key_hook, &data);
+	mlx_set_fps_goal(data.game, 60);
+	mlx_on_event(data.game, data.window, MLX_KEYDOWN, (void *)key_down, &data);
 	mlx_on_event(data.game, data.window, MLX_WINDOW_EVENT,
 		(void *)window_hook, &data);
+	mlx_on_event(data.game, data.window, MLX_KEYUP, (void *)key_up, &data);
 	mlx_add_loop_hook(data.game, (void *)raycasting, &data);
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);

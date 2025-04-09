@@ -79,7 +79,7 @@ void	cast_ray(t_data *data)
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
 	render_bg(data);
-	printf("%f\n", data->player.angle);
+	// printf("%f\n", data->player.angle);
 	while (angle <= end_angle)
 	{
 		ray = init(&ray, &data->player, angle);

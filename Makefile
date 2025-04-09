@@ -68,7 +68,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 run: all
-	@./$(NAME)
+	@./$(NAME) maps/map.cub
 
 run2: all
 	@valgrind --track-origins=yes --leak-check=full --suppressions=MacroLibX/valgrind.supp ./$(NAME)
