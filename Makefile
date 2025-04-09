@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra -Werror -I mandatory/include/ -I libft -I MacroLibX/includes
+CFLAGS = -Wall -Wextra -Werror -O2 -I mandatory/include/ -I libft -I MacroLibX/includes
 
 NAME = cub3D
 MAKE = make --no-print-directory
@@ -44,7 +44,11 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/map.c \
 	   $(PARSING_PATH)/utils.c \
 	   $(RAYCASTING_PATH)/raycasting.c \
-	   $(RENDER_PATH)/main.c
+	   $(RAYCASTING_PATH)/casting.c \
+	   $(RAYCASTING_PATH)/utils.c \
+	   $(RAYCASTING_PATH)/init.c \
+	   $(RENDER_PATH)/main.c \
+	   $(RENDER_PATH)/render.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
@@ -58,6 +62,7 @@ $(MLX):
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
+	@echo ">>> CUB3D COMPILED <<<"
 	
 %.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
@@ -70,12 +75,12 @@ run2: all
 
 clean:
 	@$(MAKE) -C $(LIBFT_PATH) clean
-	@# @$(MAKE) -C $(MLX_PATH) clean
+	@# $(MAKE) -C $(MLX_PATH) clean
 	@rm -f $(OBJS)
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@# @$(MAKE) -C $(MLX_PATH) fclean
+	@# $(MAKE) -C $(MLX_PATH) fclean
 	@rm -f $(NAME)
 
 

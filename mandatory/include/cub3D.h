@@ -5,12 +5,18 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <SDL2/SDL_scancode.h>
-# include "libft.h"
+# include <math.h>
 # include "parsing.h"
 # include "struct.h"
+# include "raycast.h"
+# include "render.h"
+# include <SDL2/SDL_scancode.h>
+# include "libft.h"
+# include "../../MacroLibX/includes/mlx_extended.h"
 
-# define SCREEN_HEIGHT 1080
-# define SCREEN_WIDTH 1920
+# define WIN_H 1080
+# define WIN_W 1920
+# define VER 1
+# define HOR 0
 
 #endif
