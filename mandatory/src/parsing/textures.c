@@ -1,44 +1,22 @@
 #include "cub3D.h"
 
-static int	check_textures(char **textures)
+static int	load_floor_sky(mlx_color *color, char *rgba,
+		int *counter)
 {
-	if (!textures)
-		return (0);
-	if (!ft_strcmp(textures[0], "\n"))
-		return (1);
-	if (tab_len(textures) != 2)
-		return (0);
-	return (1);
-}
-
-static int	load_floor_sky(mlx_image image, char *rgba,
-		mlx_context game, int *counter)
-{
-	int			y;
-	int			x;
 	char		**split_rgba;
-	mlx_color	color;
 
-	y = -1;
 	split_rgba = ft_split(rgba, ',');
 	if (!split_rgba)
 		return (0);
 	if (tab_len(split_rgba) != 3)
 		return (free_tab(split_rgba));
-	color = set_colors(split_rgba);
-	image = mlx_new_image(game, WIN_W, WIN_H / 2);
-	while (++y < WIN_H / 2)
-	{
-		x = -1;
-		while (++x < WIN_W)
-			mlx_set_image_pixel(game, image, x, y, color);
-	}
+	(*color) = set_colors(split_rgba);
 	(*counter)++;
 	free_tab(split_rgba);
 	return (1);
 }
 
-static int	load_image(mlx_image image, char *filename,
+static int	load_image(mlx_image *image, char *filename,
 		mlx_context game, int *counter)
 {
 	int		fd;
@@ -53,52 +31,70 @@ static int	load_image(mlx_image image, char *filename,
 		return (0);
 	}
 	close(fd);
-	image = mlx_new_image_from_file(game, filename, &w, &h);
+	(*image) = mlx_new_image_from_file(game, filename, &w, &h);
 	if (!image)
 		return (0);
 	(*counter)++;
 	return (1);
 }
 
-static int	fill_with_textures(char *line, t_image image[6],
-		mlx_context game, int *counter)
+static int	fill_with_textures2(t_data *data, int *counter, char **textures)
+{
+	if (!ft_strcmp(textures[0], "EA"))
+		if (!load_image(&data->textures[EAST].texture,
+				textures[1], data->game, counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
+	if (!ft_strcmp(textures[0], "F"))
+		if (!load_floor_sky(&data->color[FLOOR],
+				textures[1], counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
+	if (!ft_strcmp(textures[0], "C"))
+		if (!load_floor_sky(&data->color[SKY],
+				textures[1], counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
+	return (1);
+}
+
+static int	fill_with_textures(char *line, t_data *data, int *counter)
 {
 	char	**textures;
 
 	textures = ft_split(line, ' ');
 	if (!check_textures(textures))
-		return (destroy_textures_free_tab(image, textures, game));
+		return (destroy_textures_free_tab(data->textures,
+				textures, data->game));
 	if (!ft_strcmp(textures[0], "NO"))
-		if (!load_image(image[NORTH].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
+		if (!load_image(&data->textures[NORTH].texture,
+				textures[1], data->game, counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
 	if (!ft_strcmp(textures[0], "SO"))
-		if (!load_image(image[SOUTH].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
+		if (!load_image(&data->textures[SOUTH].texture,
+				textures[1], data->game, counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
 	if (!ft_strcmp(textures[0], "WE"))
-		if (!load_image(image[WEST].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
-	if (!ft_strcmp(textures[0], "EA"))
-		if (!load_image(image[EAST].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
-	if (!ft_strcmp(textures[0], "F"))
-		if (!load_floor_sky(image[FLOOR].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
-	if (!ft_strcmp(textures[0], "C"))
-		if (!load_floor_sky(image[SKY].texture, textures[1], game, counter))
-			return (destroy_textures_free_tab(image, textures, game));
+		if (!load_image(&data->textures[WEST].texture,
+				textures[1], data->game, counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
+	if (!fill_with_textures2(data, counter, textures))
+		return (0);
 	free_tab(textures);
 	return (1);
 }
 
-int	create_textures(t_parse *parse, t_image image[6],
-		mlx_context game)
+int	create_textures(t_parse *parse, t_data *data)
 {
 	char	*line;
 
 	line = get_next_line(parse->fd);
 	while (line && !map_is_start(line))
 	{
-		if (!fill_with_textures(line, image, game, &parse->counter))
+		if (!fill_with_textures(line, data, &parse->counter))
 			return (free_gnl(parse->fd, line));
 		free(line);
 		line = get_next_line(parse->fd);

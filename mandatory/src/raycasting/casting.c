@@ -1,5 +1,7 @@
 #include "cub3D.h"
 #include "mlx.h"
+#include "raycast.h"
+#include <stdio.h>
 
 int	is_wall(t_map *map, t_ray *ray)
 {
@@ -75,6 +77,7 @@ void	cast_ray(t_data *data)
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
 	render_bg(data);
+	printf("%f, %f\n", cos(convert_to_radian(0)), sin(convert_to_radian(0)));
 	while (angle <= end_angle)
 	{
 		ray = init(&ray, &data->player, angle);
@@ -86,5 +89,5 @@ void	cast_ray(t_data *data)
 		angle += delta_angle;
 	}
 	mlx_put_image_to_window(data->game, data->window,
-		data->textures[6].texture, 0, 0);
+		data->textures[4].texture, 0, 0);
 }

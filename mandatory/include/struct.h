@@ -7,21 +7,26 @@
 
 // enum
 
+typedef enum e_sf
+{
+	FLOOR,
+	SKY
+}	t_sf;
+
 typedef enum e_pos
 {
 	SOUTH,
 	EAST,
 	WEST,
 	NORTH,
-	SKY,
-	FLOOR
+	IMAGE
 }	t_pos;
 
 typedef struct s_image
 {
-	void	*texture;
-	int		h;
-	int		w;
+	mlx_image	texture;
+	int			h;
+	int			w;
 }	t_image;
 
 typedef enum e_angle
@@ -47,8 +52,6 @@ typedef struct s_player
 	double	angle;
 	double	x;
 	double	y;
-	double	dir_x;
-	double	dir_y;
 	double	plane_x;
 	double	plane_y;
 
@@ -67,7 +70,8 @@ typedef struct s_data
 	t_player				player;
 	mlx_window_create_info	info;
 	mlx_window				window;
-	t_image					textures[7];
+	mlx_color				color[2];
+	t_image					textures[5];
 	mlx_image				image;
 	t_map					map;
 }			t_data;

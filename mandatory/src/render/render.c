@@ -12,7 +12,7 @@ void	render_celling(t_data *data, mlx_color color)
 		while (WIN_W > j)
 		{
 			mlx_set_image_pixel(data->game,
-				data->textures[6].texture, j, i, color);
+				data->textures[4].texture, j, i, color);
 			j++;
 		}
 		i++;
@@ -31,7 +31,7 @@ void	render_floor(t_data *data, mlx_color color)
 		while (WIN_W > j)
 		{
 			mlx_set_image_pixel(data->game,
-				data->textures[6].texture, j, i, color);
+				data->textures[4].texture, j, i, color);
 			j++;
 		}
 		i++;
@@ -59,7 +59,7 @@ void	render_walls(t_data *data, t_ray *ray, int x)
 	i = ray->line_start;
 	while (ray->line_end >= i)
 	{
-		mlx_set_image_pixel(data->game, data->textures[6].texture,
+		mlx_set_image_pixel(data->game, data->textures[4].texture,
 			x, i, (mlx_color){.rgba = 0x0000FFFF});
 		i++;
 	}

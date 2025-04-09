@@ -82,7 +82,7 @@ int	parsing(t_data *data, char *filename)
 	ft_bzero((char *)&parse, sizeof(t_parse));
 	if (!check_file(filename, &parse))
 		parsing_error(&parse, 0);
-	if (!create_textures(&parse, data->textures, data->game)
+	if (!create_textures(&parse, data)
 		&& parse.counter == 6)
 		parsing_error(&parse, 1);
 	if (parse.counter == -1)
