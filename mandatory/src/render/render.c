@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "mlx.h"
 
 void	render_celling(t_data *data, mlx_color color)
 {
@@ -52,15 +53,31 @@ void	render_bg(t_data *data)
 	render_floor(data, color);
 }
 
+int	set_color(t_ray *ray)
+{
+	if (ray->side == VER && ray->dir_x < 0)
+		return (NORTH);
+	else if (ray->side == VER && ray->dir_x > 0)
+		return (SOUTH);
+	else if (ray->side == HOR && ray->side_y < 0)
+		return (WEST);
+	else
+		return (EAST);
+}
+
 void	render_walls(t_data *data, t_ray *ray, int x)
 {
-	int	i;
+	int			i;
+	mlx_color	color;
+	int			dir;
 
 	i = ray->line_start;
+	dir = set_color(ray);
+	printf("%p\n", data->textures[dir].texture);
 	while (ray->line_end >= i)
 	{
-		mlx_set_image_pixel(data->game, data->textures[6].texture,
-			x, i, (mlx_color){.rgba = 0x0000FFFF});
+		color.rgba = mlx_get_image_pixel(data->game, data->textures[dir].texture, x, i).rgba;
+		mlx_set_image_pixel(data->game, data->textures[6].texture, x, i, color);
 		i++;
 	}
 }
