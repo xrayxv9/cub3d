@@ -7,11 +7,11 @@
 
 int	is_wall(t_map *map, t_ray *ray)
 {
-	if (ray->map_x < 0 || ray->map_x >= map->h)
+	if (ray->map_y < 0 || ray->map_y >= map->h)
 		return (0);
-	else if (ray->map_y < 0 || ray->map_y >= ft_strlen(map->map[ray->map_x]))
+	else if (ray->map_x < 0 || ray->map_x >= ft_strlen(map->map[ray->map_y]))
 		return (0);
-	else if (map->map[ray->map_x][ray->map_y] == '1')
+	else if (map->map[ray->map_y][ray->map_x] == '1')
 		return (1);
 	return (0);
 }
@@ -79,6 +79,7 @@ void	cast_ray(t_data *data)
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
 	render_bg(data);
+	printf("%f\n", data->player.angle);
 	while (angle <= end_angle)
 	{
 		ray = init(&ray, &data->player, angle);
@@ -89,6 +90,4 @@ void	cast_ray(t_data *data)
 		}
 		angle += delta_angle;
 	}
-	mlx_put_image_to_window(data->game, data->window,
-		data->textures[6].texture, 0, 0);
 }

@@ -43,7 +43,6 @@ int	main(int ac, char **av)
 	mlx_on_event(data.game, data.window, MLX_KEYDOWN, (void *)key_hook, &data);
 	mlx_on_event(data.game, data.window, MLX_WINDOW_EVENT,
 		(void *)window_hook, &data);
-	data.textures[6].texture = mlx_new_image(data.game, 1920, 1080);
 	mlx_add_loop_hook(data.game, (void *)raycasting, &data);
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
