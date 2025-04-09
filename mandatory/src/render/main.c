@@ -43,6 +43,7 @@ int	main(int ac, char **av)
 	}
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_window(&data);
+	data.textures[6].texture = mlx_new_image(data.game, WIN_W, WIN_H);
 	if (!parsing(&data, av[1]))
 		return (0);
 	mlx_set_fps_goal(data.game, 60);
