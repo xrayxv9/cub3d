@@ -66,7 +66,7 @@ int	set_dir(t_ray *ray)
 		return (SOUTH);
 }
 
-void	render_walls(t_data *data, t_ray *ray, int x)
+void	render_walls(t_data *data, t_ray *ray, float x)
 {
 	int			i;
 	int			dir;
@@ -80,7 +80,7 @@ void	render_walls(t_data *data, t_ray *ray, int x)
 	calcul_touch(ray, &data->player, dir);
 	while (ray->line_end >= i)
 	{
-		delta = (i - ray->line_start) / (float)ray->line_height * 1902;
+		delta = (i - ray->line_start_tmp) / (float)ray->line_height * 1902;
 		color.rgba = mlx_get_image_pixel(data->game, image,
 				ray->touch_loc * 3060, delta).rgba;
 		mlx_set_image_pixel(data->game, data->textures[4].texture, x, i, color);

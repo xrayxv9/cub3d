@@ -110,6 +110,7 @@ typedef struct s_ray
 	double	wall_x;
 	double	camera_x;
 	double	touch_loc;
+	double	line_start_tmp;
 }	t_ray;
 
 #endif
