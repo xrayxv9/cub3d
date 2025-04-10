@@ -26,11 +26,10 @@ void	init_side(t_ray *ray, t_player *player)
 
 t_ray	init(t_ray *ray, t_player *player, float angle)
 {
-	ray->dir_x = cos(convert_to_radian(angle));
-	ray->dir_y = sin(convert_to_radian(angle));
+	ray->dir_x = cos(radian(angle));
+	ray->dir_y = sin(radian(angle));
 	ray->map_x = (int)player->x;
 	ray->map_y = (int)player->y;
-	// printf("%d, %d\n", ray->map_x, ray->map_y);
 	if (ray->dir_x == 0)
 		ray->delta_x = exp(30);
 	else

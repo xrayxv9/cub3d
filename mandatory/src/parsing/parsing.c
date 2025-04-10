@@ -46,7 +46,7 @@ void	set_position(int c, t_player *player, int *counter, t_vector *vec)
 	(*counter)++;
 }
 
-int	set_angle_height(t_map *map, t_player *player)
+int	set_angle(t_map *map, t_player *player)
 {
 	int			counter;
 	t_vector	vec;
@@ -97,7 +97,7 @@ int	parsing(t_data *data, char *filename)
 		parsing_error(&parse, 4);
 	if (!check_all_map(parse.map_to_split, &data->map))
 		parsing_error(&parse, 5);
-	if (!set_angle_height(&data->map, &data->player))
+	if (!set_angle(&data->map, &data->player) || data->player.angle == -1)
 		parsing_error(&parse, 7);
 	return (1);
 }
