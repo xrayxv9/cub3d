@@ -44,7 +44,6 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/map.c \
 	   $(PARSING_PATH)/utils.c \
 	   $(PARSING_PATH)/utils2.c \
-	   $(RAYCASTING_PATH)/raycasting.c \
 	   $(RAYCASTING_PATH)/casting.c \
 	   $(RAYCASTING_PATH)/utils.c \
 	   $(RAYCASTING_PATH)/init.c \

@@ -1,40 +1,5 @@
 #include "cub3D.h"
 #include "raycast.h"
-<<<<<<< HEAD
-
-void	key_down(int key, t_data *data)
-{
-	if (key == SDL_SCANCODE_ESCAPE)
-		mlx_loop_end(data->game);
-	if (key == SDL_SCANCODE_RIGHT)
-		data->player.angle += 2.5f;
-	if (key == SDL_SCANCODE_LEFT)
-		data->player.angle += -2.5f;
-	if (key == SDL_SCANCODE_W)
-	{
-		data->player.x += cos(convert_to_radian(data->player.angle));
-		data->player.y += sin(convert_to_radian(data->player.angle));
-	}
-	else if (key == SDL_SCANCODE_S)
-	{
-		data->player.x += cos(convert_to_radian(data->player.angle + 180));
-		data->player.y += sin(convert_to_radian(data->player.angle + 180));
-	}
-}
-
-void	key_up(int key, t_data *data)
-{
-	if (key == SDL_SCANCODE_RIGHT || key == SDL_SCANCODE_LEFT)
-		data->player.move_angle = 0.0f;
-}
-
-void	window_hook(int event, t_data *data)
-{
-	if (event == 0)
-		mlx_loop_end(data->game);
-}
-=======
->>>>>>> origin/add_deplacement
 
 void	init_window(t_data *data)
 {
