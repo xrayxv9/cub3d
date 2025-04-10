@@ -42,16 +42,8 @@ void	render_floor(t_data *data, mlx_color color)
 
 void	render_bg(t_data *data)
 {
-	mlx_color	color;
-
-	color.r = 255;
-	color.g = 0;
-	color.b = 0;
-	color.a = 255;
-	render_celling(data, color);
-	color.r = 0;
-	color.g = 255;
-	render_floor(data, color);
+	render_celling(data, data->color[SKY]);
+	render_floor(data, data->color[FLOOR]);
 }
 
 int	set_dir(t_ray *ray)

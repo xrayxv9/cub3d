@@ -40,11 +40,12 @@ int	main_while(t_ray *ray, t_map *map)
 
 void	line_handle(t_ray *ray, t_player *player, float x)
 {
-	// wall_distance(ray, player);
 	if (ray->side == VER)
-		ray->wall_distance = (ray->side_x - ray->delta_x) * cos(radian(player->angle - x));
+		ray->wall_distance = (ray->side_x - ray->delta_x)
+			* cos(radian(player->angle - x));
 	else
-		ray->wall_distance = (ray->side_y - ray->delta_y) * cos(radian(player->angle - x));
+		ray->wall_distance = (ray->side_y - ray->delta_y)
+			* cos(radian(player->angle - x));
 	ray->line_height = (int)(WIN_H / ray->wall_distance);
 	ray->line_start_tmp = WIN_H * 0.5 - ray->line_height * 0.5;
 	if (ray->line_start_tmp < 0)

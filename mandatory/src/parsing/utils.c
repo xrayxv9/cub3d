@@ -17,6 +17,7 @@ mlx_color	set_colors(char **rgba)
 	color.r = ft_atoi(rgba[0]);
 	color.g = ft_atoi(rgba[1]);
 	color.b = ft_atoi(rgba[2]);
+	color.a = 255;
 	return (color);
 }
 
