@@ -1,7 +1,4 @@
 #include "cub3D.h"
-#include "mlx.h"
-#include "raycast.h"
-#include <stdio.h>
 
 int	is_wall(t_map *map, t_ray *ray)
 {
@@ -42,10 +39,7 @@ int	main_while(t_ray *ray, t_map *map)
 
 void	line_handle(t_ray *ray, t_player *player)
 {
-	if (ray->side == VER)
-		ray->wall_distance = (ray->side_x - ray->delta_x);
-	else
-		ray->wall_distance = (ray->side_y - ray->delta_y);
+	wall_distance(ray, player);
 	ray->line_height = (int)(WIN_H / ray->wall_distance);
 	ray->line_start = WIN_H * 0.5 - ray->line_height * 0.5;
 	if (ray->line_start < 0)
@@ -81,7 +75,7 @@ void	cast_ray(t_data *data)
 	handle_angle(&data->player);
 	end_angle = data->player.angle + 45;
 	angle = data->player.angle - 45;
-	delta_angle = 90.0 / 1920;
+	delta_angle = 90.0 / WIN_W;
 	render_bg(data);
 	while (angle <= end_angle)
 	{

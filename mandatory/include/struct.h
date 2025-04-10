@@ -56,6 +56,14 @@ typedef struct s_player
 	double	plane_y;
 
 	double	move_angle;
+	double	save_angle;
+	double	speed_x;
+	double	speed_y;
+
+	bool	w_move;
+	bool	s_move;
+	bool	a_move;
+	bool	d_move;
 }	t_player;
 
 typedef struct s_map

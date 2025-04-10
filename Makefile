@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -O2 -I mandatory/include/ -I libft -I MacroLibX/includes
+CFLAGS = -g -Wall -Wextra -Werror -I mandatory/include/ -I libft -I MacroLibX/includes
 
 NAME = cub3D
 MAKE = make --no-print-directory
@@ -50,6 +50,7 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(RAYCASTING_PATH)/init.c \
 	   $(RENDER_PATH)/main.c \
 	   $(RENDER_PATH)/utils.c \
+	   $(RENDER_PATH)/event.c \
 	   $(RENDER_PATH)/render.c
 
 #-----------------------------------------------------RULES-----------------------------------------------#
@@ -70,7 +71,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 run: all
-	@./$(NAME) maps/map.cub
+	@./$(NAME) maps/.zizimap.cub
 
 run2: all
 	@valgrind --track-origins=yes --leak-check=full --suppressions=MacroLibX/valgrind.supp ./$(NAME)
