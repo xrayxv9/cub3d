@@ -12,3 +12,4 @@ libft/get_next_line/libftgnl.a
 out
 here
 compile_commands.json
+**.cache
