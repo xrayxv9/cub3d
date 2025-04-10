@@ -11,4 +11,6 @@ void	render_bg(t_data *data);
 
 void	render_walls(t_data *data, t_ray *ray, int angle);
 
+void	calcul_touch(t_ray *ray, t_player *player, int dir);
+
 #endif

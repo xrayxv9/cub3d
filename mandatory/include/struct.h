@@ -31,10 +31,10 @@ typedef struct s_image
 
 typedef enum e_angle
 {
-	SPAWN_NORTH = 0,
-	SPAWN_EAST = 90,
-	SPAWN_SOUTH = 180,
-	SPAWN_WEST = 270
+	SPAWN_NORTH = 270,
+	SPAWN_EAST = 0,
+	SPAWN_SOUTH = 90,
+	SPAWN_WEST = 180
 }	t_angle;
 
 // structs
@@ -101,6 +101,7 @@ typedef struct s_ray
 	double	step_y;
 	double	wall_x;
 	double	camera_x;
+	double	touch_loc;
 }	t_ray;
 
 #endif

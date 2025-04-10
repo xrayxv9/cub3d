@@ -16,7 +16,10 @@ int	is_wall(t_map *map, t_ray *ray)
 
 int	main_while(t_ray *ray, t_map *map)
 {
-	while (!is_wall(map, ray))
+	int	i;
+
+	i = 0;
+	while (i <= 50 && !is_wall(map, ray))
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -30,7 +33,10 @@ int	main_while(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = HOR;
 		}
+		i++;
 	}
+	if (i == 51)
+		return (0);
 	return (1);
 }
 
@@ -51,7 +57,7 @@ void	line_handle(t_ray *ray, t_player *player)
 		ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
 	else
 		ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
+	ray->wall_x -= (int)ray->wall_x;
 }
 
 void	handle_angle(t_player *player)
@@ -77,10 +83,9 @@ void	cast_ray(t_data *data)
 	angle = data->player.angle - 45;
 	delta_angle = 90.0 / 1920;
 	render_bg(data);
-	printf("%f, %f\n", cos(convert_to_radian(0)), sin(convert_to_radian(0)));
 	while (angle <= end_angle)
 	{
-		ray = init(&ray, &data->player, angle);
+		init(&ray, &data->player, angle);
 		if (main_while(&ray, &data->map))
 		{
 			line_handle(&ray, &(data->player));
