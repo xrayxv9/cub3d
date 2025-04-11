@@ -17,6 +17,4 @@ t_ray	init(t_ray *ray, t_player *player, float angle);
 
 void	line_handle(t_ray *ray, t_player *player, float x);
 
-void	wall_distance(t_ray *ray, t_player *player);
-
 #endif

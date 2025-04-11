@@ -18,5 +18,6 @@
 # define WIN_W 1920
 # define VER 1
 # define HOR 0
+# define ARGS_ERROR "Please ensure that you give a map\n"
 
 #endif

@@ -1,6 +1,4 @@
-#include "render.h"
 #include "cub3D.h"
-#include "mlx.h"
 
 void	render_celling(t_data *data, mlx_color color)
 {
