@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "mlx.h"
 
 int	handle_scene(t_data *data)
 {
