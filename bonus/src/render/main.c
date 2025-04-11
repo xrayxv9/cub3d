@@ -1,4 +1,6 @@
 #include "cub3D.h"
+#include "mlx.h"
+#include "scene.h"
 
 void	init_window(t_data *data)
 {
@@ -22,25 +24,38 @@ void	update(t_data *data)
 		cast_ray(data);
 }
 
-int	main(int ac, char **av)
+void	init_all(t_data *data, int ac, char **av)
 {
-	t_data	data;
-
 	if (ac != 2)
 	{
 		ft_putstr_fd("Error\n"ARGS_ERROR, 2);
-		return (0);
+		exit (0);
 	}
+	init_window(data);
+	data->textures[4].texture = mlx_new_image(data->game, WIN_W, WIN_H);
+	if (!parsing(data, av[1]))
+		exit (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	data;
+	t_scene	scene;
+
 	ft_bzero((char *)&data, sizeof(t_data));
-	init_window(&data);
-	data.textures[4].texture = mlx_new_image(data.game, WIN_W, WIN_H);
-	if (!parsing(&data, av[1]))
-		return (0);
-	data.window = mlx_new_window(data.game, &data.info);
-	cast_ray(&data);
+	init_all(&data, ac, av);
+	scene = MENU;
 	mlx_set_fps_goal(data.game, 60);
-	mlx_add_loop_hook(data.game, (void *)update, &data);
-	event(&data);
+	data.window = mlx_new_window(data.game, &data.info);
+	if (scene == MENU)
+		if (handle_scene(&data) == 1)
+			scene = GAME;
+	if (scene == GAME)
+	{
+		cast_ray(&data);
+		mlx_add_loop_hook(data.game, (void *)update, &data);
+		event(&data);
+	}
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	return (0);

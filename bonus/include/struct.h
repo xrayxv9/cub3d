@@ -7,6 +7,19 @@
 
 // enum
 
+typedef enum e_menu
+{
+	FIRST,
+	SECOND,
+	THIRD
+}	t_menu;
+
+typedef enum e_scene
+{
+	MENU,
+	GAME
+}	t_scene;
+
 typedef enum e_sf
 {
 	FLOOR,
