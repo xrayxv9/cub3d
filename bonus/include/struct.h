@@ -7,6 +7,13 @@
 
 // enum
 
+typedef enum e_first
+{
+	PLAY,
+	SETTINGS,
+	QUIT
+}	t_first;
+
 typedef enum e_menu
 {
 	FIRST,
@@ -35,13 +42,6 @@ typedef enum e_pos
 	IMAGE
 }	t_pos;
 
-typedef struct s_image
-{
-	mlx_image	texture;
-	int			h;
-	int			w;
-}	t_image;
-
 typedef enum e_angle
 {
 	SPAWN_NORTH = 270,
@@ -51,6 +51,19 @@ typedef enum e_angle
 }	t_angle;
 
 // structs
+
+typedef struct s_scene_struct
+{
+	mlx_image	background;
+	mlx_image	first_scene[3];
+}	t_sc;
+
+typedef struct s_image
+{
+	mlx_image	texture;
+	int			h;
+	int			w;
+}	t_image;
 
 typedef struct s_parse
 {
@@ -87,14 +100,15 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	mlx_context				game;
 	t_player				player;
+	t_image					textures[5];
+	t_sc					scene;
+	t_map					map;
+	mlx_context				game;
 	mlx_window_create_info	info;
 	mlx_window				window;
 	mlx_color				color[2];
-	t_image					textures[5];
 	mlx_image				image;
-	t_map					map;
 }			t_data;
 
 typedef struct s_vector
