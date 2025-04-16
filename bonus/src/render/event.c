@@ -79,4 +79,6 @@ void	event(t_data *data)
 	mlx_on_event(data->game, data->window, MLX_WINDOW_EVENT,
 		(void *)window_hook, data);
 	mlx_on_event(data->game, data->window, MLX_KEYUP, (void *)key_up, data);
+	mlx_on_event(data->game, data->window, MLX_MOUSEDOWN,
+		(void *)mouse_hook, data);
 }

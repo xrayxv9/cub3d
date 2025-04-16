@@ -1,8 +1,6 @@
 #include "cub3D.h"
-#include "mlx.h"
-#include "scene.h"
 
-void	init_window(t_data *data)
+static void	init_window(t_data *data)
 {
 	data->game = mlx_init();
 	data->info.height = 1080;
@@ -10,21 +8,26 @@ void	init_window(t_data *data)
 	data->info.title = "test";
 }
 
-void	update(t_data *data)
+static void	update(t_data *data)
 {
-	if (data->player.a_move || data->player.d_move
-		|| data->player.s_move || data->player.w_move)
-		calculate_speed(&data->player,
-			data->player.save_angle, &data->player.save_angle);
-	data->player.angle += data->player.move_angle;
-	data->player.x += data->player.speed_x;
-	data->player.y += data->player.speed_y;
-	if (data->player.move_angle != 0
-		|| data->player.speed_x != 0 || data->player.speed_y != 0)
-		cast_ray(data);
+	if (data->is_game == MENU)
+		handle_scene(data);
+	if (data->is_game == GAME)
+	{
+		if (data->player.a_move || data->player.d_move
+			|| data->player.s_move || data->player.w_move)
+			calculate_speed(&data->player,
+				data->player.save_angle, &data->player.save_angle);
+		data->player.angle += data->player.move_angle;
+		data->player.x += data->player.speed_x;
+		data->player.y += data->player.speed_y;
+		if (data->player.move_angle != 0
+			|| data->player.speed_x != 0 || data->player.speed_y != 0)
+			cast_ray(data);
+	}
 }
 
-void	init_all(t_data *data, int ac, char **av)
+static void	init_all(t_data *data, int ac, char **av)
 {
 	if (ac != 2)
 	{
@@ -40,22 +43,15 @@ void	init_all(t_data *data, int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	t_scene	scene;
 
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_all(&data, ac, av);
-	scene = MENU;
+	data.is_game = MENU;
+	data.scene.menu = FIRST;
 	mlx_set_fps_goal(data.game, 60);
 	data.window = mlx_new_window(data.game, &data.info);
-	if (scene == MENU)
-		if (handle_scene(&data) == 1)
-			scene = GAME;
-	if (scene == GAME)
-	{
-		cast_ray(&data);
-		mlx_add_loop_hook(data.game, (void *)update, &data);
-		event(&data);
-	}
+	mlx_add_loop_hook(data.game, (void *)update, &data);
+	event(&data);
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	return (0);

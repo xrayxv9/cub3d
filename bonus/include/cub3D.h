@@ -13,6 +13,7 @@
 # include "scene.h"
 # include <SDL2/SDL_scancode.h>
 # include "libft.h"
+# include "mlx_extended.h"
 
 # define WIN_H 1080
 # define WIN_W 1920

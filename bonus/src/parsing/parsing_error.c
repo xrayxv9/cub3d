@@ -25,13 +25,13 @@ void	parsing_error(t_parse *parse, int i)
 	exit(EXIT_FAILURE);
 }
 
-int	destroy_textures_free_tab(t_image textures[6],
+int	destroy_textures_free_tab(t_image textures[5],
 		char **tab, mlx_context game)
 {
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < TEXTURES_NUMBER)
 	{
 		if (textures[i].texture)
 			mlx_destroy_image(game, textures[i].texture);

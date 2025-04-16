@@ -5,6 +5,11 @@
 
 # include "mlx.h"
 
+// define
+
+# define TEXTURES_NUMBER 5
+# define COLORS 2
+
 // enum
 
 typedef enum e_sf
@@ -78,8 +83,8 @@ typedef struct s_data
 	t_player				player;
 	mlx_window_create_info	info;
 	mlx_window				window;
-	mlx_color				color[2];
-	t_image					textures[5];
+	mlx_color				color[COLORS];
+	t_image					textures[TEXTURES_NUMBER];
 	mlx_image				image;
 	t_map					map;
 }			t_data;
