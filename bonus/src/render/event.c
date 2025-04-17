@@ -1,45 +1,5 @@
 #include "cub3D.h"
-
-static void	player_move2(t_data *data)
-{
-	if (data->player.w_move && data->player.d_move)
-		calculate_second_speed(&data->player,
-			360, 270, &data->player.save_angle);
-	if (data->player.w_move && data->player.a_move)
-		calculate_second_speed(&data->player,
-			0, 90, &data->player.save_angle);
-	if (data->player.s_move && data->player.a_move)
-		calculate_second_speed(&data->player,
-			180, 90, &data->player.save_angle);
-	if (data->player.s_move && data->player.d_move)
-		calculate_second_speed(&data->player,
-			180, 270, &data->player.save_angle);
-}
-
-static void	player_move(int key, t_data *data)
-{
-	if (key == SDL_SCANCODE_W || data->player.w_move)
-	{
-		data->player.w_move = true;
-		calculate_speed(&data->player, 0, &data->player.save_angle);
-	}
-	if (key == SDL_SCANCODE_S || data->player.s_move)
-	{
-		data->player.s_move = true;
-		calculate_speed(&data->player, 180, &data->player.save_angle);
-	}
-	if (key == SDL_SCANCODE_A || data->player.a_move)
-	{
-		data->player.a_move = true;
-		calculate_speed(&data->player, 90, &data->player.save_angle);
-	}
-	if (key == SDL_SCANCODE_D || data->player.d_move)
-	{
-		data->player.d_move = true;
-		calculate_speed(&data->player, 270, &data->player.save_angle);
-	}
-	player_move2(data);
-}
+#include "struct.h"
 
 static void	key_down(int key, t_data *data)
 {
@@ -52,24 +12,74 @@ static void	key_down(int key, t_data *data)
 	player_move(key, data);
 }
 
+static void	key_up3(int key, t_data *data)
+{
+	if (data->keyboard_input == DIRARROW)
+	{
+		if (key == SDL_SCANCODE_UP)
+			data->player.w_move = false;
+		if (key == SDL_SCANCODE_LEFT)
+			data->player.a_move = false;
+		if (key == SDL_SCANCODE_DOWN)
+			data->player.s_move = false;
+		if (key == SDL_SCANCODE_RIGHT)
+			data->player.d_move = false;
+	}
+}
+
+static void	key_up2(int key, t_data *data)
+{
+	if (data->keyboard_input == WASD)
+	{
+		if (key == SDL_SCANCODE_W)
+			data->player.w_move = false;
+		if (key == SDL_SCANCODE_A)
+			data->player.a_move = false;
+		if (key == SDL_SCANCODE_S)
+			data->player.s_move = false;
+		if (key == SDL_SCANCODE_D)
+			data->player.d_move = false;
+	}
+	if (data->keyboard_input == ZQSD)
+	{
+		if (key == SDL_SCANCODE_Z)
+			data->player.w_move = false;
+		if (key == SDL_SCANCODE_Q)
+			data->player.a_move = false;
+		if (key == SDL_SCANCODE_S)
+			data->player.s_move = false;
+		if (key == SDL_SCANCODE_D)
+			data->player.d_move = false;
+	}
+	key_up3(key, data);
+}
+
 static void	key_up(int key, t_data *data)
 {
 	if (key == SDL_SCANCODE_RIGHT || key == SDL_SCANCODE_LEFT)
 		data->player.move_angle = 0.0f;
-	if (key == SDL_SCANCODE_W || key == SDL_SCANCODE_S
-		|| key == SDL_SCANCODE_A || key == SDL_SCANCODE_D)
+	if (data->keyboard_input == WASD
+		&& (key == SDL_SCANCODE_W || key == SDL_SCANCODE_S
+			|| key == SDL_SCANCODE_A || key == SDL_SCANCODE_D))
 	{
 		data->player.speed_y = 0.0f;
 		data->player.speed_x = 0.0f;
 	}
-	if (key == SDL_SCANCODE_W)
-		data->player.w_move = false;
-	if (key == SDL_SCANCODE_A)
-		data->player.a_move = false;
-	if (key == SDL_SCANCODE_S)
-		data->player.s_move = false;
-	if (key == SDL_SCANCODE_D)
-		data->player.d_move = false;
+	if (data->keyboard_input == ZQSD
+		&& (key == SDL_SCANCODE_Z || key == SDL_SCANCODE_S
+			|| key == SDL_SCANCODE_Q || key == SDL_SCANCODE_D))
+	{
+		data->player.speed_y = 0.0f;
+		data->player.speed_x = 0.0f;
+	}
+	if (data->keyboard_input == DIRARROW
+		&& (key == SDL_SCANCODE_UP || key == SDL_SCANCODE_DOWN
+			|| key == SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT))
+	{
+		data->player.speed_y = 0.0f;
+		data->player.speed_x = 0.0f;
+	}
+	key_up2(key, data);
 }
 
 void	event(t_data *data)

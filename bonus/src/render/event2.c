@@ -1,5 +1,13 @@
 #include "cub3D.h"
 
+static void	mouse_hook2(int button, t_data *data, int x, int y)
+{
+	(void)button;
+	(void)data;
+	(void)x;
+	(void)y;
+}
+
 void	mouse_hook(int button, t_data *data)
 {
 	int	x;
@@ -12,6 +20,9 @@ void	mouse_hook(int button, t_data *data)
 		&& y >= 300 && y <= 500)
 		data->scene.menu = SECOND;
 	else if (data->scene.menu == FIRST && button == 1 && x >= 660 && x <= 1260
+		&& y >= 525 && y <= 725)
+		data->scene.menu = THIRD;
+	else if (data->scene.menu == FIRST && button == 1 && x >= 660 && x <= 1260
 		&& y >= 750 && y <= 950)
 		mlx_loop_end(data->game);
 	else if (data->scene.menu == SECOND && button == 1 && x >= 510 && x <= 1410
@@ -20,7 +31,8 @@ void	mouse_hook(int button, t_data *data)
 		data->is_game = GAME;
 		cast_ray(data);
 	}
-	else if (data->scene.menu == SECOND && button == 1 && x >= 10 && x <= 430
-		&& y >= 865 && y <= 1005)
+	else if ((data->scene.menu == SECOND || data->scene.menu == THIRD)
+		&& button == 1 && x >= 10 && x <= 430 && y >= 865 && y <= 1005)
 		data->scene.menu = FIRST;
+	mouse_hook2(button, data, x, y);
 }

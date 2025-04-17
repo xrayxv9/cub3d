@@ -74,6 +74,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing.c \
 			 $(RENDER_PATH_BONUS)/utils.c \
 			 $(RENDER_PATH_BONUS)/event.c \
 			 $(RENDER_PATH_BONUS)/event2.c \
+			 $(RENDER_PATH_BONUS)/keyboard_event.c \
 			 $(RENDER_PATH_BONUS)/render.c \
 			 $(SCENE_PATH_BONUS)/scene.c \
 			 $(SCENE_PATH_BONUS)/scene_error.c \

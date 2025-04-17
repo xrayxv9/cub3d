@@ -24,17 +24,20 @@ void	handle_scene(t_data *data);
 // error
 
 void	error_scene(t_data *data, int i);
+void	destroy_scene(t_sc *scene, mlx_context game);
 
 // load scene
 
 int		load_background(mlx_context game, t_sc *scene);
 int		load_buttons_first_menu(mlx_context game, t_sc *scene);
 int		load_buttons_second_menu(mlx_context game, t_sc *scene);
+int		load_buttons_third_menu(mlx_context game, t_sc *scene);
 
 // event
 
 void	window_event(t_data *data);
 void	mouse_hook(int button, t_data *data);
+void	player_move(int key, t_data *data);
 
 // display scenes
 

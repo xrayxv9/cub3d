@@ -9,23 +9,40 @@
 
 # define TEXTURES_NUMBER 5
 # define COLORS 2
+# define BUTTONS 17
 # define FIRST_MENU_BUTTON 3
 # define SECOND_MENU_BUTTON 2
+# define THIRD_MENU_BUTTON 12
 
 // enum
 
-typedef enum e_first
+typedef enum e_commands
 {
-	PLAY,
-	SETTINGS,
-	QUIT
-}	t_first;
+	WASD,
+	ZQSD,
+	DIRARROW
+}	t_commands;
 
-typedef enum e_second
+typedef enum e_buttons
 {
 	CONTINUE,
-	BACK
-}	t_second;
+	SETTINGS,
+	QUIT,
+	PLAY,
+	BACK,
+	CONTROL_LEFT,
+	CONTROL_RIGHT,
+	Q,
+	W,
+	A,
+	S,
+	D,
+	UP,
+	DOWN,
+	RIGHT,
+	LEFT,
+	Z
+}	t_buttons;
 
 typedef enum e_menu
 {
@@ -75,8 +92,7 @@ typedef struct s_image
 typedef struct s_scene_struct
 {
 	mlx_image	background;
-	t_image		first_scene[FIRST_MENU_BUTTON];
-	t_image		second_scene[SECOND_MENU_BUTTON];
+	t_image		scene[BUTTONS];
 	int			menu;
 }	t_sc;
 
@@ -125,6 +141,7 @@ typedef struct s_data
 	mlx_color				color[COLORS];
 	mlx_image				image;
 	int						is_game;
+	int						keyboard_input;
 }			t_data;
 
 typedef struct s_vector

@@ -1,4 +1,6 @@
 #include "cub3D.h"
+#include "scene.h"
+#include "struct.h"
 
 static void	init_window(t_data *data)
 {
@@ -48,11 +50,13 @@ int	main(int ac, char **av)
 	init_all(&data, ac, av);
 	data.is_game = MENU;
 	data.scene.menu = FIRST;
+	data.keyboard_input = WASD;
 	mlx_set_fps_goal(data.game, 60);
 	data.window = mlx_new_window(data.game, &data.info);
 	mlx_add_loop_hook(data.game, (void *)update, &data);
 	event(&data);
 	mlx_loop(data.game);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
+	destroy_scene(&data.scene, data.game);
 	return (0);
 }

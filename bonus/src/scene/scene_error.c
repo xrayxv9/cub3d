@@ -1,16 +1,16 @@
 #include "cub3D.h"
 
-static void	destroy_scene(t_sc *scene, mlx_context game)
+void	destroy_scene(t_sc *scene, mlx_context game)
 {
 	int	i;
 
 	i = 0;
 	if (scene->background)
 		mlx_destroy_image(game, scene->background);
-	while (i < FIRST_MENU_BUTTON)
+	while (i < BUTTONS)
 	{
-		if (scene->first_scene[i].texture)
-			mlx_destroy_image(game, scene->first_scene[i].texture);
+		if (scene->scene[i].texture)
+			mlx_destroy_image(game, scene->scene[i].texture);
 		i++;
 	}
 }
