@@ -37,7 +37,6 @@ int		load_buttons_third_menu(mlx_context game, t_sc *scene);
 
 void	window_event(t_data *data);
 void	mouse_hook(int button, t_data *data);
-void	player_move(int key, t_data *data);
 
 // display scenes
 
@@ -45,5 +44,7 @@ void	display_first_scene_buttons(mlx_window window, mlx_context game,
 			t_sc *scene);
 void	display_second_scene_buttons(mlx_window window, mlx_context game,
 			t_sc *scene);
+void	display_third_scene_buttons(mlx_window window, mlx_context game,
+			t_sc *scene, int controls);
 
 #endif

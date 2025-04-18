@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include <fcntl.h>
 
 static int	load_floor_sky(mlx_color *color, char *rgba,
 		int *counter)
@@ -90,7 +91,15 @@ static int	fill_with_textures(char *line, t_data *data, int *counter)
 int	create_textures(t_parse *parse, t_data *data)
 {
 	char	*line;
+	int		fd;
 
+	fd = open("bonus/textures/font/font.ttf", O_RDONLY);
+	if (fd == -1)
+	{
+		parse->counter = 6;
+		return (0);
+	}
+	close(fd);
 	line = get_next_line(parse->fd);
 	while (line && !map_is_start(line))
 	{

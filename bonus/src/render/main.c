@@ -1,6 +1,5 @@
 #include "cub3D.h"
-#include "scene.h"
-#include "struct.h"
+#include <fcntl.h>
 
 static void	init_window(t_data *data)
 {
@@ -16,6 +15,8 @@ static void	update(t_data *data)
 		handle_scene(data);
 	if (data->is_game == GAME)
 	{
+		handle_mouse(data, 0);
+		handle_player_move(&data->player);
 		if (data->player.a_move || data->player.d_move
 			|| data->player.s_move || data->player.w_move)
 			calculate_speed(&data->player,
@@ -23,6 +24,7 @@ static void	update(t_data *data)
 		data->player.angle += data->player.move_angle;
 		data->player.x += data->player.speed_x;
 		data->player.y += data->player.speed_y;
+		handle_mouse(data, 1);
 		if (data->player.move_angle != 0
 			|| data->player.speed_x != 0 || data->player.speed_y != 0)
 			cast_ray(data);
@@ -48,6 +50,7 @@ int	main(int ac, char **av)
 
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_all(&data, ac, av);
+	data.scene.sensi = 2.50f;
 	data.is_game = MENU;
 	data.scene.menu = FIRST;
 	data.keyboard_input = WASD;

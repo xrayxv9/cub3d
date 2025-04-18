@@ -94,6 +94,7 @@ typedef struct s_scene_struct
 	mlx_image	background;
 	t_image		scene[BUTTONS];
 	int			menu;
+	float		sensi;
 }	t_sc;
 
 typedef struct s_parse
@@ -116,6 +117,10 @@ typedef struct s_player
 	double	save_angle;
 	double	speed_x;
 	double	speed_y;
+
+	int		pos_x;
+	int		pos_y;
+	int		new_x;
 
 	bool	w_move;
 	bool	s_move;
@@ -140,6 +145,7 @@ typedef struct s_data
 	mlx_window				window;
 	mlx_color				color[COLORS];
 	mlx_image				image;
+
 	int						is_game;
 	int						keyboard_input;
 }			t_data;

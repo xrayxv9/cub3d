@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "struct.h"
 
 void	calcul_touch(t_ray *ray, t_player *player, int dir)
 {
