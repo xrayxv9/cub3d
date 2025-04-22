@@ -106,7 +106,7 @@ $(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS_BONUS) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT) $(MLX) -lm -lSDL2
 	@echo ">>> CUB3D BONUS COMPILED <<<"
 
-run: all
+run: bonus
 	@./$(NAME_BONUS) maps/.zizimap.cub
 
 run2: all
