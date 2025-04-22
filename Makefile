@@ -85,11 +85,11 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
-all: $(NAME_BONUS)
+all: $(NAME)
 
-$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS_BONUS) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT) $(MLX) -lm -lSDL2
-	@echo ">>> CUB3D BONUS COMPILED <<<"
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
+	@echo ">>> CUB3D COMPILED <<<"
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
@@ -100,11 +100,11 @@ $(MLX):
 %.o: %.c
 	@$(CC) $(CFLAGS_BONUS) -c -o $@ $<
 
-bonus: $(NAME)
+bonus: $(NAME_BONUS)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
-	@echo ">>> CUB3D COMPILED <<<"
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS_BONUS) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIBFT) $(MLX) -lm -lSDL2
+	@echo ">>> CUB3D BONUS COMPILED <<<"
 
 run: all
 	@./$(NAME_BONUS) maps/.zizimap.cub
