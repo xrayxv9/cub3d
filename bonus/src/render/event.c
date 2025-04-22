@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static void	key_up_zqsd(int key, t_data *data)
+void	key_up_zqsd(int key, t_data *data)
 {
 	if (key == SDL_SCANCODE_Z || key == SDL_SCANCODE_S
 		|| key == SDL_SCANCODE_Q || key == SDL_SCANCODE_D)
@@ -71,6 +71,10 @@ static void	key_down(int key, t_data *data)
 	if (data->player.s_move && data->player.d_move)
 		calculate_second_speed(&data->player,
 			180, 270, &data->player.save_angle);
+	if (data->is_game == GAME && key == SDL_SCANCODE_TAB)
+		data->pause = !data->pause;
+	if (data->is_game == GAME && !data->pause && key == SDL_SCANCODE_TAB)
+		cast_ray(data);
 }
 
 void	event(t_data *data)

@@ -20,6 +20,7 @@ typedef struct s_scene_struct	t_sc;
 // scene
 
 void	handle_scene(t_data *data);
+void	handle_pause_screen(t_data *data);
 
 // error
 
@@ -32,6 +33,7 @@ int		load_background(mlx_context game, t_sc *scene);
 int		load_buttons_first_menu(mlx_context game, t_sc *scene);
 int		load_buttons_second_menu(mlx_context game, t_sc *scene);
 int		load_buttons_third_menu(mlx_context game, t_sc *scene);
+int		load_pause_screen(mlx_context game, t_sc *scene);
 
 // event
 

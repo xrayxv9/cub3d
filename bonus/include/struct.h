@@ -9,10 +9,11 @@
 
 # define TEXTURES_NUMBER 5
 # define COLORS 2
-# define BUTTONS 17
+# define BUTTONS 20
 # define FIRST_MENU_BUTTON 3
 # define SECOND_MENU_BUTTON 2
 # define THIRD_MENU_BUTTON 12
+# define PAUSE_MENU 3
 
 // enum
 
@@ -41,14 +42,18 @@ typedef enum e_buttons
 	DOWN,
 	RIGHT,
 	LEFT,
-	Z
+	Z,
+	RESUME,
+	GO_TO_MENU,
+	BACKGROUND
 }	t_buttons;
 
 typedef enum e_menu
 {
 	FIRST,
 	SECOND,
-	THIRD
+	THIRD,
+	FOURTH
 }	t_menu;
 
 typedef enum e_scene
@@ -148,6 +153,7 @@ typedef struct s_data
 
 	int						is_game;
 	int						keyboard_input;
+	int						pause;
 }			t_data;
 
 typedef struct s_vector

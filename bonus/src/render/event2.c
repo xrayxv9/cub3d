@@ -25,6 +25,14 @@ static void	mouse_hook2(int button, t_data *data, int x, int y)
 	mouse_hook3(button, data, x, y);
 }
 
+static void	handle_back_button(t_data *data)
+{
+	if (data->pause)
+		data->is_game = GAME;
+	else
+		data->scene.menu = FIRST;
+}
+
 void	mouse_hook(int button, t_data *data)
 {
 	int	x;
@@ -50,30 +58,8 @@ void	mouse_hook(int button, t_data *data)
 	}
 	else if ((data->scene.menu == SECOND || data->scene.menu == THIRD)
 		&& button == 1 && x >= 10 && x <= 430 && y >= 865 && y <= 1005)
-		data->scene.menu = FIRST;
+		handle_back_button(data);
 	mouse_hook2(button, data, x, y);
-}
-
-void	handle_mouse(t_data *data, int i)
-{
-	if (!i)
-	{
-		mlx_mouse_get_pos(data->game, &data->player.pos_x, &data->player.pos_y);
-		if (data->player.pos_x > WIN_W / 2)
-			data->player.move_angle = data->scene.sensi;
-		if (data->player.pos_x < WIN_W / 2)
-			data->player.move_angle = -data->scene.sensi;
-		if (data->player.pos_x == WIN_W / 2)
-			data->player.move_angle = 0;
-	}
-	if (i)
-	{
-		mlx_mouse_get_pos(data->game, &data->player.new_x, &data->player.pos_y);
-		if (data->player.new_x == data->player.pos_x
-			&& data->player.new_x != WIN_W / 2)
-			mlx_mouse_move(data->game, data->window, WIN_W / 2, WIN_H / 2);
-	}
-	mlx_mouse_hide(data->game);
 }
 
 void	key_up_wasd(int key, t_data *data)

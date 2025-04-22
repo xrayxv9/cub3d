@@ -1,5 +1,4 @@
 #include "cub3D.h"
-#include <fcntl.h>
 
 static void	init_window(t_data *data)
 {
@@ -15,19 +14,24 @@ static void	update(t_data *data)
 		handle_scene(data);
 	if (data->is_game == GAME)
 	{
-		handle_mouse(data, 0);
-		handle_player_move(&data->player);
-		if (data->player.a_move || data->player.d_move
-			|| data->player.s_move || data->player.w_move)
-			calculate_speed(&data->player,
-				data->player.save_angle, &data->player.save_angle);
-		data->player.angle += data->player.move_angle;
-		data->player.x += data->player.speed_x;
-		data->player.y += data->player.speed_y;
-		handle_mouse(data, 1);
-		if (data->player.move_angle != 0
-			|| data->player.speed_x != 0 || data->player.speed_y != 0)
-			cast_ray(data);
+		if (!data->pause)
+		{
+			handle_mouse(data, 0);
+			handle_player_move(&data->player);
+			if (data->player.a_move || data->player.d_move
+				|| data->player.s_move || data->player.w_move)
+				calculate_speed(&data->player,
+					data->player.save_angle, &data->player.save_angle);
+			data->player.angle += data->player.move_angle;
+			data->player.x += data->player.speed_x;
+			data->player.y += data->player.speed_y;
+			handle_mouse(data, 1);
+			if (data->player.move_angle != 0
+				|| data->player.speed_x != 0 || data->player.speed_y != 0)
+				cast_ray(data);
+		}
+		if (data->pause)
+			handle_pause_screen(data);
 	}
 }
 
@@ -42,6 +46,8 @@ static void	init_all(t_data *data, int ac, char **av)
 	data->textures[4].texture = mlx_new_image(data->game, WIN_W, WIN_H);
 	if (!parsing(data, av[1]))
 		exit (0);
+	if (!load_pause_screen(data->game, &data->scene))
+		return (error_scene(data, 1));
 }
 
 int	main(int ac, char **av)
