@@ -9,8 +9,58 @@
 
 # define TEXTURES_NUMBER 5
 # define COLORS 2
+# define BUTTONS 20
+# define FIRST_MENU_BUTTON 3
+# define SECOND_MENU_BUTTON 2
+# define THIRD_MENU_BUTTON 12
+# define PAUSE_MENU 3
 
 // enum
+
+typedef enum e_commands
+{
+	WASD,
+	ZQSD,
+	DIRARROW
+}	t_commands;
+
+typedef enum e_buttons
+{
+	CONTINUE,
+	SETTINGS,
+	QUIT,
+	PLAY,
+	BACK,
+	CONTROL_LEFT,
+	CONTROL_RIGHT,
+	Q,
+	W,
+	A,
+	S,
+	D,
+	UP,
+	DOWN,
+	RIGHT,
+	LEFT,
+	Z,
+	RESUME,
+	GO_TO_MENU,
+	BACKGROUND
+}	t_buttons;
+
+typedef enum e_menu
+{
+	FIRST,
+	SECOND,
+	THIRD,
+	FOURTH
+}	t_menu;
+
+typedef enum e_scene
+{
+	MENU,
+	GAME
+}	t_scene;
 
 typedef enum e_sf
 {
@@ -27,13 +77,6 @@ typedef enum e_pos
 	IMAGE
 }	t_pos;
 
-typedef struct s_image
-{
-	mlx_image	texture;
-	int			h;
-	int			w;
-}	t_image;
-
 typedef enum e_angle
 {
 	SPAWN_NORTH = 270,
@@ -43,6 +86,21 @@ typedef enum e_angle
 }	t_angle;
 
 // structs
+
+typedef struct s_image
+{
+	mlx_image	texture;
+	int			h;
+	int			w;
+}	t_image;
+
+typedef struct s_scene_struct
+{
+	mlx_image	background;
+	t_image		scene[BUTTONS];
+	int			menu;
+	float		sensi;
+}	t_sc;
 
 typedef struct s_parse
 {
@@ -65,6 +123,10 @@ typedef struct s_player
 	double	speed_x;
 	double	speed_y;
 
+	int		pos_x;
+	int		pos_y;
+	int		new_x;
+
 	bool	w_move;
 	bool	s_move;
 	bool	a_move;
@@ -79,14 +141,19 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	mlx_context				game;
 	t_player				player;
+	t_image					textures[TEXTURES_NUMBER];
+	t_sc					scene;
+	t_map					map;
+	mlx_context				game;
 	mlx_window_create_info	info;
 	mlx_window				window;
 	mlx_color				color[COLORS];
-	t_image					textures[TEXTURES_NUMBER];
 	mlx_image				image;
-	t_map					map;
+
+	int						is_game;
+	int						keyboard_input;
+	int						pause;
 }			t_data;
 
 typedef struct s_vector
