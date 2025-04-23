@@ -45,7 +45,11 @@ int	check_around(char **map, int i, int j)
 	if (is_second_map_character(map[i][j + 1])
 		|| is_second_map_character(map[i][j - 1])
 		|| is_second_map_character(map[i + 1][j])
-		|| is_second_map_character(map[i - 1][j]))
+		|| is_second_map_character(map[i - 1][j])
+		|| is_second_map_character(map[i - 1][j - 1])
+		|| is_second_map_character(map[i - 1][j + 1])
+		|| is_second_map_character(map[i + 1][j - 1])
+		|| is_second_map_character(map[i + 1][j + 1]))
 		return (0);
 	return (1);
 }

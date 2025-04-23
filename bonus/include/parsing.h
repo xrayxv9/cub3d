@@ -52,6 +52,7 @@ int			check_file(char *map_name, t_parse *parse);
 int			map_is_start(char *line);
 int			is_map_character(int c);
 int			check_textures(char **textures);
+int			check_color(char **split_rgba);
 
 // map
 

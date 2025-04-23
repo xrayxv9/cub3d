@@ -1,15 +1,16 @@
 #include "cub3D.h"
-#include <fcntl.h>
 
 static int	load_floor_sky(mlx_color *color, char *rgba,
 		int *counter)
 {
-	char		**split_rgba;
+	char	**split_rgba;
 
 	split_rgba = ft_split(rgba, ',');
 	if (!split_rgba)
 		return (0);
 	if (tab_len(split_rgba) != 3)
+		return (free_tab(split_rgba));
+	if (!check_color(split_rgba))
 		return (free_tab(split_rgba));
 	(*color) = set_colors(split_rgba);
 	(*counter)++;

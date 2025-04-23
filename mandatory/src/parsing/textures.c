@@ -10,6 +10,8 @@ static int	load_floor_sky(mlx_color *color, char *rgba,
 		return (0);
 	if (tab_len(split_rgba) != 3)
 		return (free_tab(split_rgba));
+	if (!check_color(split_rgba))
+		return (free_tab(split_rgba));
 	(*color) = set_colors(split_rgba);
 	(*counter)++;
 	free_tab(split_rgba);
