@@ -122,6 +122,8 @@ typedef struct s_player
 	double	save_angle;
 	double	speed_x;
 	double	speed_y;
+	double	save_x;
+	double	save_y;
 
 	int		pos_x;
 	int		pos_y;
@@ -150,10 +152,13 @@ typedef struct s_data
 	mlx_window				window;
 	mlx_color				color[COLORS];
 	mlx_image				image;
+	mlx_image				minimap_image;
+	mlx_image				player_pos;
 
 	int						is_game;
 	int						keyboard_input;
-	int						pause;
+	bool					pause;
+	bool					minimap;
 }			t_data;
 
 typedef struct s_vector

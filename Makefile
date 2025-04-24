@@ -46,6 +46,7 @@ PARSING_PATH_BONUS = bonus/src/parsing
 RAYCASTING_PATH_BONUS = bonus/src/raycasting
 RENDER_PATH_BONUS = bonus/src/render
 SCENE_PATH_BONUS = bonus/src/scene
+MINIMAP_PATH_BONUS = bonus/src/minimap
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/parsing_error.c \
@@ -82,6 +83,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing.c \
 			 $(SCENE_PATH_BONUS)/load_scene.c \
 			 $(SCENE_PATH_BONUS)/display.c \
 			 $(SCENE_PATH_BONUS)/display2.c \
+			 $(MINIMAP_PATH_BONUS)/minimap.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
@@ -110,7 +112,7 @@ run: bonus
 	@./$(NAME_BONUS) maps/.zizimap.cub
 
 run2: all
-	@valgrind --track-origins=yes --leak-check=full --suppressions=MacroLibX/valgrind.supp ./$(NAME)
+	@valgrind --track-origins=yes --leak-check=full --suppressions=MacroLibX/valgrind.supp ./$(NAME_BONUS) maps/.zizimap.cub
 
 clean:
 	@$(MAKE) -C $(LIBFT_PATH) clean

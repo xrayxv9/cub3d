@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "raycast.h"
 
 static void	mouse_hook4(int button, t_data *data, int x, int y)
 {
@@ -56,6 +57,8 @@ void	handle_mouse(t_data *data, int i)
 {
 	if (!i)
 	{
+		data->player.save_x = data->player.x;
+		data->player.save_y = data->player.y;
 		mlx_mouse_get_pos(data->game, &data->player.pos_x, &data->player.pos_y);
 		if (data->player.pos_x > WIN_W / 2)
 			data->player.move_angle = data->scene.sensi;
@@ -72,4 +75,14 @@ void	handle_mouse(t_data *data, int i)
 			mlx_mouse_move(data->game, data->window, WIN_W / 2, WIN_H / 2);
 	}
 	mlx_mouse_hide(data->game);
+}
+
+void	key_down2(int key, t_data *data)
+{
+	if (key == SDL_SCANCODE_M)
+	{
+		data->minimap = !data->minimap;
+		if (!data->minimap)
+			cast_ray(data);
+	}
 }
