@@ -122,6 +122,8 @@ typedef struct s_player
 	double	save_angle;
 	double	speed_x;
 	double	speed_y;
+	double	save_x;
+	double	save_y;
 
 	int		pos_x;
 	int		pos_y;

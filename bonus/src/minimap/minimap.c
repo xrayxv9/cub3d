@@ -42,9 +42,13 @@ void	display_minimap(t_data *data)
 {
 	mlx_put_image_to_window(data->game, data->window,
 		data->minimap_image, 0, 0);
-	data->player_pos = mlx_new_image(data->game, WIN_W, WIN_H);
-	trace_player(data->player.x * 10, data->player.y * 10,
-		data->game, data->player_pos);
+	if (data->player.save_x != data->player.x
+		|| data->player.save_y != data->player.y)
+	{
+		data->player_pos = mlx_new_image(data->game, WIN_W, WIN_H);
+		trace_player(data->player.x * 10, data->player.y * 10,
+			data->game, data->player_pos);
+	}
 	mlx_put_image_to_window(data->game, data->window,
 		data->player_pos, 0, 0);
 }
