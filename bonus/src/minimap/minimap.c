@@ -60,6 +60,9 @@ void	minimap(t_data *data)
 
 	i = 0;
 	data->minimap_image = mlx_new_image(data->game, WIN_W, WIN_H);
+	data->player_pos = mlx_new_image(data->game, WIN_W, WIN_H);
+	trace_player(data->player.x * 10, data->player.y * 10,
+		data->game, data->player_pos);
 	while (data->map.map[i])
 	{
 		j = 0;
