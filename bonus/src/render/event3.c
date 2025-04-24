@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include "raycast.h"
 
 static void	mouse_hook4(int button, t_data *data, int x, int y)
 {
@@ -72,4 +73,14 @@ void	handle_mouse(t_data *data, int i)
 			mlx_mouse_move(data->game, data->window, WIN_W / 2, WIN_H / 2);
 	}
 	mlx_mouse_hide(data->game);
+}
+
+void	key_down2(int key, t_data *data)
+{
+	if (key == SDL_SCANCODE_M)
+	{
+		data->minimap = !data->minimap;
+		if (!data->minimap)
+			cast_ray(data);
+	}
 }

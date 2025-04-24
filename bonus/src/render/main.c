@@ -5,7 +5,7 @@ static void	init_window(t_data *data)
 	data->game = mlx_init();
 	data->info.height = 1080;
 	data->info.width = 1920;
-	data->info.title = "test";
+	data->info.title = "portal";
 }
 
 static void	update(t_data *data)
@@ -29,6 +29,8 @@ static void	update(t_data *data)
 			if (data->player.move_angle != 0
 				|| data->player.speed_x != 0 || data->player.speed_y != 0)
 				cast_ray(data);
+			if (data->minimap)
+				display_minimap(data);
 		}
 		if (data->pause)
 			handle_pause_screen(data);
@@ -52,11 +54,13 @@ static void	init_all(t_data *data, int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data		data;
 
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_all(&data, ac, av);
 	data.scene.sensi = 2.50f;
+	minimap(&data);
+	data.minimap = false;
 	data.is_game = MENU;
 	data.scene.menu = FIRST;
 	data.keyboard_input = WASD;

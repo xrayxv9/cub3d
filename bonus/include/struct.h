@@ -150,10 +150,13 @@ typedef struct s_data
 	mlx_window				window;
 	mlx_color				color[COLORS];
 	mlx_image				image;
+	mlx_image				minimap_image;
+	mlx_image				player_pos;
 
 	int						is_game;
 	int						keyboard_input;
-	int						pause;
+	bool					pause;
+	bool					minimap;
 }			t_data;
 
 typedef struct s_vector

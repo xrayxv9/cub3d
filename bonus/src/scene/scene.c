@@ -5,8 +5,8 @@ void	handle_pause_screen(t_data *data)
 	mlx_color	color;
 
 	ft_bzero((char *)&color, sizeof(mlx_color));
-	mlx_clear_window(data->game, data->window, color);
 	mlx_mouse_show(data->game);
+	mlx_clear_window(data->game, data->window, color);
 	mlx_put_image_to_window(data->game, data->window,
 		data->scene.scene[BACKGROUND].texture, 0, 0);
 	mlx_put_image_to_window(data->game, data->window,

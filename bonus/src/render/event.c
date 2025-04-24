@@ -75,6 +75,7 @@ static void	key_down(int key, t_data *data)
 		data->pause = !data->pause;
 	if (data->is_game == GAME && !data->pause && key == SDL_SCANCODE_TAB)
 		cast_ray(data);
+	key_down2(key, data);
 }
 
 void	event(t_data *data)
