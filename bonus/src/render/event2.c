@@ -61,7 +61,7 @@ void	mouse_hook(int button, t_data *data)
 		&& button == 1 && x >= 10 && x <= 430 && y >= 865 && y <= 1005)
 		handle_back_button(data);
 	else if (data->scene.menu == 1)
-		portal_send(data, BLUE);
+		portal_send(data, ORANGE);
 	mouse_hook2(button, data, x, y);
 }
 

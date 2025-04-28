@@ -112,9 +112,9 @@ typedef struct s_parse
 
 typedef	struct s_portal
 {
-	int		x;
-	int		y;
 	bool	exist;
+	double	x;
+	double	y;
 }		t_portal;
 
 typedef struct s_player
@@ -141,7 +141,7 @@ typedef struct s_player
 	bool	a_move;
 	bool	d_move;
 
-	t_portal	portals[2];
+	t_portal	*portals;
 }	t_player;
 
 typedef struct s_map

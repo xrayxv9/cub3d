@@ -1,7 +1,8 @@
-#include "../../include/cub3D.h"
+#include <cub3D.h>
 
 void	init_portal(t_portal *portals)
 {
+	portals = malloc(2 * sizeof(t_portal));
 	portals[BLUE].x = -1;
 	portals[BLUE].y = -1;
 	portals[ORANGE].x = -1;
@@ -10,25 +11,13 @@ void	init_portal(t_portal *portals)
 	portals[ORANGE].exist = false;
 }
 
-int	check_wall(t_ray *ray, t_map *map)
-{
-	set_dir(ray);	
-	if (ray->side == NORTH)
-	{
-		if (ray->map_x > 0 && map->map[ray->map_y][ray->map_x - 1] == 1
-			&& map->map[ray->map_y + 1] && map->map[ray->map_y + 1][ray->map_x - 1] != 1)
-			return (1);
-		return (0);
-	}
-	return(12);
-}
 
-void	init_coo(t_portal *portals, t_ray *ray, t_player *player, t_map *map)
+void	init_coo(t_portal portal, t_ray *ray, t_player *player)
 {
-	// int	x;
-	
-	(void)portals;
 	(void)player;
-	printf("here is the result : %d\n", check_wall(ray, map));
-	// x = ray->side_x - (ray->line_height / 3);
+
+	if (ray->side_x - (int)ray->side_x > 0.2)
+		portal.x = ray->side_x + ((ray->line_height / 2)
+			* (1 + (ray->side_x - (int)ray->side_x)));
+	printf("here is the co : %f\n", portal.x);
 }
