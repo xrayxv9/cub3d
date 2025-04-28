@@ -27,6 +27,7 @@ void	player_move_zqsd(int key, t_data *data);
 void	player_move_wasd(int key, t_data *data);
 void	handle_player_move(t_player *player);
 void	key_down2(int key, t_data *data);
+int		set_dir(t_ray *ray);
 
 // utils
 

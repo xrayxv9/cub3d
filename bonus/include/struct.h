@@ -3,7 +3,7 @@
 
 // includes
 
-# include "mlx.h"
+# include "../../MacroLibX/includes/mlx.h"
 
 // define
 
@@ -110,6 +110,13 @@ typedef struct s_parse
 	int		is_map;
 }	t_parse;
 
+typedef	struct s_portal
+{
+	int		x;
+	int		y;
+	bool	exist;
+}		t_portal;
+
 typedef struct s_player
 {
 	double	angle;
@@ -133,6 +140,8 @@ typedef struct s_player
 	bool	s_move;
 	bool	a_move;
 	bool	d_move;
+
+	t_portal	portals[2];
 }	t_player;
 
 typedef struct s_map

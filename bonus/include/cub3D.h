@@ -8,13 +8,15 @@
 # include <math.h>
 # include <pthread.h>
 # include <SDL2/SDL_scancode.h>
-# include "mlx_extended.h"
+# include "../../MacroLibX/includes/mlx_extended.h"
+# include "../../MacroLibX/includes/mlx.h"
 # include "parsing.h"
 # include "struct.h"
 # include "raycast.h"
 # include "render.h"
 # include "scene.h"
 # include "libft.h"
+# include "portal.h"
 
 # define WIN_H 1080
 # define WIN_W 1920

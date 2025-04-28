@@ -1,4 +1,5 @@
 #include "cub3D.h"
+#include <SDL2/SDL_scancode.h>
 
 static void	mouse_hook2(int button, t_data *data, int x, int y)
 {
@@ -59,6 +60,8 @@ void	mouse_hook(int button, t_data *data)
 	else if ((data->scene.menu == SECOND || data->scene.menu == THIRD)
 		&& button == 1 && x >= 10 && x <= 430 && y >= 865 && y <= 1005)
 		handle_back_button(data);
+	else if (data->scene.menu == 1)
+		portal_send(data, BLUE);
 	mouse_hook2(button, data, x, y);
 }
 

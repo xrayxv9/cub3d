@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../../include/cub3D.h"
 
 int	is_wall(t_map *map, t_ray *ray)
 {

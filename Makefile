@@ -47,6 +47,7 @@ RAYCASTING_PATH_BONUS = bonus/src/raycasting
 RENDER_PATH_BONUS = bonus/src/render
 SCENE_PATH_BONUS = bonus/src/scene
 MINIMAP_PATH_BONUS = bonus/src/minimap
+PORTAL_PATH_BONUS = bonus/src/portal
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/parsing_error.c \
@@ -84,6 +85,8 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing.c \
 			 $(SCENE_PATH_BONUS)/display.c \
 			 $(SCENE_PATH_BONUS)/display2.c \
 			 $(MINIMAP_PATH_BONUS)/minimap.c \
+			 $(PORTAL_PATH_BONUS)/portal.c \
+			 $(PORTAL_PATH_BONUS)/init_portal.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 

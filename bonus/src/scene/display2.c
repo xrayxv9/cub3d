@@ -1,5 +1,4 @@
-#include "cub3D.h"
-#include "mlx.h"
+#include "../../include/cub3D.h"
 
 static void	display_wasd_controls(mlx_window window, mlx_context game,
 		t_sc *scene)

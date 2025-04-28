@@ -7,7 +7,7 @@ static void	init_window(t_data *data)
 	data->info.width = 1920;
 	data->info.title = "portal";
 }
-
+#include <stdio.h>
 static void	update(t_data *data)
 {
 	if (data->is_game == MENU)
