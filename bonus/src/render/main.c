@@ -1,5 +1,4 @@
 #include "cub3D.h"
-#include <include/portal.h>
 
 static void	init_window(t_data *data)
 {
@@ -49,6 +48,7 @@ static void	init_all(t_data *data, int ac, char **av)
 	data->textures[4].texture = mlx_new_image(data->game, WIN_W, WIN_H);
 	if (!parsing(data, av[1]))
 		exit (0);
+	data->player.portals = init_portal();
 	if (!load_pause_screen(data->game, &data->scene))
 		return (error_scene(data, 1));
 }
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 	mlx_add_loop_hook(data.game, (void *)update, &data);
 	event(&data);
 	mlx_loop(data.game);
-	free(data->player.portals);
+	free(data.player.portals);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	destroy_scene(&data.scene, data.game);
 	return (0);

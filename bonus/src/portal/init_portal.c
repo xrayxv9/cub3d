@@ -1,7 +1,9 @@
 #include <cub3D.h>
 
-void	init_portal(t_portal *portals)
+t_portal	*init_portal(void)
 {
+	t_portal	*portals;
+
 	portals = malloc(2 * sizeof(t_portal));
 	portals[BLUE].x = -1;
 	portals[BLUE].y = -1;
@@ -9,8 +11,8 @@ void	init_portal(t_portal *portals)
 	portals[ORANGE].y = -1;
 	portals[BLUE].exist = false;
 	portals[ORANGE].exist = false;
+	return (portals);
 }
-
 
 void	init_coo(t_portal portal, t_ray *ray, t_player *player)
 {
