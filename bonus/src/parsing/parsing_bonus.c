@@ -1,4 +1,4 @@
-#include <cub3D.h>
+#include "cub3D_bonus.h"
 
 int	check_all_map(char *map_to_split, t_map *map)
 {

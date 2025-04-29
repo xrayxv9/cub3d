@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include <cub3D.h>
 
 void	init_window(t_data *data)
 {
