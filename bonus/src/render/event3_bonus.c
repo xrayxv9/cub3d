@@ -73,7 +73,7 @@ void	handle_mouse(t_data *data, int i)
 			&& data->player.new_x != WIN_W / 2)
 			mlx_mouse_move(data->game, data->window, WIN_W / 2, WIN_H / 2);
 	}
-	mlx_mouse_hide(data->game);
+	// mlx_mouse_hide(data->game);
 }
 
 void	key_down2(int key, t_data *data)

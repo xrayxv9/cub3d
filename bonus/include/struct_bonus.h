@@ -113,6 +113,7 @@ typedef struct s_parse
 typedef	struct s_portal
 {
 	bool	exist;
+	int		dir;
 	double	x;
 	double	y;
 }		t_portal;

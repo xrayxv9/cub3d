@@ -8,7 +8,7 @@
 
 t_portal	*init_portal(void);
 
-void		init_coo(t_portal *portals, t_ray *ray, int type, t_player *player);
+void		init_coo(t_portal *portals, t_ray *ray, int type);
 
 void		portal_send(t_data *data, int type);
 
