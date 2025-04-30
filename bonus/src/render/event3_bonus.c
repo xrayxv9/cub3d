@@ -60,9 +60,11 @@ void	handle_mouse(t_data *data, int i)
 		data->player.save_y = data->player.y;
 		mlx_mouse_get_pos(data->game, &data->player.pos_x, &data->player.pos_y);
 		if (data->player.pos_x > WIN_W / 2)
-			data->player.move_angle = data->scene.sensi;
+			data->player.move_angle = ((data->player.pos_x - WIN_W / 2) / 4)
+				* (data->scene.sensi * data->scene.sensi);
 		if (data->player.pos_x < WIN_W / 2)
-			data->player.move_angle = -data->scene.sensi;
+			data->player.move_angle = -(((WIN_W / 2 - data->player.pos_x) / 4)
+					* (data->scene.sensi * data->scene.sensi));
 		if (data->player.pos_x == WIN_W / 2)
 			data->player.move_angle = 0;
 	}
