@@ -1,4 +1,5 @@
 #include "cub3D_bonus.h"
+#include <bonus/include/struct_bonus.h>
 
 int	is_wall(t_map *map, t_ray *ray)
 {
@@ -96,7 +97,7 @@ void	cast_ray(t_data *data)
 	}
 	mlx_put_image_to_window(data->game, data->window,
 		data->textures[4].texture, 0, 0);
-	mlx_put_image_to_window(data->game, data->window, data->crosshair,
+	mlx_put_image_to_window(data->game, data->window, data->portal_images[CROSSHAIR],
 					 WIN_W / 2, WIN_H / 2);
 
 }

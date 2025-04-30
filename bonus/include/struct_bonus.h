@@ -77,6 +77,13 @@ typedef enum e_pos
 	IMAGE
 }	t_pos;
 
+typedef enum e_portal
+{
+	CROSSHAIR,
+	BLUE_IMAGE,
+	ORANGE_IMAGE
+} t_portal_enum;
+
 typedef enum e_angle
 {
 	SPAWN_NORTH = 270,
@@ -114,8 +121,8 @@ typedef	struct s_portal
 {
 	bool	exist;
 	int		dir;
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 }		t_portal;
 
 typedef struct s_player
@@ -164,7 +171,7 @@ typedef struct s_data
 	mlx_image				image;
 	mlx_image				minimap_image;
 	mlx_image				player_pos;
-	mlx_image				crosshair;
+	mlx_image				portal_images[3];
 
 	int						is_game;
 	int						keyboard_input;

@@ -1,4 +1,5 @@
 #include "cub3D_bonus.h"
+#include "portal_bonus.h"
 
 void	render_celling(t_data *data, mlx_color color)
 {
@@ -70,9 +71,10 @@ void	render_walls(t_data *data, t_ray *ray, float x)
 	calcul_touch(ray, &data->player, dir, 1);
 	while (ray->line_end >= i)
 	{
-		delta = (i - ray->line_start_tmp) / (float)ray->line_height * 1902;
+		delta = (i - ray->line_start_tmp) / (float)ray->line_height * 1000;
+		image = check_portal_coo(ray, data, image, dir);
 		color.rgba = mlx_get_image_pixel(data->game, image,
-				ray->touch_loc * 3060, delta).rgba;
+				ray->touch_loc * 1000, delta).rgba;
 		mlx_set_image_pixel(data->game, data->textures[4].texture, x, i, color);
 		i++;
 	}

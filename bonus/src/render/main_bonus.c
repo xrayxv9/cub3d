@@ -1,4 +1,8 @@
 #include "cub3D_bonus.h"
+#include "libft.h"
+#include "mlx.h"
+#include "parsing_bonus.h"
+#include "struct_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -37,6 +41,27 @@ static void	update(t_data *data)
 	}
 }
 
+int	free_fail(t_data *data)
+{
+	int			i;
+	int			ret;
+
+	i = 0;
+	ret = 0;
+	if (data->portal_images[CROSSHAIR] && data->portal_images[BLUE_IMAGE]
+			&& data->portal_images[ORANGE_IMAGE])
+		return (0);
+	while (i++ < 3)
+	{
+		if (data->portal_images[i])
+		{
+			mlx_destroy_image(data->game, data->portal_images[i]);
+			ret = 1;
+		}
+	}
+	return (ret);
+}
+
 static void	init_all(t_data *data, int ac, char **av)
 {
 	if (ac != 2)
@@ -49,8 +74,14 @@ static void	init_all(t_data *data, int ac, char **av)
 	if (!parsing(data, av[1]))
 		exit (0);
 	data->player.portals = init_portal();
-	data->crosshair = mlx_new_image_from_file(data->game,
+	data->portal_images[CROSSHAIR] = mlx_new_image_from_file(data->game,
 								   "bonus/textures/crosshair.png", NULL, NULL);
+	data->portal_images[BLUE_IMAGE] = mlx_new_image_from_file(data->game,
+									"bonus/textures/portals/blue.png", NULL, NULL);
+	data->portal_images[ORANGE_IMAGE] = mlx_new_image_from_file(data->game,
+								"bonus/textures/portals/orange.png", NULL, NULL);
+	if (free_fail(data))
+		destroy_textures_free_tab(data->textures, data->map.map, data->game);
 	if (!load_pause_screen(data->game, &data->scene))
 		return (error_scene(data, 1));
 }

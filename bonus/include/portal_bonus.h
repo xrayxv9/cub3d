@@ -12,4 +12,8 @@ void		init_coo(t_portal *portals, t_ray *ray, int type);
 
 void		portal_send(t_data *data, int type);
 
+mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir);
+
+
+
 #endif

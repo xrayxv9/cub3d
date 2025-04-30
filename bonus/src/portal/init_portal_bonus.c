@@ -1,4 +1,3 @@
-#include "render_bonus.h"
 #include <cub3D_bonus.h>
 
 t_portal	*init_portal(void)
@@ -22,4 +21,5 @@ void	init_coo(t_portal *portal, t_ray *ray, int type)
 	portal[type].dir = set_dir(ray);
 	portal[type].x = ray->map_x;
 	portal[type].y = ray->map_y;
+	printf("portal orange : (%d, %d)\n", portal[type].x, portal[type].y);
 }

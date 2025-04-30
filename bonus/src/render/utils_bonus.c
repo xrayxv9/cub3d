@@ -9,9 +9,9 @@ void	calcul_touch(t_ray *ray, t_player *player, int dir, int use)
 	if (use)
 	{
 		if (dir == NORTH)
-			ray->touch_loc = 3060 - ray->touch_loc;
+			ray->touch_loc = 1000 - ray->touch_loc;
 		if (dir == EAST)
-			ray->touch_loc = 3060 - ray->touch_loc;
+			ray->touch_loc = 1000 - ray->touch_loc;
 	}
 	ray->touch_loc -= (int)ray->touch_loc;
 }
