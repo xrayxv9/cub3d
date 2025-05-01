@@ -27,8 +27,12 @@ static void	update(t_data *data)
 				calculate_speed(&data->player,
 					data->player.save_angle, &data->player.save_angle);
 			data->player.angle += data->player.move_angle;
-			data->player.x += data->player.speed_x;
-			data->player.y += data->player.speed_y;
+			if (data->map.map[(int)(data->player.y + data->player.speed_y)]
+				[(int)(data->player.x + data->player.speed_x)] != '1')
+			{
+				data->player.x += data->player.speed_x;
+				data->player.y += data->player.speed_y;
+			}
 			handle_mouse(data, 1);
 			if (data->player.move_angle != 0
 				|| data->player.speed_x != 0 || data->player.speed_y != 0)

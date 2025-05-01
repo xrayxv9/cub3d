@@ -41,9 +41,9 @@ void	mouse_hook(int button, t_data *data)
 	x = -1;
 	y = -1;
 	mlx_mouse_get_pos(data->game, &x, &y);
-	if (data->is_game == GAME && button == 3)
+	if (data->is_game == GAME && button == 3 && !data->pause)
 		portal_send(data, ORANGE);
-	else if (data->is_game == GAME && button == 1)
+	else if (data->is_game == GAME && button == 1 && !data->pause)
 		portal_send(data, BLUE);
 	else if (data->scene.menu == FIRST && button == 1 && x >= 660 && x <= 1260
 		&& y >= 300 && y <= 500)

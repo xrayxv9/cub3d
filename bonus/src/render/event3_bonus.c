@@ -24,7 +24,6 @@ static void	mouse_hook4(int button, t_data *data, int x, int y)
 			data->scene.menu = FIRST;
 		}
 	}
-
 }
 
 void	mouse_hook3(int button, t_data *data, int x, int y)
