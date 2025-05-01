@@ -125,6 +125,12 @@ typedef	struct s_portal
 	int		y;
 }		t_portal;
 
+typedef struct s_double
+{
+	float	x;
+	int		i;
+}	t_double;
+
 typedef struct s_player
 {
 	double	angle;

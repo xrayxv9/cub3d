@@ -14,6 +14,7 @@ void		portal_send(t_data *data, int type);
 
 mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir);
 
+void		render_portal(t_data *data, t_double dou, mlx_color color, t_ray *ray);
 
 
 #endif

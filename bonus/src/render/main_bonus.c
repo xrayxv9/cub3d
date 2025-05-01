@@ -16,7 +16,7 @@ static void	update(t_data *data)
 {
 	if (data->is_game == MENU)
 		handle_scene(data);
-	if (data->is_game == GAME)
+	else if (data->is_game == GAME)
 	{
 		if (!data->pause)
 		{
@@ -92,7 +92,7 @@ int	main(int ac, char **av)
 
 	ft_bzero((char *)&data, sizeof(t_data));
 	init_all(&data, ac, av);
-	data.scene.sensi = 1.00f;
+	data.scene.sensi = 0.23f;
 	minimap(&data);
 	data.minimap = false;
 	data.is_game = MENU;

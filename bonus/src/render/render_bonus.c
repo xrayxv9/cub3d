@@ -59,7 +59,7 @@ int	set_dir(t_ray *ray)
 
 void	render_walls(t_data *data, t_ray *ray, float x)
 {
-	int			i;
+	t_double	dou;
 	int			dir;
 	mlx_color	color;
 	mlx_image	image;
@@ -67,15 +67,16 @@ void	render_walls(t_data *data, t_ray *ray, float x)
 
 	dir = set_dir(ray);
 	image = data->textures[dir].texture;
-	i = ray->line_start;
+	dou.i = ray->line_start;
+	dou.x = x;
 	calcul_touch(ray, &data->player, dir, 1);
-	while (ray->line_end >= i)
+	while (ray->line_end >= dou.i)
 	{
-		delta = (i - ray->line_start_tmp) / (float)ray->line_height * 1000;
+		delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
 		image = check_portal_coo(ray, data, image, dir);
 		color.rgba = mlx_get_image_pixel(data->game, image,
 				ray->touch_loc * 1000, delta).rgba;
-		mlx_set_image_pixel(data->game, data->textures[4].texture, x, i, color);
-		i++;
+		render_portal(data, dou, color, ray);
+		dou.i++;
 	}
 }

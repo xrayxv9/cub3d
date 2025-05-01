@@ -9,7 +9,7 @@ static void	mouse_hook4(int button, t_data *data, int x, int y)
 			return ;
 		data->scene.sensi += 0.10;
 	}
-	if (data->is_game == GAME && data->pause)
+	else if (data->is_game == GAME && data->pause)
 	{
 		if (button == 1 && x >= 660 && x <= 1260 && y >= 300 && y <= 500)
 			data->pause = !data->pause;
@@ -24,10 +24,6 @@ static void	mouse_hook4(int button, t_data *data, int x, int y)
 			data->scene.menu = FIRST;
 		}
 	}
-	if (data->is_game == GAME && button == 3)
-		portal_send(data, ORANGE);
-	if (data->is_game == GAME && button == 1)
-		portal_send(data, BLUE);
 
 }
 

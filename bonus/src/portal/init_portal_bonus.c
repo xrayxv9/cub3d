@@ -21,5 +21,5 @@ void	init_coo(t_portal *portal, t_ray *ray, int type)
 	portal[type].dir = set_dir(ray);
 	portal[type].x = ray->map_x;
 	portal[type].y = ray->map_y;
-	printf("portal orange : (%d, %d)\n", portal[type].x, portal[type].y);
+	portal[type].exist = 1;
 }
