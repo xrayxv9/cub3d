@@ -17,4 +17,8 @@ t_ray	init(t_ray *ray, t_player *player, float angle);
 
 void	line_handle(t_ray *ray, t_player *player, float x);
 
+void	init_step(t_ray *ray);
+
+void	init_side(t_ray *ray, double x, double y);
+
 #endif

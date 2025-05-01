@@ -212,6 +212,7 @@ typedef struct s_ray
 	double	camera_x;
 	double	touch_loc;
 	double	line_start_tmp;
+	double	angle;
 }	t_ray;
 
 #endif

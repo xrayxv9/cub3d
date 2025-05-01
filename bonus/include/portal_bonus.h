@@ -16,5 +16,6 @@ mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir);
 
 void		render_portal(t_data *data, t_double dou, mlx_color color, t_ray *ray);
 
+void	reset_angle(t_portal *portals, t_ray *ray, int type);
 
 #endif
