@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra -Werror -I mandatory/include -I libft -I MacroLibX/includes
+CFLAGS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I mandatory/include -I libft 
 CFLAGS_BONUS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I bonus/include -I libft
 
 NAME = cub3D
@@ -6,7 +6,6 @@ NAME_BONUS = cub3D_bonus
 MAKE = make --no-print-directory
 
 OBJS = $(SRCS:.c=.o)
-
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 #-------------------------------------------------------COLORS--------------------------------------------------#
@@ -47,6 +46,7 @@ RAYCASTING_PATH_BONUS = bonus/src/raycasting
 RENDER_PATH_BONUS = bonus/src/render
 SCENE_PATH_BONUS = bonus/src/scene
 MINIMAP_PATH_BONUS = bonus/src/minimap
+PORTAL_PATH_BONUS = bonus/src/portal
 
 SRCS = $(PARSING_PATH)/parsing.c \
 	   $(PARSING_PATH)/parsing_error.c \
@@ -62,32 +62,35 @@ SRCS = $(PARSING_PATH)/parsing.c \
 	   $(RENDER_PATH)/event.c \
 	   $(RENDER_PATH)/render.c
 
-SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing.c \
-			 $(PARSING_PATH_BONUS)/parsing_error.c \
-			 $(PARSING_PATH_BONUS)/textures.c \
-			 $(PARSING_PATH_BONUS)/map.c \
-			 $(PARSING_PATH_BONUS)/utils.c \
-			 $(PARSING_PATH_BONUS)/utils2.c \
-			 $(RAYCASTING_PATH_BONUS)/casting.c \
-			 $(RAYCASTING_PATH_BONUS)/utils.c \
-			 $(RAYCASTING_PATH_BONUS)/init.c \
-			 $(RENDER_PATH_BONUS)/main.c \
-			 $(RENDER_PATH_BONUS)/utils.c \
-			 $(RENDER_PATH_BONUS)/event.c \
-			 $(RENDER_PATH_BONUS)/event2.c \
-			 $(RENDER_PATH_BONUS)/event3.c \
-			 $(RENDER_PATH_BONUS)/keyboard_event.c \
-			 $(RENDER_PATH_BONUS)/render.c \
-			 $(SCENE_PATH_BONUS)/scene.c \
-			 $(SCENE_PATH_BONUS)/scene_error.c \
-			 $(SCENE_PATH_BONUS)/load_scene.c \
-			 $(SCENE_PATH_BONUS)/display.c \
-			 $(SCENE_PATH_BONUS)/display2.c \
-			 $(MINIMAP_PATH_BONUS)/minimap.c \
+SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
+			 $(PARSING_PATH_BONUS)/parsing_error_bonus.c \
+			 $(PARSING_PATH_BONUS)/textures_bonus.c \
+			 $(PARSING_PATH_BONUS)/map_bonus.c \
+			 $(PARSING_PATH_BONUS)/utils_bonus.c \
+			 $(PARSING_PATH_BONUS)/utils2_bonus.c \
+			 $(RAYCASTING_PATH_BONUS)/casting_bonus.c \
+			 $(RAYCASTING_PATH_BONUS)/utils_bonus.c \
+			 $(RAYCASTING_PATH_BONUS)/init_bonus.c \
+			 $(RENDER_PATH_BONUS)/main_bonus.c \
+			 $(RENDER_PATH_BONUS)/utils_bonus.c \
+			 $(RENDER_PATH_BONUS)/event_bonus.c \
+			 $(RENDER_PATH_BONUS)/event2_bonus.c \
+			 $(RENDER_PATH_BONUS)/event3_bonus.c \
+			 $(RENDER_PATH_BONUS)/keyboard_event_bonus.c \
+			 $(RENDER_PATH_BONUS)/render_bonus.c \
+			 $(SCENE_PATH_BONUS)/scene_bonus.c \
+			 $(SCENE_PATH_BONUS)/scene_error_bonus.c \
+			 $(SCENE_PATH_BONUS)/load_scene_bonus.c \
+			 $(SCENE_PATH_BONUS)/display_bonus.c \
+			 $(SCENE_PATH_BONUS)/display2_bonus.c \
+			 $(MINIMAP_PATH_BONUS)/minimap_bonus.c \
+			 $(PORTAL_PATH_BONUS)/portal_bonus.c \
+			 $(PORTAL_PATH_BONUS)/render_portal_bonus.c \
+			 $(PORTAL_PATH_BONUS)/init_portal_bonus.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -lm -lSDL2
@@ -99,8 +102,13 @@ $(LIBFT):
 $(MLX):
 	@$(MAKE) -C $(MLX_PATH) -s -j
 
+ifeq ($(MAKECMDGOALS), bonus)
 %.o: %.c
 	@$(CC) $(CFLAGS_BONUS) -c -o $@ $<
+else
+%.o: %.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
+endif
 
 bonus: $(NAME_BONUS)
 

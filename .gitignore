@@ -2,6 +2,7 @@ cub3D
 mandatory/src/parsing/*.o
 mandatory/src/raycasting/*.o
 mandatory/src/render/*.o
+bonus/src/*/*.o
 libft/*.o
 libft/libft.a
 libft/ft_printf/*.o
