@@ -1,3 +1,4 @@
+#include "portal_bonus.h"
 #include "render_bonus.h"
 #include "struct_bonus.h"
 #include <cub3D_bonus.h>
@@ -11,7 +12,8 @@ void	portal_send(t_data *data, int type)
 	init(&ray, &data->player, data->player.angle);
 	main_while(&ray, &data->map);
 	line_handle(&ray, &data->player, data->player.angle);
-	init_coo(portals, &ray, type);
+	if (!check_portal_coo(&ray, data, NULL, set_dir(&ray)))
+		init_coo(portals, &ray, type);
 }
 
 mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir)
