@@ -1,6 +1,3 @@
-#include "portal_bonus.h"
-#include "render_bonus.h"
-#include "struct_bonus.h"
 #include <cub3D_bonus.h>
 
 void	portal_send(t_data *data, int type)

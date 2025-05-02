@@ -70,10 +70,10 @@ typedef enum e_sf
 
 typedef enum e_pos
 {
-	SOUTH,
-	EAST,
-	WEST,
 	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
 	IMAGE
 }	t_pos;
 
@@ -127,8 +127,8 @@ typedef	struct s_portal
 
 typedef struct s_double
 {
-	float	x;
-	int		i;
+	int	x;
+	int	i;
 }	t_double;
 
 typedef struct s_player
@@ -199,6 +199,7 @@ typedef struct s_ray
 	int		line_height;
 	int		line_start;
 	int		line_end;
+	int		tp;
 	double	wall_distance;
 	double	dir_x;
 	double	dir_y;

@@ -76,7 +76,7 @@ void	render_walls(t_data *data, t_ray *ray, float x)
 		image = check_portal_coo(ray, data, image, dir);
 		color.rgba = mlx_get_image_pixel(data->game, image,
 				ray->touch_loc * 1000, delta).rgba;
-		render_portal(data, dou, color, ray);
+		render_portal(data, &dou, color, ray);
 		dou.i++;
 	}
 }

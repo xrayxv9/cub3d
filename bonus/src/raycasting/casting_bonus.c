@@ -17,7 +17,7 @@ int	main_while(t_ray *ray, t_map *map)
 	int	i;
 
 	i = 0;
-	while (i <= 50 && !is_wall(map, ray))
+	while ((i <= 50 && !is_wall(map, ray)) || i <= 0)
 	{
 		if (ray->side_x < ray->side_y)
 		{

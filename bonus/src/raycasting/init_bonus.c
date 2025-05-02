@@ -29,6 +29,7 @@ t_ray	init(t_ray *ray, t_player *player, float angle)
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
 	ray->angle = angle;
+	ray->tp = 0;
 	ray->map_x = (int)player->x;
 	ray->map_y = (int)player->y;
 	if (ray->dir_x == 0)
