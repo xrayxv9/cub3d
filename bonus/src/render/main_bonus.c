@@ -1,8 +1,4 @@
 #include "cub3D_bonus.h"
-#include "libft.h"
-#include "mlx.h"
-#include "parsing_bonus.h"
-#include "struct_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -27,12 +23,7 @@ static void	update(t_data *data)
 				calculate_speed(&data->player,
 					data->player.save_angle, &data->player.save_angle);
 			data->player.angle += data->player.move_angle;
-			if (data->map.map[(int)(data->player.y + data->player.speed_y)]
-				[(int)(data->player.x + data->player.speed_x)] != '1')
-			{
-				data->player.x += data->player.speed_x;
-				data->player.y += data->player.speed_y;
-			}
+			teleport_collision(&data->player, &data->map);
 			handle_mouse(data, 1);
 			if (data->player.move_angle != 0
 				|| data->player.speed_x != 0 || data->player.speed_y != 0)
