@@ -1,61 +1,67 @@
 #include "mlx.h"
+#include "portal_bonus.h"
 #include "render_bonus.h"
 #include <cub3D_bonus.h>
 
-int	is_black(mlx_color color)
+int	is_color(mlx_color color, unsigned int r, unsigned int g, unsigned int b)
 {
 	mlx_color black;
 
-	black.r = 0;
-	black.g = 0;
-	black.b = 0;
+	black.r = r;
+	black.g = g;
+	black.b = b;
 	black.a = 255;
 	if (color.rgba == black.rgba)
 		return (1);
 	return (0);
 }
 
-
-void	render_walls_portal(t_data *data, t_ray *ray, float x)
+int	portal_find(t_portal *portal, int x, int y)
 {
+	if (portal[BLUE].x == x && portal[BLUE].y == y)
+		return (BLUE);
+	else if (portal[ORANGE].x == x && portal[ORANGE].y == y)
+			return (ORANGE);
+	else
+		return (-1);
+}
+
+void	get_color(t_ray *ray, t_data *data, t_portal *portals, mlx_color *colors)
+{
+	t_ray		ra;
 	t_double	dou;
 	int			dir;
-	mlx_color	color;
 	mlx_image	image;
-	double		delta;
+	mlx_color	color;
 
+	reset_angle(portals, ray, portal_find(portals, ray->map_x, ray->map_y),
+				  &data->map);
 	dir = set_dir(ray);
 	image = data->textures[dir].texture;
-	dou.i = ray->line_start;
-	dou.x = x;
-	delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
-	calcul_touch(ray, &data->player, dir, 1);
-	color.rgba = mlx_get_image_pixel(data->game, image,
-		ray->touch_loc * 1000, delta).rgba;
-	while (is_black(color))
+	dou.i = ra.line_start;
+	dou.x = ra.angle;
+	calcul_touch(&ra, &data->player, dir, 1);
+	while (ra.line_end >= dou.i)
 	{
-		delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
-		image = check_portal_coo(ray, data, image, dir);
+		dou.delta = (dou.i - ra.line_start_tmp) / (float)ra.line_height * 1000;
+		image = check_portal_coo(&ra, data, image, dir);
 		color.rgba = mlx_get_image_pixel(data->game, image,
-				ray->touch_loc * 1000, delta).rgba;
-		mlx_set_image_pixel(data->game, data->textures[4].texture, dou.x, dou.i, color);
+				ra.touch_loc * 1000, dou.delta).rgba;
+		colors[(int)dou.delta] = color;
 		dou.i++;
 	}
 }
 
-void	render_portal(t_data *data, t_double *dou, mlx_color color, t_ray *ray)
+mlx_color	render_portal(t_portal *portals, mlx_color *colors, t_current *current, t_data *data)
 {
-	if (is_black(color) && ray->tp < 1 && data->player.portals[BLUE].exist && data->player.portals[ORANGE].exist)
+	if (portals[BLUE].exist && portals[ORANGE].exist)
 	{
-		ray->tp++;
-		if (ray->map_x == data->player.portals[ORANGE].x
-				&& ray->map_y == data->player.portals[ORANGE].y)
-			reset_angle(data->player.portals, ray, ORANGE, &data->map);
-		else 
-			reset_angle(data->player.portals, ray, BLUE, &data->map);
-		printf("coo blue : (%d, %d), coo orange : (%d, %d), ray coo : (%d, %d)\n", data->player.portals[BLUE].x, data->player.portals[BLUE].y, data->player.portals[ORANGE].x, data->player.portals[ORANGE].y, ray->map_x, ray->map_y);
-		render_walls_portal(data, ray, ray->angle);
+		if (!current->i)
+		{
+			get_color(current->ray, data, portals, colors);
+			current->i = 1;
+		}
+		return (colors[current->i++]);
 	}
-	else
-		mlx_set_image_pixel(data->game, data->textures[4].texture, dou->x, dou->i, color);
+	return(current->color);
 }

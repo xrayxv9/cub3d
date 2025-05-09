@@ -1,10 +1,10 @@
 #include <cub3D_bonus.h>
 
-void	line_handle_portal(t_ray *ray, t_portal portal, float x)
+void	line_handle_portal(t_ray *ray, t_portal portal, float x, double wall)
 {
 	if (ray->side == VER)
 		ray->wall_distance = (ray->side_x - ray->delta_x)
-			* cos(radian(ray->angle - x));
+			* cos(radian(ray->angle - x) + wall);
 	else
 		ray->wall_distance = (ray->side_y - ray->delta_y)
 			* cos(radian(ray->angle - x));

@@ -57,26 +57,67 @@ int	set_dir(t_ray *ray)
 		return (SOUTH);
 }
 
+void	test(t_data *data, t_ray ray, float x)
+{
+	t_double	dou;
+	int			dir;
+	mlx_image	image;
+	t_current	current;
+	int			type;
+
+	type = portal_find(data->player.portals, ray.map_x, ray.map_y);
+	reset_angle(data->player.portals, &ray, type, &data->map);
+	dir = set_dir(&ray);
+	current.ray = &ray;
+	image = data->textures[dir].texture;
+	dou.i = ray.line_start;
+	dou.x = x;
+	calcul_touch(&ray, &data->player, dir, 1);
+	current.i = 0;
+	while (ray.line_end >= dou.i)
+	{
+		dou.delta = (dou.i - ray.line_start_tmp) / (float)ray.line_height * 1000;
+		image = check_portal_coo(&ray, data, image, dir);
+		current.color.rgba = mlx_get_image_pixel(data->game, image,
+				ray.touch_loc * 1000, dou.delta).rgba;
+		mlx_set_image_pixel(data->game, data->textures[4].texture, dou.x, dou.i, current.color);
+		dou.i++;
+	}
+}
+
+int both(t_portal *portals)
+{
+	if (portals[BLUE].exist && portals[ORANGE].exist)
+		return (1);
+	return (0);
+}
+
 void	render_walls(t_data *data, t_ray *ray, float x)
 {
 	t_double	dou;
 	int			dir;
-	mlx_color	color;
 	mlx_image	image;
-	double		delta;
+	t_current	current;
+	int			type;
 
+	type = portal_find(data->player.portals, ray->map_x, ray->map_y);
+	if (type != -1 && data->player.portals[BLUE].exist && data->player.portals[ORANGE].exist)
+		test(data, *ray, x);
 	dir = set_dir(ray);
+	current.ray = ray;
 	image = data->textures[dir].texture;
 	dou.i = ray->line_start;
 	dou.x = x;
 	calcul_touch(ray, &data->player, dir, 1);
+	current.i = 0;
 	while (ray->line_end >= dou.i)
 	{
-		delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
+		dou.delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
 		image = check_portal_coo(ray, data, image, dir);
-		color.rgba = mlx_get_image_pixel(data->game, image,
-				ray->touch_loc * 1000, delta).rgba;
-		render_portal(data, &dou, color, ray);
+		current.color.rgba = mlx_get_image_pixel(data->game, image,
+				ray->touch_loc * 1000, dou.delta).rgba;
+		if (!is_color(current.color, 0, 0, 0))
+			mlx_set_image_pixel(data->game, data->textures[4].texture, dou.x, dou.i, current.color);
 		dou.i++;
 	}
 }

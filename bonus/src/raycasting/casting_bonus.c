@@ -47,12 +47,12 @@ void	line_handle(t_ray *ray, t_player *player, float x)
 		ray->wall_distance = (ray->side_y - ray->delta_y)
 			* cos(radian(player->angle - x));
 	ray->line_height = (int)(WIN_H / ray->wall_distance);
-	ray->line_start_tmp = WIN_H * 0.5 - ray->line_height * 0.5;
+	ray->line_start_tmp = (WIN_H >> 1) - (ray->line_height >> 1);
 	if (ray->line_start_tmp < 0)
 		ray->line_start = 0;
 	else
 		ray->line_start = ray->line_start_tmp;
-	ray->line_end = ray->line_height * 0.5 + WIN_H * 0.5;
+	ray->line_end = (ray->line_height >> 1) + (WIN_H >> 1);
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
 	if (ray->side == 0)
@@ -98,6 +98,5 @@ void	cast_ray(t_data *data)
 	mlx_put_image_to_window(data->game, data->window,
 		data->textures[4].texture, 0, 0);
 	mlx_put_image_to_window(data->game, data->window, data->portal_images[CROSSHAIR],
-					 WIN_W / 2, WIN_H / 2);
-
+					 WIN_W >> 1, WIN_H >> 1);
 }

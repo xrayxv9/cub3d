@@ -1,3 +1,5 @@
+#include "portal_bonus.h"
+#include "render_bonus.h"
 #include <cub3D_bonus.h>
 
 static void	trace_square(int start, int y, mlx_context game, mlx_image image)
@@ -53,6 +55,23 @@ void	display_minimap(t_data *data)
 		data->player_pos, 0, 0);
 }
 
+void	display_ray(t_data *data)
+{
+	mlx_color	color;
+	t_ray		ray;
+
+	color.r = 0;
+	color.g = 255;
+	color.b = 0;
+	color.a = 255;
+	init(&ray, &data->player, data->player.angle);
+	main_while(&ray, &data->map);
+	// if (portal_find(data->player.portals, ray.map_x, ray.map_y))
+	// 	reset_angle(, t_ray *ray, int type, t_map *map)
+	trace_square(ray.side_x, ray.side_y, data->game, data->player_pos);
+	mlx_set_image_pixel(data->game, data->player_pos, ray.side_x, ray.side_y , color);
+}
+
 void	minimap(t_data *data)
 {
 	int	i;
@@ -71,6 +90,7 @@ void	minimap(t_data *data)
 			if (data->map.map[i][j] == '1')
 				trace_square(j * 10, i * 10, data->game, data->minimap_image);
 			j++;
+			display_ray(data);
 		}
 		i++;
 	}
