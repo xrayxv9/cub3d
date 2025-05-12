@@ -1,7 +1,7 @@
-NO ./bonus/textures/NORTH.png
-SO ./bonus/textures/SOUTH.png
-WE ./bonus/textures/WEST.png
-EA ./bonus/textures/EAST.png
+NO ./bonus/textures/wall.png
+SO ./bonus/textures/wall.png
+WE ./bonus/textures/wall.png
+EA ./bonus/textures/wall.png
 
 F 220,100,0
 C 225,30,0
