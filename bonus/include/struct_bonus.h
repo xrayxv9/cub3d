@@ -131,6 +131,9 @@ typedef struct s_double
 	int		x;
 	int		i;
 	double	delta;
+	double	dy;
+	double	dx;
+	double	touch;
 }	t_double;
 
 typedef struct s_player

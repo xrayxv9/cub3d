@@ -71,6 +71,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/casting_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/utils_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/init_bonus.c \
+			 $(RAYCASTING_PATH_BONUS)/init_side_bonus.c \
 			 $(RENDER_PATH_BONUS)/main_bonus.c \
 			 $(RENDER_PATH_BONUS)/utils_bonus.c \
 			 $(RENDER_PATH_BONUS)/event_bonus.c \

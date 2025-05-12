@@ -21,4 +21,6 @@ void	init_step(t_ray *ray);
 
 void	init_side(t_ray *ray, double x, double y);
 
+void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti);
+
 #endif
