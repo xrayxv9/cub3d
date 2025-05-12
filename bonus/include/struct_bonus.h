@@ -14,6 +14,7 @@
 # define SECOND_MENU_BUTTON 2
 # define THIRD_MENU_BUTTON 12
 # define PAUSE_MENU 3
+# define PORTAL 4
 
 // enum
 
@@ -81,8 +82,9 @@ typedef enum e_portal
 {
 	CROSSHAIR,
 	BLUE_IMAGE,
-	ORANGE_IMAGE
-} t_portal_enum;
+	ORANGE_IMAGE,
+	PORTAL_LAUNCHER
+}	t_portal_enum;
 
 typedef enum e_angle
 {
@@ -177,7 +179,7 @@ typedef struct s_data
 	mlx_image				image;
 	mlx_image				minimap_image;
 	mlx_image				player_pos;
-	mlx_image				portal_images[3];
+	mlx_image				portal_images[PORTAL];
 
 	int						is_game;
 	int						keyboard_input;

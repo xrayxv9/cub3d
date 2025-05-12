@@ -75,6 +75,8 @@ static void	init_all(t_data *data, int ac, char **av)
 									"bonus/textures/portals/blue.png", NULL, NULL);
 	data->portal_images[ORANGE_IMAGE] = mlx_new_image_from_file(data->game,
 								"bonus/textures/portals/orange.png", NULL, NULL);
+	data->portal_images[PORTAL_LAUNCHER] = mlx_new_image_from_file(data->game,
+			"bonus/textures/portal_launcher.png", NULL, NULL);
 	if (free_fail(data))
 		destroy_textures_free_tab(data->textures, data->map.map, data->game);
 	if (!load_pause_screen(data->game, &data->scene))
