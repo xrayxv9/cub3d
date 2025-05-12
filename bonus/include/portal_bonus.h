@@ -12,9 +12,12 @@ void		init_coo(t_portal *portals, t_ray *ray, int type);
 
 void		portal_send(t_data *data, int type);
 
-mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir);
+mlx_image	check_portal_coo(t_ray *ray, t_data *data,
+				mlx_image image, int dir);
 
-void		render_portal(t_data *data, t_double dou, mlx_color color, t_ray *ray);
+void		render_portal(t_data *data, t_double dou,
+				mlx_color color, t_ray *ray);
 
+void		teleport_collision(t_player *player, t_map *map);
 
 #endif
