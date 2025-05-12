@@ -47,13 +47,9 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 {
 	int	anti;
 
-	anti = 1;
-	if (type == 1)
-		anti = 0;
+	anti = type == 0;
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
-	ray->map_x = (int)portal[anti].x;
-	ray->map_y = (int)portal[anti].y;
 	if (ray->dir_x == 0)
 		ray->delta_x = exp(30);
 	else
@@ -73,11 +69,13 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	double	ra;
 
 	ra = ray->wall_distance;
-	anti = 1;
-	if (type)
-		anti =  0;
+	anti = type == 0;
 	ray->map_x = portals[anti].x;
 	ray->map_y = portals[anti].y;
+	if (portals[anti].dir == SOUTH)
+		ray->map_y++;
+	if (portals[anti].dir == WEST)
+		ray->map_x++;
 	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
 	init_ray_portal(ray, portals, ray->angle, type);
 	main_while(ray, map);
