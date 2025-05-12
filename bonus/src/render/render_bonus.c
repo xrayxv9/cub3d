@@ -98,11 +98,11 @@ void	render_walls(t_data *data, t_ray *ray, float x)
 	t_current	current;
 	int			type;
 
+	dir = set_dir(ray);
 	printf("type : %d, portal co : (%d, %d)\n", 0, data->player.portals[0].x, data->player.portals[0].y);
-	type = portal_find(data->player.portals, ray->map_x, ray->map_y);
+	type = portal_find(data->player.portals, ray->map_x, ray->map_y, dir);
 	if (type != -1 && data->player.portals[BLUE].exist && data->player.portals[ORANGE].exist)
 		test(data, *ray, x, type);
-	dir = set_dir(ray);
 	current.ray = ray;
 	image = data->textures[dir].texture;
 	dou.i = ray->line_start;

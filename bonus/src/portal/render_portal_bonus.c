@@ -16,11 +16,11 @@ int	is_color(mlx_color color, unsigned int r, unsigned int g, unsigned int b)
 	return (0);
 }
 
-int	portal_find(t_portal *portal, int x, int y)
+int	portal_find(t_portal *portal, int x, int y, int dir)
 {
-	if (portal[BLUE].x == x && portal[BLUE].y == y)
+	if (portal[BLUE].x == x && portal[BLUE].y == y && dir == portal[BLUE].dir)
 		return (BLUE);
-	else if (portal[ORANGE].x == x && portal[ORANGE].y == y)
+	else if (portal[ORANGE].x == x && portal[ORANGE].y == y && dir == portal[ORANGE].dir)
 			return (ORANGE);
 	else
 		return (-1);
@@ -34,9 +34,8 @@ void	get_color(t_ray *ray, t_data *data, t_portal *portals, mlx_color *colors)
 	mlx_image	image;
 	mlx_color	color;
 
-	reset_angle(portals, ray, portal_find(portals, ray->map_x, ray->map_y),
-				  &data->map);
 	dir = set_dir(ray);
+	reset_angle(portals, ray, portal_find(portals, ray->map_x, ray->map_y, dir), &data->map);
 	image = data->textures[dir].texture;
 	dou.i = ra.line_start;
 	dou.x = ra.angle;

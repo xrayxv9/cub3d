@@ -22,6 +22,6 @@ void		line_handle_portal(t_ray *ray, t_portal portal, float x, double wall);
 
 int			is_color(mlx_color color, unsigned int r, unsigned int g, unsigned int b);
 
-int			portal_find(t_portal *portal, int x, int y);
+int		portal_find(t_portal *portal, int x, int y, int dir);
 
 #endif
