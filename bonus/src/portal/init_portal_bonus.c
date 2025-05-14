@@ -56,7 +56,7 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
-	init_side_portal(ray, portal, type, anti);
+	init_side_portal(ray->touch_loc, portal, type, anti);
 	return (*ray);
 }
 

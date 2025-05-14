@@ -44,14 +44,13 @@ void	south_portal(t_portal *portal, int type, int anti, t_double *dou)
 		east_portal(portal, type, anti, dou);
 }
 
-void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti)
+t_double	init_side_portal(double touch_loc, t_portal *portal, int type, int anti)
 {
 	t_double	dou;
 
 	dou.dx = portal[anti].x;
 	dou.dy = portal[anti].y;
-	dou.touch = ray->touch_loc;
-	printf("couleur : %s, value : %d\n",(type == 1 ? "orange": "blue") , portal[type].dir);
+	dou.touch = touch_loc;
 	if (portal[type].dir == SOUTH)
 	{
 		if (portal[anti].dir == SOUTH)
@@ -65,5 +64,5 @@ void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti)
 	}
 	else
 		south_portal(portal, type, anti, &dou);
-	init_side(ray, dou.dx, dou.dy);
+	return (dou);
 }
