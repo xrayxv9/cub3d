@@ -87,7 +87,7 @@ void	cast_ray(t_data *data)
 	render_bg(data);
 	while (angle <= end_angle)
 	{
-		init_dda(&ray, &data->player, angle);
+		init_dda(&ray, data->player.x, data->player.y, angle);
 		if (dda(&ray, &data->map))
 		{
 			line_handle(&ray, &(data->player), angle);

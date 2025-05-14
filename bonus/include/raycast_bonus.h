@@ -13,7 +13,7 @@ double	radian(float angle);
 
 int		square(int number);
 
-t_ray	init_dda(t_ray *ray, t_player *player, float angle);
+t_ray	init_dda(t_ray *ray, double x, double y, float angle);
 
 void	line_handle(t_ray *ray, t_player *player, float x);
 

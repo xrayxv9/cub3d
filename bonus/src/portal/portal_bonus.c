@@ -6,7 +6,7 @@ void	portal_send(t_data *data, int type)
 	t_portal	*portals;
 
 	portals = data->player.portals;
-	init_dda(&ray, &data->player, data->player.angle);
+	init_dda(&ray, data->player.x, data->player.y, data->player.angle);
 	dda(&ray, &data->map);
 	line_handle(&ray, &data->player, data->player.angle);
 	if (!check_portal_coo(&ray, data, NULL, set_dir(&ray)))

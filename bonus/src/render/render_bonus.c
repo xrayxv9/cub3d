@@ -48,9 +48,9 @@ void	render_bg(t_data *data)
 int	set_dir(t_ray *ray)
 {
 	if (ray->side == VER && ray->dir_x > 0)
-		return (WEST);
-	else if (ray->side == VER && ray->dir_x < 0)
 		return (EAST);
+	else if (ray->side == VER && ray->dir_x < 0)
+		return (WEST);
 	else if (ray->side == HOR && ray->dir_y > 0)
 		return (NORTH);
 	else

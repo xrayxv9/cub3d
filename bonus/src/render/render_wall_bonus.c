@@ -1,3 +1,5 @@
+#include "portal_bonus.h"
+#include "raycast_bonus.h"
 #include "render_bonus.h"
 #include <cub3D_bonus.h>
 
@@ -25,19 +27,25 @@ void	show(t_ray *ray, t_data *data, t_double *dou, t_current *current)
 	}
 }
 
-void	render_wall_portal(t_data *data, t_ray ray, float x, int type)
+// void	init_dda_portal(t_ray *ray, double pos_x, double pos_y, float angle)
+// {
+//
+// }
+
+void	render_wall_portal(t_data *data, t_ray ray, float angle, int type)
 {
 	t_double	dou;
 	int			dir;
 	t_current	current;
+	t_ray		ray_exit;
 
-	printf("coo blue : x : %d, y : %d\n", data->player.portals[BLUE].x, data->player.portals[BLUE].y);
-	printf("coo orange : x : %d, y : %d\n", data->player.portals[ORANGE].x, data->player.portals[ORANGE].y);
+	// init_dda_portal();
+	dda(&ray_exit, &data->map);
 	reset_angle(data->player.portals, &ray, type, &data->map);
 	dir = set_dir(&ray);
 	current.ray = &ray;
 	dou.i = ray.line_start;
-	dou.x = x;
+	dou.x = angle;
 	calcul_touch(&ray, &data->player, dir, 1);
 	current.i = 0;
 	current.loop = 0;
