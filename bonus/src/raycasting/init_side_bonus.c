@@ -50,6 +50,10 @@ t_double	init_side_portal(double touch_loc, t_portal *portal, int type, int anti
 
 	dou.dx = portal[anti].x;
 	dou.dy = portal[anti].y;
+	if (portal[anti].dir == SOUTH)
+		dou.dy++;
+	if (portal[anti].dir == WEST)
+		dou.dx++;
 	dou.touch = touch_loc;
 	if (portal[type].dir == SOUTH)
 	{
