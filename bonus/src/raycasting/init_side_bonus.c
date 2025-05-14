@@ -1,47 +1,47 @@
 #include "raycast_bonus.h"
 #include <cub3D_bonus.h>
 
-void	east_portal(int type, int anti, t_double *dou)
+void	east_portal(t_portal *portal, int type, int anti, t_double *dou)
 {
-	if (type == EAST)
+	if (portal[type].dir == EAST)
 	{
-		if (anti == NORTH)
+		if (portal[anti].dir == NORTH)
 			dou->dx += 1 - dou->touch;
-		else if (anti == SOUTH)
+		else if (portal[anti].dir == SOUTH)
 			dou->dx = dou->touch;
-		else if (anti == WEST)
+		else if (portal[anti].dir == WEST)
 			dou->dy += 1 - dou->touch;
-		else if (anti == EAST)
+		else if (portal[anti].dir == EAST)
 			dou->dy += dou->touch;
 	}
 }
 
-void	south_portal(int type, int anti, t_double *dou)
+void	south_portal(t_portal *portal, int type, int anti, t_double *dou)
 {
 	if (type == SOUTH)
 	{
-		if (anti == NORTH)
+		if (portal[anti].dir == NORTH)
 			dou->dx += 1 - dou->touch;
-		else if (anti == SOUTH)
+		else if (portal[anti].dir == SOUTH)
 			dou->dx = dou->touch;
-		else if (anti == WEST)
+		else if (portal[anti].dir == WEST)
 			dou->dy += dou->touch;
-		else if (anti == EAST)
+		else if (portal[anti].dir == EAST)
 			dou->dy += 1 - dou->touch;
 	}
 	else if (type == WEST)
 	{
-		if (anti == NORTH)
+		if (portal[anti].dir == NORTH)
 			dou->dx += 1 - dou->touch;
-		else if (anti == SOUTH)
+		else if (portal[anti].dir == SOUTH)
 			dou->dx = dou->touch;
-		else if (anti == WEST)
+		else if (portal[anti].dir == WEST)
 			dou->dy += 1 - dou->touch;
-		else if (anti == EAST)
+		else if (portal[anti].dir == EAST)
 			dou->dy += dou->touch;
 	}
 	else
-		east_portal(type, anti, dou);
+		east_portal(portal, type, anti, dou);
 }
 
 void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti)
@@ -51,18 +51,18 @@ void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti)
 	dou.dx = portal[anti].x;
 	dou.dy = portal[anti].y;
 	dou.touch = ray->touch_loc;
-	if (type == NORTH)
+	if (portal == NORTH)
 	{
-		if (anti == NORTH)
+		if (portal[anti].dir == NORTH)
 			dou.dx += 1 - dou.touch;
-		else if (anti == SOUTH)
+		else if (portal[anti].dir == SOUTH)
 			dou.dx += dou.touch;
-		else if (anti == WEST)
+		else if (portal[anti].dir == WEST)
 			dou.dy += dou.touch;
 		else
 			dou.dy += 1 - dou.touch;
 	}
 	else
-		south_portal(type, anti, &dou);
+		south_portal(portal, type, anti, &dou);
 	init_side(ray, dou.dx, dou.dy);
 }

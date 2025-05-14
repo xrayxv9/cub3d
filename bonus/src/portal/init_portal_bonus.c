@@ -1,6 +1,3 @@
-#include "portal_bonus.h"
-#include "raycast_bonus.h"
-#include "render_bonus.h"
 #include <cub3D_bonus.h>
 
 t_portal	*init_portal(void)

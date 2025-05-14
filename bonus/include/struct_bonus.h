@@ -224,6 +224,7 @@ typedef struct s_ray
 typedef struct s_current
 {
 	int			i;
+	int			loop;
 	mlx_color	color;
 	t_ray		*ray;
 }				t_current;

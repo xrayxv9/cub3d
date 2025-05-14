@@ -39,3 +39,10 @@ void	window_hook(int event, t_data *data)
 	if (event == 0)
 		mlx_loop_end(data->game);
 }
+
+int both(t_portal *portals)
+{
+	if (portals[BLUE].exist && portals[ORANGE].exist)
+		return (1);
+	return (0);
+}
