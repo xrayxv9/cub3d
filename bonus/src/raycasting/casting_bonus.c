@@ -12,12 +12,12 @@ int	is_wall(t_map *map, t_ray *ray)
 	return (0);
 }
 
-int	main_while(t_ray *ray, t_map *map)
+int	dda(t_ray *ray, t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while ((i <= 50 && !is_wall(map, ray)) || i <= 0)
+	while ((i <= 50 && !is_wall(map, ray)))
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -87,8 +87,8 @@ void	cast_ray(t_data *data)
 	render_bg(data);
 	while (angle <= end_angle)
 	{
-		init(&ray, &data->player, angle);
-		if (main_while(&ray, &data->map))
+		init_dda(&ray, &data->player, angle);
+		if (dda(&ray, &data->map))
 		{
 			line_handle(&ray, &(data->player), angle);
 			render_walls(data, &ray, i++);

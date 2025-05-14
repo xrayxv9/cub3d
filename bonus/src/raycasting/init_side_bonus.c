@@ -20,7 +20,7 @@ void	south_portal(t_portal *portal, int type, int anti, t_double *dou)
 {
 	if (type == SOUTH)
 	{
-		if (portal[anti].dir == NORTH)
+		if (portal[type].dir == NORTH)
 			dou->dx += 1 - dou->touch;
 		else if (portal[anti].dir == SOUTH)
 			dou->dx = dou->touch;
@@ -29,7 +29,7 @@ void	south_portal(t_portal *portal, int type, int anti, t_double *dou)
 		else if (portal[anti].dir == EAST)
 			dou->dy += 1 - dou->touch;
 	}
-	else if (type == WEST)
+	else if (portal[type].dir == WEST)
 	{
 		if (portal[anti].dir == NORTH)
 			dou->dx += 1 - dou->touch;
@@ -51,7 +51,7 @@ void	init_side_portal(t_ray *ray, t_portal *portal, int type, int anti)
 	dou.dx = portal[anti].x;
 	dou.dy = portal[anti].y;
 	dou.touch = ray->touch_loc;
-	if (portal == NORTH)
+	if (portal[type].dir == NORTH)
 	{
 		if (portal[anti].dir == NORTH)
 			dou.dx += 1 - dou.touch;

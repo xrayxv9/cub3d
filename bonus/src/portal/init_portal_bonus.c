@@ -75,7 +75,7 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 		ray->map_x++;
 	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
 	init_ray_portal(ray, portals, ray->angle, type);
-	main_while(ray, map);
+	dda(ray, map);
 	line_handle_portal(ray, portals[type], ray->angle, ra);
 }
 

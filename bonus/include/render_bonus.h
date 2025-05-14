@@ -15,7 +15,7 @@ void	render_celling(t_data *data, mlx_color color);
 void	render_bg(t_data *data);
 void	render_walls(t_data *data, t_ray *ray, float angle);
 void	calcul_touch(t_ray *ray, t_player *player, int dir, int use);
-int		main_while(t_ray *ray, t_map *map);
+int		dda(t_ray *ray, t_map *map);
 int		both(t_portal *portals);
 void	render_wall_portal(t_data *data, t_ray ray, float x, int type);
 void	show(t_ray *ray, t_data *data, t_double *dou, t_current *current);

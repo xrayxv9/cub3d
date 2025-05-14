@@ -24,7 +24,7 @@ void	init_side(t_ray *ray, double x, double y)
 		ray->side_y = ((double)ray->map_y + 1 - y) * ray->delta_y;
 }
 
-t_ray	init(t_ray *ray, t_player *player, float angle)
+t_ray	init_dda(t_ray *ray, t_player *player, float angle)
 {
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
