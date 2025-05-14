@@ -33,7 +33,7 @@ double	get_angle_tp(float angle, int dir_portal, int dir_tp)
 	if (j == 0)
 		return (180 + angle);
 	else if (j == 1)
-		return (90 - angle);
+		return (angle - 90);
 	else if (j == 2)
 		return (angle);
 	else
@@ -71,8 +71,12 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	ray->map_y = portals[anti].y;
 	if (portals[anti].dir == SOUTH)
 		ray->map_y++;
+	if (portals[anti].dir == NORTH)
+		ray->map_y--;
 	if (portals[anti].dir == WEST)
 		ray->map_x++;
+	if (portals[anti].dir == EAST)
+		ray->map_x--;
 	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
 	init_ray_portal(ray, portals, ray->angle, type);
 	dda(ray, map);

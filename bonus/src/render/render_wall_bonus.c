@@ -49,16 +49,16 @@ void	render_wall_portal(t_data *data, t_ray ray, float angle, int type)
 	t_double	dou;
 	int			dir;
 	t_current	current;
-	t_ray		ray_exit;
-	double		x_exit;
-	double		y_exit;
-	double		angle_exit;
-
-	angle_exit = get_angle_tp(angle, data->player.portals[type].dir, data->player.portals[type == 0].dir);
-	get_exit_coo(&x_exit, &y_exit, data->player.portals, type, ray.touch_loc);
-	init_dda(&ray_exit, x_exit, y_exit, angle_exit);
-	dda(&ray_exit, &data->map);
-	printf("x : %f, y : %f\n", x_exit, y_exit);
+	// t_ray		ray_exit;
+	// double		x_exit;
+	// double		y_exit;
+	// double		angle_exit;
+	//
+	// angle_exit = get_angle_tp(angle, data->player.portals[type].dir, data->player.portals[type == 0].dir);
+	// get_exit_coo(&x_exit, &y_exit, data->player.portals, type, ray.touch_loc);
+	// init_dda(&ray_exit, x_exit, y_exit, angle_exit);
+	// dda(&ray_exit, &data->map);
+	printf("bleu : %d, orange : %d\n", data->player.portals[BLUE].dir, data->player.portals[ORANGE].dir);
 	reset_angle(data->player.portals, &ray, type, &data->map);
 	dir = set_dir(&ray);
 	current.ray = &ray;
