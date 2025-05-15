@@ -90,6 +90,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(PORTAL_PATH_BONUS)/render_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/init_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/calcul_portal_bonus.c \
+			 $(PORTAL_PATH_BONUS)/teleportation_bonus.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#
 

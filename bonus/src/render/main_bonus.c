@@ -1,8 +1,4 @@
 #include "cub3D_bonus.h"
-#include "libft.h"
-#include "mlx.h"
-#include "parsing_bonus.h"
-#include "struct_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -27,8 +23,7 @@ static void	update(t_data *data)
 				calculate_speed(&data->player,
 					data->player.save_angle, &data->player.save_angle);
 			data->player.angle += data->player.move_angle;
-			data->player.x += data->player.speed_x;
-			data->player.y += data->player.speed_y;
+			teleport_collision(&data->player, &data->map);
 			handle_mouse(data, 1);
 			if (data->player.move_angle != 0
 				|| data->player.speed_x != 0 || data->player.speed_y != 0)
@@ -80,6 +75,8 @@ static void	init_all(t_data *data, int ac, char **av)
 									"bonus/textures/portals/blue.png", NULL, NULL);
 	data->portal_images[ORANGE_IMAGE] = mlx_new_image_from_file(data->game,
 								"bonus/textures/portals/orange.png", NULL, NULL);
+	data->portal_images[PORTAL_LAUNCHER] = mlx_new_image_from_file(data->game,
+			"bonus/textures/portal_launcher.png", NULL, NULL);
 	if (free_fail(data))
 		destroy_textures_free_tab(data->textures, data->map.map, data->game);
 	if (!load_pause_screen(data->game, &data->scene))
