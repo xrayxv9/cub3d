@@ -47,6 +47,7 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 	anti = type == 0;
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
+	printf("ray->dir: %f, %f\n",ray->dir_x, ray->dir_y);
 	if (ray->dir_x == 0)
 		ray->delta_x = exp(30);
 	else
@@ -56,6 +57,7 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
+	printf("ray->step : %f, %f\n",ray->step_x, ray->step_y);
 	init_side_portal(ray->touch_loc, portal, type, anti);
 	return (*ray);
 }
@@ -65,6 +67,7 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	int		anti;
 	double	ra;
 
+	printf("DEBUT\n");
 	ra = ray->wall_distance;
 	anti = type == 0;
 	ray->map_x = portals[anti].x;
@@ -77,10 +80,15 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 		ray->map_x++;
 	if (portals[anti].dir == EAST)
 		ray->map_x--;
+	printf("before dda coo x : %d, coo y : %d\n", ray->map_x, ray->map_y);
+	printf("angle before change : %f\n", ray->angle);
 	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
+	printf("angle after change : %f\n", ray->angle);
 	init_ray_portal(ray, portals, ray->angle, type);
 	dda(ray, map);
+	printf("after dda coo x : %d, coo y : %d\n", ray->map_x, ray->map_y);
 	line_handle_portal(ray, portals[type], ray->angle, ra);
+	printf("FIN\n");
 }
 
 void	init_coo(t_portal *portal, t_ray *ray, int type)

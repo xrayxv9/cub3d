@@ -27,38 +27,12 @@ void	show(t_ray *ray, t_data *data, t_double *dou, t_current *current)
 	}
 }
 
-void	get_exit_coo(double *x_exit, double *y_exit, t_portal *portals, int entry, double touch_loc)
-{
-	int			exit;
-	t_double	dou;
-
-	exit = entry == 0;
-	// *x_exit = portals[exit].x;
-	// *y_exit = portals[exit].y;
-	// if (portals[exit].dir == SOUTH)
-	// 	(*y_exit)++;
-	// if (portals[exit].dir == WEST)
-	// 	(*x_exit)++;
-	dou = init_side_portal(touch_loc, portals, entry, exit);
-	*x_exit = dou.dx;
-	*y_exit = dou.dy;
-}
-
 void	render_wall_portal(t_data *data, t_ray ray, float angle, int type)
 {
 	t_double	dou;
 	int			dir;
 	t_current	current;
-	// t_ray		ray_exit;
-	// double		x_exit;
-	// double		y_exit;
-	// double		angle_exit;
-	//
-	// angle_exit = get_angle_tp(angle, data->player.portals[type].dir, data->player.portals[type == 0].dir);
-	// get_exit_coo(&x_exit, &y_exit, data->player.portals, type, ray.touch_loc);
-	// init_dda(&ray_exit, x_exit, y_exit, angle_exit);
-	// dda(&ray_exit, &data->map);
-	printf("bleu : %d, orange : %d\n", data->player.portals[BLUE].dir, data->player.portals[ORANGE].dir);
+
 	reset_angle(data->player.portals, &ray, type, &data->map);
 	dir = set_dir(&ray);
 	current.ray = &ray;
