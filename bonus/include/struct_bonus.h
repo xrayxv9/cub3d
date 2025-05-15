@@ -190,10 +190,6 @@ typedef struct s_data
 	mlx_image				player_pos;
 	t_player				player;
 	mlx_image				portal_images[PORTAL];
-	int						is_game;
-	int						keyboard_input;
-	bool					pause;
-	bool					minimap;
 }			t_data;
 
 typedef struct s_vector

@@ -25,9 +25,6 @@ int			is_color(mlx_color color, unsigned int r, unsigned int g, unsigned int b);
 
 int		portal_find(t_portal *portal, int x, int y, int dir);
 
-void		render_portal(t_data *data, t_double dou,
-				mlx_color color, t_ray *ray);
-
 void		teleport_collision(t_player *player, t_map *map);
 
 #endif

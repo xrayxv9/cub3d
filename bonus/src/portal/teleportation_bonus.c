@@ -51,31 +51,6 @@ static int	is_good_angle(t_player *player, int tmp)
 			&& player->portals[tmp].dir == WEST));
 }
 
-double	get_angle_tp(float angle, int dir_portal, int dir_tp)
-{
-	int	i;
-	int	j;
-
-	i = dir_portal;
-	j = 0;
-	while (i != dir_tp)
-	{
-		printf("dir_tp : %d, dir : %d\n", dir_tp, dir_portal);
-		if (i == 3)
-			i = 0;
-		j++;
-		i++;
-	}
-	if (j == 0)
-		return (180 + angle);
-	else if (j == 1)
-		return (90 + angle);
-	else if (j == 2)
-		return (angle);
-	else
-		return (90 - angle);
-}
-
 void	teleport_collision(t_player *player, t_map *map)
 {
 	int	tmp;
