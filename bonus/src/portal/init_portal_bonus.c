@@ -16,14 +16,15 @@ t_portal	*init_portal(void)
 	return (portals);
 }
 
-double	get_angle_tp(float angle, int dir_portal, int dir_tp)
+double	get_angle_tp(float angle, int dir_portal, int dir_tp, int num)
 {
 	int	i;
 	int	j;
 	
 	i = dir_portal;
 	j = 0;
-	printf("angle before : %f\n", angle);
+	if (num)
+		printf("teleporting from : %d, to : %d\n", dir_portal, dir_tp);
 	while (i != dir_tp)
 	{
 		if (i == 3)
@@ -34,16 +35,17 @@ double	get_angle_tp(float angle, int dir_portal, int dir_tp)
 	if (j == 0)
 		return (180 + angle);
 	else if (j == 1)
-		return (angle - 90);
+		return (angle + 90);
 	else if (j == 2)
 		return (angle);
 	else
-		return (90 + angle);
+		return (angle - 90);
 }
 
 t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 {
-	int	anti;
+	int			anti;
+	t_double	dou;
 
 	anti = type == 0;
 	ray->dir_x = cos(radian(angle));
@@ -57,8 +59,9 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
-	printf("ray->step : %f, %f\n",ray->step_x, ray->step_y);
-	init_side_portal(ray->touch_loc, portal, type, anti);
+	dou = init_side_portal(ray->touch_loc, portal, type, anti);
+	ray->side_x = dou.dx;
+	ray->side_y = dou.dy;
 	return (*ray);
 }
 
@@ -67,7 +70,6 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	int		anti;
 	double	ra;
 
-	printf("DEBUT\n");
 	ra = ray->wall_distance;
 	anti = type == 0;
 	ray->map_x = portals[anti].x;
@@ -80,15 +82,10 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 		ray->map_x++;
 	if (portals[anti].dir == EAST)
 		ray->map_x--;
-	printf("before dda coo x : %d, coo y : %d\n", ray->map_x, ray->map_y);
-	printf("angle before change : %f\n", ray->angle);
-	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
-	printf("angle after change : %f\n", ray->angle);
+	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir, 0);
 	init_ray_portal(ray, portals, ray->angle, type);
 	dda(ray, map);
-	printf("after dda coo x : %d, coo y : %d\n", ray->map_x, ray->map_y);
 	line_handle_portal(ray, portals[type], ray->angle, ra);
-	printf("FIN\n");
 }
 
 void	init_coo(t_portal *portal, t_ray *ray, int type)

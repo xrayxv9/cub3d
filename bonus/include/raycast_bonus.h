@@ -23,6 +23,6 @@ void	init_side(t_ray *ray, double x, double y);
 
 t_double	init_side_portal(double touch_loc, t_portal *portal, int type, int anti);
 
-double	get_angle_tp(float angle, int dir_portal, int dir_tp);
+double	get_angle_tp(float angle, int dir_portal, int dir_tp, int num);
 
 #endif
