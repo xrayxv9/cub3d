@@ -23,6 +23,7 @@ double	get_angle_tp(float angle, int dir_portal, int dir_tp)
 	
 	i = dir_portal;
 	j = 0;
+	printf("angle before : %f\n", angle);
 	while (i != dir_tp)
 	{
 		if (i == 3)
@@ -47,7 +48,6 @@ t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 	anti = type == 0;
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
-	printf("ray->dir: %f, %f\n",ray->dir_x, ray->dir_y);
 	if (ray->dir_x == 0)
 		ray->delta_x = exp(30);
 	else
