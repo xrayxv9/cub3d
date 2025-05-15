@@ -27,18 +27,38 @@ void	show(t_ray *ray, t_data *data, t_double *dou, t_current *current)
 	}
 }
 
+void	calcul_touch_portal(t_ray *ray, t_double *dou, int dir, int use)
+{
+	if (ray->side == VER)
+		ray->touch_loc = dou->dy + ray->wall_distance * ray->dir_y;
+	else
+		ray->touch_loc = dou->dx + ray->wall_distance * ray->dir_x;
+	ray->touch_loc -= (int)ray->touch_loc;
+	if (use)
+	{
+		if (dir == NORTH)
+			ray->touch_loc = 1 - ray->touch_loc;
+		if (dir == EAST)
+			ray->touch_loc = 1 - ray->touch_loc;
+	}
+}
+
 void	render_wall_portal(t_data *data, t_ray ray, float angle, int type)
 {
 	t_double	dou;
 	int			dir;
 	t_current	current;
+	t_double	doudou;
+	double		dist;
 
-	reset_angle(data->player.portals, &ray, type, &data->map);
+	dist = ray.wall_distance;
+	doudou = reset_angle(data->player.portals, &ray, type, &data->map);
 	dir = set_dir(&ray);
 	current.ray = &ray;
 	dou.i = ray.line_start;
 	dou.x = angle;
-	calcul_touch(&ray, &data->player, dir, 1);
+	ray.wall_distance -= dist;
+	calcul_touch_portal(&ray, &doudou, dir, 1);
 	current.i = 0;
 	current.loop = 0;
 	show(&ray, data, &dou, &current);

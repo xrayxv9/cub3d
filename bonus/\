@@ -28,24 +28,24 @@ void	east_portal(t_portal *portal, int exit, t_double *dou)
 void	north_portal(t_portal *portal, int exit, t_double *dou)
 {
 	if (portal[exit].dir == NORTH)
-		dou->dx += dou->touch;
-	else if (portal[exit].dir == SOUTH)
 		dou->dx += 1 - dou->touch;
+	else if (portal[exit].dir == SOUTH)
+		dou->dx += dou->touch;
 	else if (portal[exit].dir == WEST)
-		dou->dy += 1 - dou->touch;
-	else if (portal[exit].dir == EAST)
 		dou->dy += dou->touch;
+	else if (portal[exit].dir == EAST)
+		dou->dy += 1 - dou->touch;
 }
 void	south_portal(t_portal *portal, int exit, t_double *dou)
 {
 		if (portal[exit].dir == SOUTH)
-			dou->dx += dou->touch;
-		else if (portal[exit].dir == NORTH)
 			dou->dx += 1 - dou->touch;
+		else if (portal[exit].dir == NORTH)
+			dou->dx += dou->touch;
 		else if (portal[exit].dir == EAST)
-			dou->dy += 1 - dou->touch;
-		else
 			dou->dy += dou->touch;
+		else
+			dou->dy += 1 - dou->touch;
 }
 
 t_double	init_side_portal(double touch_loc, t_portal *portal, int entry, int exit)
@@ -58,7 +58,6 @@ t_double	init_side_portal(double touch_loc, t_portal *portal, int entry, int exi
 		dou.dy++;
 	if (portal[exit].dir == WEST)
 		dou.dx++;
-	dou.touch = touch_loc;
 	if (entry == NORTH)
 		north_portal(portal, exit, &dou);
 	if (entry == SOUTH)
@@ -67,5 +66,6 @@ t_double	init_side_portal(double touch_loc, t_portal *portal, int entry, int exi
 		east_portal(portal, exit, &dou);
 	if (entry == WEST)
 		west_portal(portal, exit, &dou);
+	dou.touch = touch_loc;
 	return (dou);
 }

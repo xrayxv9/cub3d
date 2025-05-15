@@ -1,7 +1,7 @@
-NO ./mandatory/textures/NORTH.png
-SO ./mandatory/textures/SOUTH.png
-WE ./mandatory/textures/WEST.png
-EA ./mandatory/textures/EAST.png
+NO ./bonus/textures/BLUE.png
+SO ./bonus/textures/RED.png
+WE ./bonus/textures/YELLOW.png
+EA ./bonus/textures/GREEN.png
 
 F 220,100,0
 C 225,30,0

@@ -1,3 +1,4 @@
+#include "raycast_bonus.h"
 #include <cub3D_bonus.h>
 
 t_portal	*init_portal(void)
@@ -16,22 +17,11 @@ t_portal	*init_portal(void)
 	return (portals);
 }
 
-double	get_angle_tp(float angle, int dir_portal, int dir_tp, int num)
+double	get_angle_tp(float angle, int dir_portal, int dir_tp)
 {
-	int	i;
 	int	j;
 	
-	i = dir_portal;
-	j = 0;
-	if (num)
-		printf("teleporting from : %d, to : %d\n", dir_portal, dir_tp);
-	while (i != dir_tp)
-	{
-		if (i == 3)
-			i = -1;
-		i++;
-		j++;
-	}
+	j = (dir_tp - dir_portal + 4) % 4;;
 	if (j == 0)
 		return (180 + angle);
 	else if (j == 1)
@@ -42,33 +32,27 @@ double	get_angle_tp(float angle, int dir_portal, int dir_tp, int num)
 		return (angle - 90);
 }
 
-t_ray	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
+t_double	init_ray_portal(t_ray *ray, t_portal *portal, float angle, int type)
 {
 	int			anti;
 	t_double	dou;
 
-	anti = type == 0;
+	anti = !type;
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
-	if (ray->dir_x == 0)
-		ray->delta_x = exp(30);
-	else
-		ray->delta_x = fabs(1 / ray->dir_x);
-	if (ray->dir_y == 0)
-		ray->delta_y = exp(30);
-	else
-		ray->delta_y = fabs(1 / ray->dir_y);
+	ray->delta_x = fabs(1 / ray->dir_x);
+	ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
 	dou = init_side_portal(ray->touch_loc, portal, type, anti);
-	ray->side_x = dou.dx;
-	ray->side_y = dou.dy;
-	return (*ray);
+	init_side(ray, dou.dx, dou.dy);
+	return (dou);
 }
 
-void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
+t_double	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 {
 	int		anti;
 	double	ra;
+	t_double	dou;
 
 	ra = ray->wall_distance;
 	anti = type == 0;
@@ -79,13 +63,14 @@ void	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	if (portals[anti].dir == NORTH)
 		ray->map_y--;
 	if (portals[anti].dir == WEST)
-		ray->map_x++;
-	if (portals[anti].dir == EAST)
 		ray->map_x--;
-	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir, 0);
-	init_ray_portal(ray, portals, ray->angle, type);
+	if (portals[anti].dir == EAST)
+		ray->map_x++;
+	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
+	dou = init_ray_portal(ray, portals, ray->angle, type);
 	dda(ray, map);
 	line_handle_portal(ray, portals[type], ray->angle, ra);
+	return (dou);
 }
 
 void	init_coo(t_portal *portal, t_ray *ray, int type)

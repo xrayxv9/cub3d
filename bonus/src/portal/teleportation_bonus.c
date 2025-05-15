@@ -48,7 +48,7 @@ static void	add_coo(t_player *player, int color)
 	}
 	if (player->portals[color].dir == WEST)
 	{
-		player->x = player->portals[color].x + 1.015f;
+		player->x = player->portals[color].x + 1.01f;
 		player->y = player->portals[color].y + 0.5f;
 	}
 	if (player->portals[color].dir == EAST)
@@ -75,18 +75,9 @@ void	teleport_collision(t_player *player, t_map *map)
 		tmp = get_portal(player);
 		if (is_good_angle(player, tmp))
 		{
-			if (tmp == BLUE)
-			{
-				player->angle = get_angle_tp(player->angle,
-						player->portals[tmp].dir, player->portals[ORANGE].dir, 1);
-				add_coo(player, ORANGE);
-			}
-			if (tmp == ORANGE)
-			{
-				player->angle = get_angle_tp(player->angle,
-						player->portals[tmp].dir, player->portals[BLUE].dir, 1);
-				add_coo(player, BLUE);
-			}
+			player->angle = get_angle_tp(player->angle,
+					player->portals[tmp].dir, player->portals[tmp == 0].dir);
+			add_coo(player, tmp == 0);
 		}
 	}
 }

@@ -21,7 +21,6 @@ int	portal_find(t_portal *portal, int x, int y, int dir)
 	if (portal[BLUE].x == x && portal[BLUE].y == y && dir == portal[BLUE].dir)
 		return (BLUE);
 	else if (portal[ORANGE].x == x && portal[ORANGE].y == y && dir == portal[ORANGE].dir)
-			return (ORANGE);
-	else
-		return (-1);
+		return (ORANGE);
+	return (-1);
 }

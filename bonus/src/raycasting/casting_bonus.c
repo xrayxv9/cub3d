@@ -41,13 +41,13 @@ int	dda(t_ray *ray, t_map *map)
 
 void	line_handle(t_ray *ray, t_player *player, float x)
 {
+	(void)player;
+	(void)x;
 	if (ray->side == VER)
-		ray->wall_distance = (ray->side_x - ray->delta_x)
-			* cos(radian(player->angle - x));
+		ray->wall_distance = (ray->side_x - ray->delta_x);
 	else
-		ray->wall_distance = (ray->side_y - ray->delta_y)
-			* cos(radian(player->angle - x));
-	ray->line_height = (int)(WIN_H / ray->wall_distance);
+		ray->wall_distance = (ray->side_y - ray->delta_y);
+	ray->line_height = (int)(WIN_H / ray->wall_distance) * 1.25;
 	ray->line_start_tmp = (WIN_H >> 1) - (ray->line_height >> 1);
 	if (ray->line_start_tmp < 0)
 		ray->line_start = 0;
@@ -56,11 +56,11 @@ void	line_handle(t_ray *ray, t_player *player, float x)
 	ray->line_end = (ray->line_height >> 1) + (WIN_H >> 1);
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
-	if (ray->side == 0)
-		ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
-	else
-		ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
-	ray->wall_x -= (int)ray->wall_x;
+	// if (ray->side == 0)
+	// 	ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
+	// else
+	// 	ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
+	// ray->wall_x -= (int)ray->wall_x;
 }
 
 void	handle_angle(t_player *player)
