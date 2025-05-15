@@ -48,9 +48,9 @@ void	render_bg(t_data *data)
 int	set_dir(t_ray *ray)
 {
 	if (ray->side == VER && ray->dir_x > 0)
-		return (WEST);
-	else if (ray->side == VER && ray->dir_x < 0)
 		return (EAST);
+	else if (ray->side == VER && ray->dir_x < 0)
+		return (WEST);
 	else if (ray->side == HOR && ray->dir_y > 0)
 		return (NORTH);
 	else
@@ -61,22 +61,18 @@ void	render_walls(t_data *data, t_ray *ray, float x)
 {
 	t_double	dou;
 	int			dir;
-	mlx_color	color;
-	mlx_image	image;
-	double		delta;
+	t_current	current;
+	int			type;
 
 	dir = set_dir(ray);
-	image = data->textures[dir].texture;
+	type = portal_find(data->player.portals, ray->map_x, ray->map_y, dir);
+	if (type != -1 && data->player.portals[BLUE].exist && data->player.portals[ORANGE].exist)
+		render_wall_portal(data, *ray, x, type);
+	current.ray = ray;
 	dou.i = ray->line_start;
 	dou.x = x;
 	calcul_touch(ray, &data->player, dir, 1);
-	while (ray->line_end >= dou.i)
-	{
-		delta = (dou.i - ray->line_start_tmp) / (float)ray->line_height * 1000;
-		image = check_portal_coo(ray, data, image, dir);
-		color.rgba = mlx_get_image_pixel(data->game, image,
-				ray->touch_loc * 1000, delta).rgba;
-		render_portal(data, dou, color, ray);
-		dou.i++;
-	}
+	current.i = 0;
+	current.loop = 1;
+	show(ray, data, &dou, &current);
 }

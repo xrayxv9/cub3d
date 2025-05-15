@@ -71,6 +71,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/casting_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/utils_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/init_bonus.c \
+			 $(RAYCASTING_PATH_BONUS)/init_side_bonus.c \
 			 $(RENDER_PATH_BONUS)/main_bonus.c \
 			 $(RENDER_PATH_BONUS)/utils_bonus.c \
 			 $(RENDER_PATH_BONUS)/event_bonus.c \
@@ -78,6 +79,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(RENDER_PATH_BONUS)/event3_bonus.c \
 			 $(RENDER_PATH_BONUS)/keyboard_event_bonus.c \
 			 $(RENDER_PATH_BONUS)/render_bonus.c \
+			 $(RENDER_PATH_BONUS)/render_wall_bonus.c \
 			 $(SCENE_PATH_BONUS)/scene_bonus.c \
 			 $(SCENE_PATH_BONUS)/scene_error_bonus.c \
 			 $(SCENE_PATH_BONUS)/load_scene_bonus.c \
@@ -87,6 +89,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(PORTAL_PATH_BONUS)/portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/render_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/init_portal_bonus.c \
+			 $(PORTAL_PATH_BONUS)/calcul_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/teleportation_bonus.c \
 
 #-----------------------------------------------------RULES-----------------------------------------------#

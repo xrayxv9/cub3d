@@ -71,10 +71,10 @@ typedef enum e_sf
 
 typedef enum e_pos
 {
-	SOUTH,
-	EAST,
-	WEST,
 	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
 	IMAGE
 }	t_pos;
 
@@ -119,6 +119,7 @@ typedef struct s_parse
 	int		is_map;
 }	t_parse;
 
+
 typedef	struct s_portal
 {
 	bool	exist;
@@ -129,8 +130,12 @@ typedef	struct s_portal
 
 typedef struct s_double
 {
-	float	x;
+	int		x;
 	int		i;
+	double	delta;
+	double	dy;
+	double	dx;
+	double	touch;
 }	t_double;
 
 typedef struct s_player
@@ -168,7 +173,11 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	t_player				player;
+	int						is_game;
+	int						keyboard_input;
+	bool					pause;
+	bool					minimap;
+
 	t_image					textures[TEXTURES_NUMBER];
 	t_sc					scene;
 	t_map					map;
@@ -179,8 +188,8 @@ typedef struct s_data
 	mlx_image				image;
 	mlx_image				minimap_image;
 	mlx_image				player_pos;
+	t_player				player;
 	mlx_image				portal_images[PORTAL];
-
 	int						is_game;
 	int						keyboard_input;
 	bool					pause;
@@ -201,6 +210,7 @@ typedef struct s_ray
 	int		line_height;
 	int		line_start;
 	int		line_end;
+	int		tp;
 	double	wall_distance;
 	double	dir_x;
 	double	dir_y;
@@ -214,6 +224,15 @@ typedef struct s_ray
 	double	camera_x;
 	double	touch_loc;
 	double	line_start_tmp;
+	double	angle;
 }	t_ray;
+
+typedef struct s_current
+{
+	int			i;
+	int			loop;
+	mlx_color	color;
+	t_ray		*ray;
+}				t_current;
 
 #endif

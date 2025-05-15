@@ -12,24 +12,26 @@ void	init_step(t_ray *ray)
 		ray->step_y = -1;
 }
 
-void	init_side(t_ray *ray, t_player *player)
+void	init_side(t_ray *ray, double x, double y)
 {
 	if (ray->step_x < 0)
-		ray->side_x = (player->x - (double)ray->map_x) * ray->delta_x;
+		ray->side_x = (x - (double)ray->map_x) * ray->delta_x;
 	else
-		ray->side_x = ((double)ray->map_x + 1 - player->x) * ray->delta_x;
+		ray->side_x = ((double)ray->map_x + 1 - x) * ray->delta_x;
 	if (ray->step_y < 0)
-		ray->side_y = (player->y - (double)ray->map_y) * ray->delta_y;
+		ray->side_y = (y - (double)ray->map_y) * ray->delta_y;
 	else
-		ray->side_y = ((double)ray->map_y + 1 - player->y) * ray->delta_y;
+		ray->side_y = ((double)ray->map_y + 1 - y) * ray->delta_y;
 }
 
-t_ray	init(t_ray *ray, t_player *player, float angle)
+t_ray	init_dda(t_ray *ray, double x, double y, float angle)
 {
 	ray->dir_x = cos(radian(angle));
 	ray->dir_y = sin(radian(angle));
-	ray->map_x = (int)player->x;
-	ray->map_y = (int)player->y;
+	ray->angle = angle;
+	ray->tp = 0;
+	ray->map_x = (int)x;
+	ray->map_y = (int)y;
 	if (ray->dir_x == 0)
 		ray->delta_x = exp(30);
 	else
@@ -39,6 +41,6 @@ t_ray	init(t_ray *ray, t_player *player, float angle)
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
 	init_step(ray);
-	init_side(ray, player);
+	init_side(ray, x, y);
 	return (*ray);
 }

@@ -6,14 +6,14 @@ void	calcul_touch(t_ray *ray, t_player *player, int dir, int use)
 		ray->touch_loc = player->y + (ray->side_x - ray->delta_x) * ray->dir_y;
 	else
 		ray->touch_loc = player->x + (ray->side_y - ray->delta_y) * ray->dir_x;
+	ray->touch_loc -= (int)ray->touch_loc;
 	if (use)
 	{
 		if (dir == NORTH)
-			ray->touch_loc = 1000 - ray->touch_loc;
+			ray->touch_loc = 1 - ray->touch_loc;
 		if (dir == EAST)
-			ray->touch_loc = 1000 - ray->touch_loc;
+			ray->touch_loc = 1 - ray->touch_loc;
 	}
-	ray->touch_loc -= (int)ray->touch_loc;
 }
 
 void	calculate_speed(t_player *player, double pos_angle,
@@ -38,4 +38,11 @@ void	window_hook(int event, t_data *data)
 {
 	if (event == 0)
 		mlx_loop_end(data->game);
+}
+
+int both(t_portal *portals)
+{
+	if (portals[BLUE].exist && portals[ORANGE].exist)
+		return (1);
+	return (0);
 }

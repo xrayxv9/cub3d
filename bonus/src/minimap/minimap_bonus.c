@@ -1,3 +1,5 @@
+#include "portal_bonus.h"
+#include "render_bonus.h"
 #include <cub3D_bonus.h>
 
 static void	trace_square(int start, int y, mlx_context game, mlx_image image)

@@ -13,12 +13,12 @@ int	is_wall(t_map *map, t_ray *ray)
 	return (0);
 }
 
-int	main_while(t_ray *ray, t_map *map)
+int	dda(t_ray *ray, t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (i <= 50 && !is_wall(map, ray))
+	while ((i <= 50 && !is_wall(map, ray)))
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -48,12 +48,12 @@ void	line_handle(t_ray *ray, t_player *player, float x)
 		ray->wall_distance = (ray->side_y - ray->delta_y)
 			* cos(radian(player->angle - x));
 	ray->line_height = (int)(WIN_H / ray->wall_distance);
-	ray->line_start_tmp = WIN_H * 0.5 - ray->line_height * 0.5;
+	ray->line_start_tmp = (WIN_H >> 1) - (ray->line_height >> 1);
 	if (ray->line_start_tmp < 0)
 		ray->line_start = 0;
 	else
 		ray->line_start = ray->line_start_tmp;
-	ray->line_end = ray->line_height * 0.5 + WIN_H * 0.5;
+	ray->line_end = (ray->line_height >> 1) + (WIN_H >> 1);
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
 	if (ray->side == 0)
@@ -88,8 +88,8 @@ void	cast_ray(t_data *data)
 	render_bg(data);
 	while (angle <= end_angle)
 	{
-		init(&ray, &data->player, angle);
-		if (main_while(&ray, &data->map))
+		init_dda(&ray, data->player.x, data->player.y, angle);
+		if (dda(&ray, &data->map))
 		{
 			line_handle(&ray, &(data->player), angle);
 			render_walls(data, &ray, i++);
@@ -99,7 +99,7 @@ void	cast_ray(t_data *data)
 	mlx_put_image_to_window(data->game, data->window,
 		data->textures[4].texture, 0, 0);
 	mlx_put_image_to_window(data->game, data->window, data->portal_images[CROSSHAIR],
-					 WIN_W / 2, WIN_H / 2);
+					 WIN_W >> 1, WIN_H >> 1);
 	mlx_put_transformed_image_to_window(data->game,
 		data->window, data->portal_images[PORTAL_LAUNCHER], 1000, 600, 1.7f, 1.7f, 0);
 }

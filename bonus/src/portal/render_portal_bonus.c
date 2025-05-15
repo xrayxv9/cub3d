@@ -1,19 +1,27 @@
+#include "mlx.h"
+#include "portal_bonus.h"
+#include "render_bonus.h"
 #include <cub3D_bonus.h>
 
-void	render_portal(t_data *data, t_double dou, mlx_color color, t_ray *ray)
+int	is_color(mlx_color color, unsigned int r, unsigned int g, unsigned int b)
 {
 	mlx_color black;
 
-	black.r = 0;
-	black.g = 0;
-	black.b = 0;
+	black.r = r;
+	black.g = g;
+	black.b = b;
 	black.a = 255;
-	(void)ray;
-	if (black.rgba == color.rgba && data->player.portals[BLUE].exist
-		&& data->player.portals[ORANGE].exist)
-	{
+	if (color.rgba == black.rgba)
+		return (1);
+	return (0);
+}
 
-	}
-	else 
-		mlx_set_image_pixel(data->game, data->textures[4].texture, dou.x, dou.i, color);
+int	portal_find(t_portal *portal, int x, int y, int dir)
+{
+	if (portal[BLUE].x == x && portal[BLUE].y == y && dir == portal[BLUE].dir)
+		return (BLUE);
+	else if (portal[ORANGE].x == x && portal[ORANGE].y == y && dir == portal[ORANGE].dir)
+			return (ORANGE);
+	else
+		return (-1);
 }
