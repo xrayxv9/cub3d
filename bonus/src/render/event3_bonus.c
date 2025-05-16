@@ -1,5 +1,14 @@
 #include "cub3D_bonus.h"
 
+void	get_mous_and_portal(t_data *data, int button, int *x, int *y)
+{
+	mlx_mouse_get_pos(data->game, x, y);
+	if (data->is_game == GAME && button == 3 && !data->pause)
+		portal_send(data, ORANGE);
+	else if (data->is_game == GAME && button == 1 && !data->pause)
+		portal_send(data, BLUE);
+}
+
 static void	mouse_hook4(int button, t_data *data, int x, int y)
 {
 	if (data->scene.menu == THIRD && button == 1 && x >= 1380 && x <= 1583
@@ -60,21 +69,21 @@ void	handle_mouse(t_data *data, int i)
 		data->player.save_x = data->player.x;
 		data->player.save_y = data->player.y;
 		mlx_mouse_get_pos(data->game, &data->player.pos_x, &data->player.pos_y);
-		if (data->player.pos_x > WIN_W / 2)
-			data->player.move_angle = ((data->player.pos_x - WIN_W / 2) / 4)
+		if (data->player.pos_x > WIN_W >> 1)
+			data->player.move_angle = ((data->player.pos_x - (WIN_W >> 1)) >> 2)
 				* (data->scene.sensi * data->scene.sensi);
-		if (data->player.pos_x < WIN_W / 2)
-			data->player.move_angle = - ((( WIN_W / 2 - data->player.pos_x) / 4)
-					* (data->scene.sensi * data->scene.sensi));
-		if (data->player.pos_x == WIN_W / 2)
+		if (data->player.pos_x < WIN_W >> 1)
+			data->player.move_angle = -((((WIN_W >> 1) - data->player.pos_x)
+						>> 2) * (data->scene.sensi * data->scene.sensi));
+		if (data->player.pos_x == WIN_W >> 1)
 			data->player.move_angle = 0;
 	}
 	if (i)
 	{
 		mlx_mouse_get_pos(data->game, &data->player.new_x, &data->player.pos_y);
 		if (data->player.new_x == data->player.pos_x
-			&& data->player.new_x != WIN_W / 2)
-			mlx_mouse_move(data->game, data->window, WIN_W / 2, WIN_H / 2);
+			&& data->player.new_x != WIN_W >> 1)
+			mlx_mouse_move(data->game, data->window, WIN_W >> 1, WIN_H >> 1);
 	}
 	mlx_mouse_hide(data->game);
 }

@@ -31,7 +31,8 @@ void	calculate_second_speed(t_player *player, double first_pos_angle,
 				- first_pos_angle - second_pos_angle)) * 0.1;
 	player->speed_y = sin(radian(player->angle
 				- first_pos_angle - second_pos_angle)) * 0.1;
-	*save_angle = (first_pos_angle - second_pos_angle) / 2 + second_pos_angle;
+	*save_angle = ((first_pos_angle - second_pos_angle) * 0.5)
+		+ second_pos_angle;
 }
 
 void	window_hook(int event, t_data *data)
@@ -40,7 +41,7 @@ void	window_hook(int event, t_data *data)
 		mlx_loop_end(data->game);
 }
 
-int both(t_portal *portals)
+int	both(t_portal *portals)
 {
 	if (portals[BLUE].exist && portals[ORANGE].exist)
 		return (1);

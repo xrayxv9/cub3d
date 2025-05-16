@@ -1,5 +1,7 @@
+#include "render_bonus.h"
 #include "cub3D_bonus.h"
 #include "portal_bonus.h"
+#include "struct_bonus.h"
 
 void	render_celling(t_data *data, mlx_color color)
 {
@@ -57,22 +59,24 @@ int	set_dir(t_ray *ray)
 		return (SOUTH);
 }
 
-void	render_walls(t_data *data, t_ray *ray, float x)
+void	render_walls(t_data *data, t_ray *ray, int x_image)
 {
-	t_double	dou;
+	t_save_info	save;
 	int			dir;
 	t_current	current;
 	int			type;
+	t_portal	*portals;
 
+	portals = data->player.portals;
 	dir = set_dir(ray);
 	type = portal_find(data->player.portals, ray->map_x, ray->map_y, dir);
-	if (type != -1 && data->player.portals[BLUE].exist && data->player.portals[ORANGE].exist)
-		render_wall_portal(data, *ray, x, type);
+	if (type != -1 && both(portals))
+		render_wall_portal(data, *ray, x_image, type);
 	current.ray = ray;
-	dou.i = ray->line_start;
-	dou.x = x;
+	save.y_image = ray->line_start;
+	save.x_image = x_image;
 	calcul_touch(ray, &data->player, dir, 1);
 	current.i = 0;
 	current.loop = 1;
-	show(ray, data, &dou, &current);
+	show(ray, data, &save, &current);
 }

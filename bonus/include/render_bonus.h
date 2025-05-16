@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/16 12:28:58 by cmorel            #+#    #+#             */
+/*   Updated: 2025/05/16 16:01:19 by cmorel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RENDER_BONUS_H
 # define RENDER_BONUS_H
 
@@ -13,12 +25,13 @@ typedef struct s_player	t_player;
 void	render_floor(t_data *data, mlx_color color);
 void	render_celling(t_data *data, mlx_color color);
 void	render_bg(t_data *data);
-void	render_walls(t_data *data, t_ray *ray, float angle);
+void	render_walls(t_data *data, t_ray *ray, int x_image);
 void	calcul_touch(t_ray *ray, t_player *player, int dir, int use);
 int		dda(t_ray *ray, t_map *map);
 int		both(t_portal *portals);
 void	render_wall_portal(t_data *data, t_ray ray, float x, int type);
-void	show(t_ray *ray, t_data *data, t_double *dou, t_current *current);
+void	show(t_ray *ray, t_data *data, t_save_info *dou, t_current *current);
+void	put_images_to_window(t_data *data);
 
 // event
 
@@ -40,6 +53,5 @@ void	calculate_speed(t_player *player, double pos_angle,
 			double *save_angle);
 void	calculate_second_speed(t_player *player, double first_pos_angle,
 			double second_pos_angle, double *save_angle);
-
 
 #endif

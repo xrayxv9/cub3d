@@ -1,71 +1,73 @@
-#include "raycast_bonus.h"
+#include "struct_bonus.h"
 #include <cub3D_bonus.h>
 
-void	west_portal(t_portal *portal, int exit, t_double *dou)
+void	west_portal(t_portal *portal, int exit, t_save_info *save)
 {
 	if (portal[exit].dir == SOUTH)
-		dou->dx += dou->touch;
+		save->dx += save->touch;
 	else if (portal[exit].dir == NORTH)
-		dou->dx += 1 - dou->touch;
+		save->dx += 1 - save->touch;
 	else if (portal[exit].dir == EAST)
-		dou->dy += dou->touch;
+		save->dy += save->touch;
 	else if (portal[exit].dir == WEST)
-		dou->dy += 1 - dou->touch;
+		save->dy += 1 - save->touch;
 }
 
-void	east_portal(t_portal *portal, int exit, t_double *dou)
+void	east_portal(t_portal *portal, int exit, t_save_info *save)
 {
 	if (portal[exit].dir == SOUTH)
-		dou->dx +=  dou->touch;
+		save->dx += save->touch;
 	else if (portal[exit].dir == NORTH)
-		dou->dx += 1 - dou->touch;
+		save->dx += 1 - save->touch;
 	else if (portal[exit].dir == EAST)
-		dou->dy += dou->touch;
+		save->dy += save->touch;
 	else if (portal[exit].dir == WEST)
-		dou->dy += 1 - dou->touch;
+		save->dy += 1 - save->touch;
 }
 
-void	north_portal(t_portal *portal, int exit, t_double *dou)
+void	north_portal(t_portal *portal, int exit, t_save_info *save)
 {
 	if (portal[exit].dir == NORTH)
-		dou->dx += dou->touch;
+		save->dx += save->touch;
 	else if (portal[exit].dir == SOUTH)
-		dou->dx += 1 - dou->touch;
+		save->dx += 1 - save->touch;
 	else if (portal[exit].dir == WEST)
-		dou->dy += dou->touch;
+		save->dy += save->touch;
 	else if (portal[exit].dir == EAST)
-		dou->dy += 1 - dou->touch;
+		save->dy += 1 - save->touch;
 }
-void	south_portal(t_portal *portal, int exit, t_double *dou)
+
+void	south_portal(t_portal *portal, int exit, t_save_info *save)
 {
 	if (portal[exit].dir == SOUTH)
-		dou->dx += 1 - dou->touch;
+		save->dx += 1 - save->touch;
 	else if (portal[exit].dir == NORTH)
-		dou->dx +=  dou->touch;
+		save->dx += save->touch;
 	else if (portal[exit].dir == EAST)
-		dou->dy += 1 - dou->touch;
+		save->dy += 1 - save->touch;
 	else
-		dou->dy += dou->touch;
+		save->dy += save->touch;
 }
 
-t_double	init_side_portal(double touch_loc, t_portal *portal, int entry, int exit)
+t_save_info	init_side_portal(double touch_loc, t_portal *portal,
+					int entry, int exit)
 {
-	t_double	dou;
+	t_save_info	save;
 
-	dou.dx = portal[exit].x;
-	dou.dy = portal[exit].y;
+	save.dx = portal[exit].x;
+	save.dy = portal[exit].y;
 	if (portal[exit].dir == SOUTH)
-		dou.dy++;
+		save.dy++;
 	if (portal[exit].dir == WEST)
-		dou.dx++;
-	dou.touch = touch_loc;
+		save.dx++;
+	save.touch = touch_loc;
 	if (portal[entry].dir == NORTH)
-		north_portal(portal, exit, &dou);
+		north_portal(portal, exit, &save);
 	else if (portal[entry].dir == SOUTH)
-		south_portal(portal, exit, &dou);
+		south_portal(portal, exit, &save);
 	else if (portal[entry].dir == EAST)
-		east_portal(portal, exit, &dou);
+		east_portal(portal, exit, &save);
 	else if (portal[entry].dir == WEST)
-		west_portal(portal, exit, &dou);
-	return (dou);
+		west_portal(portal, exit, &save);
+	return (save);
 }

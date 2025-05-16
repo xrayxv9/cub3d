@@ -1,4 +1,4 @@
-CFLAGS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I mandatory/include -I libft -O2 
+CFLAGS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I mandatory/include -I libft -O2
 CFLAGS_BONUS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I bonus/include -I libft -O2
 
 NAME = cub3D
@@ -78,6 +78,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(RENDER_PATH_BONUS)/event2_bonus.c \
 			 $(RENDER_PATH_BONUS)/event3_bonus.c \
 			 $(RENDER_PATH_BONUS)/keyboard_event_bonus.c \
+			 $(RENDER_PATH_BONUS)/put_images_bonus.c \
 			 $(RENDER_PATH_BONUS)/render_bonus.c \
 			 $(RENDER_PATH_BONUS)/render_wall_bonus.c \
 			 $(SCENE_PATH_BONUS)/scene_bonus.c \

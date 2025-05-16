@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/16 12:29:01 by cmorel            #+#    #+#             */
+/*   Updated: 2025/05/16 15:41:30 by cmorel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_BONUS_H
 # define STRUCT_BONUS_H
 
@@ -119,8 +131,7 @@ typedef struct s_parse
 	int		is_map;
 }	t_parse;
 
-
-typedef	struct s_portal
+typedef struct s_portal
 {
 	bool	exist;
 	int		dir;
@@ -128,39 +139,38 @@ typedef	struct s_portal
 	int		y;
 }		t_portal;
 
-typedef struct s_double
+typedef struct s_save_info
 {
-	int		x;
-	int		i;
-	double	delta;
+	int		y_image;
+	int		x_image;
 	double	dy;
 	double	dx;
 	double	touch;
-}	t_double;
+}	t_save_info;
 
 typedef struct s_player
 {
-	double	angle;
-	double	x;
-	double	y;
-	double	plane_x;
-	double	plane_y;
+	double		angle;
+	double		x;
+	double		y;
+	double		plane_x;
+	double		plane_y;
 
-	double	move_angle;
-	double	save_angle;
-	double	speed_x;
-	double	speed_y;
-	double	save_x;
-	double	save_y;
+	double		move_angle;
+	double		save_angle;
+	double		speed_x;
+	double		speed_y;
+	double		save_x;
+	double		save_y;
 
-	int		pos_x;
-	int		pos_y;
-	int		new_x;
+	int			pos_x;
+	int			pos_y;
+	int			new_x;
 
-	bool	w_move;
-	bool	s_move;
-	bool	a_move;
-	bool	d_move;
+	bool		w_move;
+	bool		s_move;
+	bool		a_move;
+	bool		d_move;
 
 	t_portal	*portals;
 }	t_player;

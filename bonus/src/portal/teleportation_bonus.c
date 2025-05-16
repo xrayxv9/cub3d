@@ -1,15 +1,24 @@
 #include "cub3D_bonus.h"
+#include "struct_bonus.h"
 
 static int	is_good_angle(t_player *player, int tmp)
 {
-	return ((player->y < player->portals[tmp].y
-			&& player->portals[tmp].dir == NORTH)
-		|| (player->y > player->portals[tmp].y
-			&& player->portals[tmp].dir == SOUTH)
-		|| (player->x < player->portals[tmp].x
-			&& player->portals[tmp].dir == EAST)
-		|| (player->x > player->portals[tmp].x
-			&& player->portals[tmp].dir == WEST));
+	t_portal	portal;
+
+	portal = player->portals[tmp];
+	if (player->y < portal.y && (int)player->x == portal.x
+		&& portal.dir == NORTH)
+		return (1);
+	else if (player->y > portal.y && (int)player->x == portal.x
+		&& portal.dir == SOUTH)
+		return (1);
+	else if (player->x > portal.x && (int)player->y == portal.y
+		&& portal.dir == WEST)
+		return (1);
+	else if (player->x < portal.x && (int)player->y == portal.y
+		&& portal.dir == EAST)
+		return (1);
+	else return (0);
 }
 
 static int	get_portal(t_player *player)
@@ -58,7 +67,6 @@ static void	add_coo(t_player *player, int color)
 	}
 }
 
-
 void	teleport_collision(t_player *player, t_map *map)
 {
 	int	tmp;
@@ -73,11 +81,13 @@ void	teleport_collision(t_player *player, t_map *map)
 		&& player->portals[ORANGE].exist)
 	{
 		tmp = get_portal(player);
-		if (is_good_angle(player, tmp))
+		if (tmp != -1 && is_good_angle(player, tmp))
 		{
+			printf("color : %d, angle before: %f, dir : %d\n", tmp, player->angle, player->portals[tmp].dir);
 			player->angle = get_angle_tp(player->angle,
-					player->portals[tmp].dir, player->portals[tmp == 0].dir);
-			add_coo(player, tmp == 0);
+					player->portals[tmp].dir, player->portals[!tmp].dir);
+			printf("color : %d, angle after : %f, dir anti : %d\n", !tmp, player->angle, player->portals[!tmp].dir);
+			add_coo(player, !tmp);
 		}
 	}
 }

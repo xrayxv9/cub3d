@@ -1,14 +1,12 @@
-#include "cub3D_bonus.h"
-#include "mlx.h"
-#include <bonus/include/struct_bonus.h>
+#include <cub3D_bonus.h>
 
-int	is_wall(t_map *map, t_ray *ray)
+int	is_wall(t_map *map, int x, int y)
 {
-	if (ray->map_y < 0 || ray->map_y >= map->h)
+	if (y < 0 || y >= map->h)
 		return (0);
-	else if (ray->map_x < 0 || ray->map_x >= ft_strlen(map->map[ray->map_y]))
+	else if (x < 0 || x >= ft_strlen(map->map[y]))
 		return (0);
-	else if (map->map[ray->map_y][ray->map_x] == '1')
+	else if (map->map[y][x] == '1')
 		return (1);
 	return (0);
 }
@@ -18,7 +16,7 @@ int	dda(t_ray *ray, t_map *map)
 	int	i;
 
 	i = 0;
-	while ((i <= 50 && !is_wall(map, ray)))
+	while ((i <= 50 && !is_wall(map, ray->map_x, ray->map_y)))
 	{
 		if (ray->side_x < ray->side_y)
 		{
@@ -56,11 +54,6 @@ void	line_handle(t_ray *ray, t_player *player, float x)
 	ray->line_end = (ray->line_height >> 1) + (WIN_H >> 1);
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
-	// if (ray->side == 0)
-	// 	ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
-	// else
-	// 	ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
-	// ray->wall_x -= (int)ray->wall_x;
 }
 
 void	handle_angle(t_player *player)
@@ -73,18 +66,19 @@ void	handle_angle(t_player *player)
 
 void	cast_ray(t_data *data)
 {
-	t_ray	ray;
-	int		i;
-	double	angle;
-	double	delta_angle;
-	double	end_angle;
+	t_ray			ray;
+	int				i;
+	double			angle;
+	static double	delta_angle;
+	double			end_angle;
 
 	i = 0;
 	mlx_clear_window(data->game, data->window, (mlx_color){.rgba = 0x0000FFFF});
 	handle_angle(&data->player);
 	angle = data->player.angle - 30;
 	end_angle = data->player.angle + 30;
-	delta_angle = 60.0 / WIN_W;
+	if (!delta_angle)
+		delta_angle = 60.0 / WIN_W;
 	render_bg(data);
 	while (angle <= end_angle)
 	{
@@ -96,10 +90,5 @@ void	cast_ray(t_data *data)
 		}
 		angle += delta_angle;
 	}
-	mlx_put_image_to_window(data->game, data->window,
-		data->textures[4].texture, 0, 0);
-	mlx_put_image_to_window(data->game, data->window, data->portal_images[CROSSHAIR],
-					 WIN_W >> 1, WIN_H >> 1);
-	mlx_put_transformed_image_to_window(data->game,
-		data->window, data->portal_images[PORTAL_LAUNCHER], 1000, 600, 1.7f, 1.7f, 0);
+	put_images_to_window(data);
 }

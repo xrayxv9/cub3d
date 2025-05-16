@@ -44,7 +44,7 @@ int	free_fail(t_data *data)
 	i = 0;
 	ret = 0;
 	if (data->portal_images[CROSSHAIR] && data->portal_images[BLUE_IMAGE]
-			&& data->portal_images[ORANGE_IMAGE])
+		&& data->portal_images[ORANGE_IMAGE])
 		return (0);
 	while (i++ < 3)
 	{
@@ -70,11 +70,11 @@ static void	init_all(t_data *data, int ac, char **av)
 		exit (0);
 	data->player.portals = init_portal();
 	data->portal_images[CROSSHAIR] = mlx_new_image_from_file(data->game,
-								   "bonus/textures/crosshair.png", NULL, NULL);
+			"bonus/textures/crosshair.png", NULL, NULL);
 	data->portal_images[BLUE_IMAGE] = mlx_new_image_from_file(data->game,
-									"bonus/textures/portals/blue.png", NULL, NULL);
+			"bonus/textures/portals/blue.png", NULL, NULL);
 	data->portal_images[ORANGE_IMAGE] = mlx_new_image_from_file(data->game,
-								"bonus/textures/portals/orange.png", NULL, NULL);
+			"bonus/textures/portals/orange.png", NULL, NULL);
 	data->portal_images[PORTAL_LAUNCHER] = mlx_new_image_from_file(data->game,
 			"bonus/textures/portal_launcher.png", NULL, NULL);
 	if (free_fail(data))

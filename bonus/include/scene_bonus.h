@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/16 12:28:56 by cmorel            #+#    #+#             */
+/*   Updated: 2025/05/16 13:33:40 by cmorel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SCENE_BONUS_H
 # define SCENE_BONUS_H
 
@@ -26,6 +38,7 @@ void	handle_pause_screen(t_data *data);
 
 void	error_scene(t_data *data, int i);
 void	destroy_scene(t_sc *scene, mlx_context game);
+void	get_mous_and_portal(t_data *data, int button, int *x, int *y);
 
 // load scene
 
