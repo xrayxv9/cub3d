@@ -59,7 +59,6 @@ t_double	init_side_portal(double touch_loc, t_portal *portal, int entry, int exi
 	if (portal[exit].dir == WEST)
 		dou.dx++;
 	dou.touch = touch_loc;
-	printf("entry : %d, exit : %d\n", portal[entry].dir, portal[exit].dir);
 	if (portal[entry].dir == NORTH)
 		north_portal(portal, exit, &dou);
 	else if (portal[entry].dir == SOUTH)
