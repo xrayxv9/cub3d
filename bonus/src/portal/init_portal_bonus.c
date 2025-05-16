@@ -63,9 +63,9 @@ t_double	reset_angle(t_portal *portals, t_ray *ray, int type, t_map *map)
 	if (portals[anti].dir == NORTH)
 		ray->map_y--;
 	if (portals[anti].dir == WEST)
-		ray->map_x--;
-	if (portals[anti].dir == EAST)
 		ray->map_x++;
+	if (portals[anti].dir == EAST)
+		ray->map_x--;
 	ray->angle = get_angle_tp(ray->angle, portals[type].dir, portals[anti].dir);
 	dou = init_ray_portal(ray, portals, ray->angle, type);
 	dda(ray, map);
