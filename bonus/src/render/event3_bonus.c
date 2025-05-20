@@ -1,10 +1,14 @@
 #include "cub3D_bonus.h"
+#include "libft.h"
 
 void	get_mous_and_portal(t_data *data, int button, int *x, int *y)
 {
 	mlx_mouse_get_pos(data->game, x, y);
 	if (data->is_game == GAME && button == 3 && !data->pause)
+	{
+	
 		portal_send(data, ORANGE);
+	}
 	else if (data->is_game == GAME && button == 1 && !data->pause)
 		portal_send(data, BLUE);
 }

@@ -4,13 +4,21 @@ void	portal_send(t_data *data, int type)
 {
 	t_ray		ray;
 	t_portal	*portals;
+	int			i;
 
 	portals = data->player.portals;
 	init_dda(&ray, data->player.x, data->player.y, data->player.angle);
 	dda(&ray, &data->map);
 	line_handle(&ray, &data->player, data->player.angle);
-	if (!check_portal_coo(&ray, data, NULL, set_dir(&ray)))
-		init_coo(portals, &ray, type);
+	i = portal_find(portals, ray.map_x, ray.map_y, set_dir(&ray));
+	if (portals[type].exist && i == type)
+	{
+		ft_memset((char *)&portals[type], -1, sizeof(t_portal));
+		portals[type].exist = 0;
+	}
+	else
+		if (!check_portal_coo(&ray, data, NULL, set_dir(&ray)))
+			init_coo(portals, &ray, type);
 }
 
 mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir)
