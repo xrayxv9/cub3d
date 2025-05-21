@@ -1,3 +1,4 @@
+#include "raycast_bonus.h"
 #include <cub3D_bonus.h>
 
 void	portal_send(t_data *data, int type)
@@ -19,6 +20,7 @@ void	portal_send(t_data *data, int type)
 	else
 		if (!check_portal_coo(&ray, data, NULL, set_dir(&ray)))
 			init_coo(portals, &ray, type);
+	cast_ray(data);
 }
 
 mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir)

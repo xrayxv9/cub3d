@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:29:01 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 15:41:30 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:42:00 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ typedef struct s_data
 	int						keyboard_input;
 	bool					pause;
 	bool					minimap;
+	long long				curr_timestamp;
+	long long				timestamp_last_frame;
 
 	t_image					textures[TEXTURES_NUMBER];
 	t_sc					scene;

@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:36 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:28:37 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/21 15:02:46 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <pthread.h>
+# include <sys/time.h>
 # include <SDL2/SDL_scancode.h>
 # include "../../MacroLibX/includes/mlx_extended.h"
 # include "../../MacroLibX/includes/mlx.h"
@@ -32,6 +33,7 @@
 
 # define WIN_H 1080
 # define WIN_W 1920
+# define FPS 160
 # define VER 1
 # define HOR 0
 # define ARGS_ERROR "Please ensure that you give a map\n"

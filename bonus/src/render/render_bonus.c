@@ -9,7 +9,7 @@ void	render_celling(t_data *data, mlx_color color)
 	int	j;
 
 	i = 0;
-	while (i <= WIN_H / 2)
+	while (i <= WIN_H >> 1)
 	{
 		j = 0;
 		while (WIN_W > j)
@@ -27,7 +27,7 @@ void	render_floor(t_data *data, mlx_color color)
 	int	i;
 	int	j;
 
-	i = WIN_H / 2;
+	i = WIN_H >> 1;
 	while (i < WIN_H)
 	{
 		j = 0;

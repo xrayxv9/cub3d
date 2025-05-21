@@ -8,12 +8,25 @@ static void	init_window(t_data *data)
 	data->info.title = "portal";
 }
 
+long long	timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
 static void	update(t_data *data)
 {
 	if (data->is_game == MENU)
 		handle_scene(data);
 	else if (data->is_game == GAME)
 	{
+		data->curr_timestamp = timestamp();
+		if (data->curr_timestamp < data->timestamp_last_frame + 1000 / FPS)
+			usleep((data->timestamp_last_frame
+					+ 1000 / FPS - data->curr_timestamp) * 1000);
+		data->timestamp_last_frame = data->curr_timestamp;
 		if (!data->pause)
 		{
 			handle_mouse(data, 0);
@@ -41,12 +54,12 @@ int	free_fail(t_data *data)
 	int			i;
 	int			ret;
 
-	i = 0;
+	i = -1;
 	ret = 0;
 	if (data->portal_images[CROSSHAIR] && data->portal_images[BLUE_IMAGE]
 		&& data->portal_images[ORANGE_IMAGE])
 		return (0);
-	while (i++ < 3)
+	while (++i < 3)
 	{
 		if (data->portal_images[i])
 		{
@@ -97,6 +110,7 @@ int	main(int ac, char **av)
 	data.keyboard_input = WASD;
 	mlx_set_fps_goal(data.game, 60);
 	data.window = mlx_new_window(data.game, &data.info);
+	data.timestamp_last_frame = timestamp();
 	mlx_add_loop_hook(data.game, (void *)update, &data);
 	event(&data);
 	mlx_loop(data.game);
