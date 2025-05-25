@@ -17,7 +17,7 @@ void	show(t_ray *ray, t_data *data, t_save_info *save, t_current *current)
 		if (current->loop)
 		{
 			if (!(both(data->player.portals)
-				&& is_black(&current->color)))
+					&& is_black(&current->color)))
 				mlx_set_image_pixel(data->game, data->textures[4].texture,
 					save->x_image, save->y_image, current->color);
 		}
@@ -53,7 +53,8 @@ void	render_wall_portal(t_data *data, t_ray ray, float angle, int type)
 	t_save_info	save_between_rays;
 
 	dist = ray.wall_distance;
-	save_between_rays = reset_angle(data->player.portals, &ray, type, &data->map);
+	save_between_rays = reset_angle(data->player.portals,
+			&ray, type, &data->map);
 	dir = set_dir(&ray);
 	current.ray = &ray;
 	save.y_image = ray.line_start;

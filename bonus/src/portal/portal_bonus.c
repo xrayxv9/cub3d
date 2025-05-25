@@ -1,5 +1,4 @@
-#include "raycast_bonus.h"
-#include <cub3D_bonus.h>
+#include "cub3D_bonus.h"
 
 void	portal_send(t_data *data, int type)
 {
@@ -30,7 +29,7 @@ mlx_image	check_portal_coo(t_ray *ray, t_data *data, mlx_image image, int dir)
 	portals = data->player.portals;
 	if (ray->map_x == portals[BLUE].x && ray->map_y == portals[BLUE].y
 		&& dir == portals[BLUE].dir)
-		return (data->portal_images[BLUE_IMAGE]);
+		return (data->portal_images[data->portal_frame_ctr]);
 	else if (ray->map_x == portals[ORANGE].x && ray->map_y == portals[ORANGE].y
 		&& dir == portals[ORANGE].dir)
 		return (data->portal_images[ORANGE_IMAGE]);
