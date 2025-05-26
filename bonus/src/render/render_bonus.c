@@ -1,7 +1,16 @@
-#include "render_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 16:57:50 by mpendilh          #+#    #+#             */
+/*   Updated: 2025/05/26 16:57:50 by mpendilh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
-#include "portal_bonus.h"
-#include "struct_bonus.h"
 
 void	render_celling(t_data *data, mlx_color color)
 {

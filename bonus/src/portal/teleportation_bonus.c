@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   teleportation_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 16:56:07 by mpendilh          #+#    #+#             */
+/*   Updated: 2025/05/26 16:56:07 by mpendilh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
-#include "struct_bonus.h"
 
 static int	is_good_angle(t_player *player, int tmp)
 {
@@ -18,7 +29,8 @@ static int	is_good_angle(t_player *player, int tmp)
 	else if (player->x < portal.x && (int)player->y == portal.y
 		&& portal.dir == EAST)
 		return (1);
-	else return (0);
+	else
+		return (0);
 }
 
 static int	get_portal(t_player *player)

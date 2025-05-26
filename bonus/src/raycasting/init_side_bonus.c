@@ -1,5 +1,16 @@
-#include "struct_bonus.h"
-#include <cub3D_bonus.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_side_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 16:57:04 by mpendilh          #+#    #+#             */
+/*   Updated: 2025/05/26 16:57:05 by mpendilh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3D_bonus.h"
 
 void	west_portal(t_portal *portal, int exit, t_save_info *save)
 {
