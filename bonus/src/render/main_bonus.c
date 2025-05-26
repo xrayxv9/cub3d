@@ -1,6 +1,4 @@
 #include "cub3D_bonus.h"
-#include "raycast_bonus.h"
-#include "struct_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -10,39 +8,18 @@ static void	init_window(t_data *data)
 	data->info.title = "portal";
 }
 
-long long	timestamp(void)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
 static void	update(t_data *data)
 {
 	if (data->is_game == MENU)
 		handle_scene(data);
 	else if (data->is_game == GAME)
 	{
-		data->curr_timestamp = timestamp();
-		if (data->curr_timestamp < data->timestamp_last_frame + 1000 / FPS)
-		{
-			if (data->portal_frame_ctr > PORTAL_FRAME - 1)
-				data->portal_frame_ctr = BLUE_IMAGE_1;
-			usleep((data->timestamp_last_frame
-					+ 1000 / FPS - data->curr_timestamp) * 1000);
-			data->portal_frame_ctr++;
-			cast_ray(data);
-		}
-		data->timestamp_last_frame = data->curr_timestamp;
+		handle_frame_limiter(data);
 		if (!data->pause)
 		{
 			handle_mouse(data, 0);
 			handle_player_move(&data->player);
-			if (data->player.a_move || data->player.d_move
-				|| data->player.s_move || data->player.w_move)
-				calculate_speed(&data->player,
-					data->player.save_angle, &data->player.save_angle);
+			handle_move(data);
 			data->player.angle += data->player.move_angle;
 			teleport_collision(&data->player, &data->map);
 			handle_mouse(data, 1);
@@ -55,40 +32,6 @@ static void	update(t_data *data)
 		if (data->pause)
 			handle_pause_screen(data);
 	}
-}
-
-int	init_portal_textures(t_data *data)
-{
-	int		fd;
-	int		i;
-	char	*tmp;
-	char	*tmp2;
-
-	i = BLUE_IMAGE_1;
-	while (i < PORTAL_FRAME + BLUE_IMAGE_1)
-	{
-		tmp = ft_strjoin("bonus/textures/portals/blue", ft_itoa(i));
-		tmp2 = ft_strjoin(tmp, ".png");
-		free(tmp);
-		fd = open(tmp2, O_RDONLY);
-		if (fd == -1)
-		{
-			free(tmp2);
-			return (0);
-		}
-		close(fd);
-		data->portal_images[i] = mlx_new_image_from_file
-			(data->game, tmp2, NULL, NULL);
-		free(tmp2);
-		i++;
-	}
-	data->portal_images[CROSSHAIR] = mlx_new_image_from_file(data->game,
-			"bonus/textures/crosshair.png", NULL, NULL);
-	data->portal_images[ORANGE_IMAGE] = mlx_new_image_from_file(data->game,
-			"bonus/textures/portals/orange.png", NULL, NULL);
-	data->portal_images[PORTAL_LAUNCHER] = mlx_new_image_from_file(data->game,
-			"bonus/textures/portal_launcher.png", NULL, NULL);
-	return (1);
 }
 
 static void	init_all(t_data *data, int ac, char **av)
@@ -104,6 +47,8 @@ static void	init_all(t_data *data, int ac, char **av)
 		exit (0);
 	data->player.portals = init_portal();
 	init_portal_textures(data);
+	init_portal_textures2(data);
+	init_portal_textures3(data);
 	if (!load_pause_screen(data->game, &data->scene))
 		return (error_scene(data, 1));
 }
@@ -116,7 +61,8 @@ int	main(int ac, char **av)
 	init_all(&data, ac, av);
 	data.scene.sensi = 0.23f;
 	minimap(&data);
-	data.portal_frame_ctr = BLUE_IMAGE_1;
+	data.blue_portal_frame_ctr = BLUE_IMAGE_1;
+	data.orange_portal_frame_ctr = ORANGE_IMAGE_1;
 	data.minimap = false;
 	data.is_game = MENU;
 	data.scene.menu = FIRST;

@@ -3,8 +3,8 @@ SO ./bonus/textures/wall.png
 WE ./bonus/textures/wall.png
 EA ./bonus/textures/wall.png
 
-F 220,100,0
-C 225,30,0
+F 22,22,22
+C 51,51,51
 
 1111111111111111111111
 11111111110000000000011

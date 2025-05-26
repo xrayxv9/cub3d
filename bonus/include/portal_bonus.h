@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:43 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 16:22:48 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/26 14:11:37 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@ int			is_black(mlx_color *color);
 int			portal_find(t_portal *portal, int x, int y, int dir);
 
 void		teleport_collision(t_player *player, t_map *map);
+
+int			init_portal_textures(t_data *data);
+int			init_portal_textures2(t_data *data);
+int			init_portal_textures3(t_data *data);
 
 #endif

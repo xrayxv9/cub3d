@@ -74,8 +74,13 @@ void	teleport_collision(t_player *player, t_map *map)
 	if (map->map[(int)(player->y + player->speed_y)]
 		[(int)(player->x + player->speed_x)] != '1')
 	{
-		player->x += player->speed_x;
-		player->y += player->speed_y;
+		if (map->map[(int)(player->y + player->speed_y)][(int)player->x] != '1'
+			&& map->map[(int)player->y]
+			[(int)(player->x + player->speed_x)] != '1')
+		{
+			player->x += player->speed_x;
+			player->y += player->speed_y;
+		}
 	}
 	if (player->portals[BLUE].exist
 		&& player->portals[ORANGE].exist)
@@ -83,10 +88,8 @@ void	teleport_collision(t_player *player, t_map *map)
 		tmp = get_portal(player);
 		if (tmp != -1 && is_good_angle(player, tmp))
 		{
-			printf("color : %d, angle before: %f, dir : %d\n", tmp, player->angle, player->portals[tmp].dir);
 			player->angle = get_angle_tp(player->angle,
 					player->portals[tmp].dir, player->portals[!tmp].dir);
-			printf("color : %d, angle after : %f, dir anti : %d\n", !tmp, player->angle, player->portals[!tmp].dir);
 			add_coo(player, !tmp);
 		}
 	}

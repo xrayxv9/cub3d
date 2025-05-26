@@ -74,6 +74,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(RAYCASTING_PATH_BONUS)/init_side_bonus.c \
 			 $(RENDER_PATH_BONUS)/main_bonus.c \
 			 $(RENDER_PATH_BONUS)/utils_bonus.c \
+			 $(RENDER_PATH_BONUS)/utils2_bonus.c \
 			 $(RENDER_PATH_BONUS)/event_bonus.c \
 			 $(RENDER_PATH_BONUS)/event2_bonus.c \
 			 $(RENDER_PATH_BONUS)/event3_bonus.c \
@@ -88,6 +89,7 @@ SRCS_BONUS = $(PARSING_PATH_BONUS)/parsing_bonus.c \
 			 $(SCENE_PATH_BONUS)/display2_bonus.c \
 			 $(MINIMAP_PATH_BONUS)/minimap_bonus.c \
 			 $(PORTAL_PATH_BONUS)/portal_bonus.c \
+			 $(PORTAL_PATH_BONUS)/portal_launcher_bonus.c \
 			 $(PORTAL_PATH_BONUS)/render_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/init_portal_bonus.c \
 			 $(PORTAL_PATH_BONUS)/calcul_portal_bonus.c \

@@ -1,4 +1,5 @@
 #include "cub3D_bonus.h"
+#include "libft.h"
 
 int	check_textures(char **textures)
 {
@@ -21,7 +22,8 @@ int	check_color(char **split_rgba)
 	{
 		j = 0;
 		if (ft_strlen(split_rgba[i]) > 3)
-			return (0);
+			if (split_rgba[i][ft_strlen(split_rgba[i]) - 1] != '\n')
+				return (0);
 		while (split_rgba[i][j])
 		{
 			if (!ft_isdigit(split_rgba[i][j]) && split_rgba[i][j] != '\n')

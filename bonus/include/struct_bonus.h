@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:29:01 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/25 17:25:01 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:15:02 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 # define SECOND_MENU_BUTTON 2
 # define THIRD_MENU_BUTTON 12
 # define PAUSE_MENU 3
-# define PORTAL 7
-# define PORTAL_FRAME 4
+# define PORTAL 10
+# define BLUE_PORTAL_FRAME 4
+# define ORANGE_PORTAL_FRAME 3
 
 // enum
 
@@ -98,7 +99,9 @@ typedef enum e_portal
 	BLUE_IMAGE_2,
 	BLUE_IMAGE_3,
 	BLUE_IMAGE_4,
-	ORANGE_IMAGE,
+	ORANGE_IMAGE_1,
+	ORANGE_IMAGE_2,
+	ORANGE_IMAGE_3,
 	PORTAL_LAUNCHER
 }	t_portal_enum;
 
@@ -187,7 +190,9 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	int						portal_frame_ctr;
+	int						counter;
+	int						blue_portal_frame_ctr;
+	int						orange_portal_frame_ctr;
 	int						is_game;
 	int						keyboard_input;
 	bool					pause;
