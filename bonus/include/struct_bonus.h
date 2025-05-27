@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:29:01 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/26 14:15:02 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:54:46 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,13 @@ typedef enum e_angle
 }	t_angle;
 
 // structs
+
+typedef struct s_tmp
+{
+	char	*tmp1;
+	char	*tmp2;
+	char	*tmp3;
+}	t_tmp;
 
 typedef struct s_image
 {

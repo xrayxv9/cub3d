@@ -6,7 +6,7 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:57:32 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/26 16:57:33 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:46:10 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ static void	init_all(t_data *data, int ac, char **av)
 		return (error_scene(data, 1));
 }
 
+static void	destroy_all_textures(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i && data->portal_images[i])
+		mlx_destroy_image(data->game, data->portal_images[i]);
+	if (data->image)
+		mlx_destroy_image(data->game, data->image);
+	if (data->minimap_image)
+		mlx_destroy_image(data->game, data->minimap_image);
+	if (data->player_pos)
+		mlx_destroy_image(data->game, data->player_pos);
+}
+
 int	main(int ac, char **av)
 {
 	t_data		data;
@@ -86,6 +101,7 @@ int	main(int ac, char **av)
 	event(&data);
 	mlx_loop(data.game);
 	free(data.player.portals);
+	destroy_all_textures(&data);
 	destroy_textures_free_tab(data.textures, data.map.map, data.game);
 	destroy_scene(&data.scene, data.game);
 	return (0);
