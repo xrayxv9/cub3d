@@ -6,11 +6,12 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:57:32 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/30 14:13:24 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:06:45 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+#include "parsing_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -93,6 +94,11 @@ int	main(int ac, char **av)
 	t_data		data;
 
 	ft_bzero((char *)&data, sizeof(t_data));
+	if (ac != 2)
+	{
+		ft_putstr_fd(ERROR ARGS_ERROR, 2);
+		return (0);
+	}
 	init_all(&data, ac, av);
 	minimap(&data);
 	mlx_set_fps_goal(data.game, 60);
