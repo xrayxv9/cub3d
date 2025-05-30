@@ -6,7 +6,7 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:56:27 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/26 16:56:28 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:16:20 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	check_textures(char **textures)
 		return (0);
 	if (!ft_strcmp(textures[0], "\n"))
 		return (1);
-	if (tab_len(textures) != 2)
-		return (0);
 	return (1);
 }
 
@@ -44,4 +42,9 @@ int	check_color(char **split_rgba)
 		i++;
 	}
 	return (1);
+}
+
+int	is_position(int c)
+{
+	return (c == 'W' || c == 'E' || c == 'S' || c == 'N');
 }

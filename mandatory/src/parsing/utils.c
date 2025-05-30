@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:27:10 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:27:11 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:15:42 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	map_is_start(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n'
-			&& line[i] != '0' && line[i] != '1')
+			&& line[i] != '0' && line[i] != '1' && !is_position(line[i]))
 			return (0);
 		i++;
 	}
