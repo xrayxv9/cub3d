@@ -6,7 +6,7 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:57:50 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/26 16:57:50 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:47:58 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	render_walls(t_data *data, t_ray *ray, int x_image)
 	portals = data->player.portals;
 	dir = set_dir(ray);
 	type = portal_find(data->player.portals, ray->map_x, ray->map_y, dir);
-	if (type != -1 && both(portals))
+	if (type != -1 && both(portals) && ray->touch_loc > 0.31
+		&& ray->touch_loc < 0.75)
 		render_wall_portal(data, *ray, x_image, type);
 	current.ray = ray;
 	save.y_image = ray->line_start;
