@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:26:57 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:26:58 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 10:42:42 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,11 @@ typedef struct s_ray
 	double	touch_loc;
 	double	line_start_tmp;
 }	t_ray;
+
+typedef struct s_angle
+{
+	double	start_angle;
+	double	end_angle;
+}	t_ang;
 
 #endif

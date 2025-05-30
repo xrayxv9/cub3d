@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:27:16 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:27:18 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 10:41:13 by cmorel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_wall(t_map *map, t_ray *ray)
 	return (0);
 }
 
-int	main_while(t_ray *ray, t_map *map)
+int	main_while(t_ray *ray, t_map *map, int x, int y)
 {
 	int	i;
 
@@ -45,33 +45,26 @@ int	main_while(t_ray *ray, t_map *map)
 		}
 		i++;
 	}
-	if (i == 51)
+	if (i == 51 || !simple_len(map->map, x, y))
 		return (0);
 	return (1);
 }
 
-void	line_handle(t_ray *ray, t_player *player, float x)
+void	line_handle(t_ray *ray)
 {
 	if (ray->side == VER)
-		ray->wall_distance = (ray->side_x - ray->delta_x)
-			* cos(radian(player->angle - x));
+		ray->wall_distance = (ray->side_x - ray->delta_x);
 	else
-		ray->wall_distance = (ray->side_y - ray->delta_y)
-			* cos(radian(player->angle - x));
-	ray->line_height = (int)(WIN_H / ray->wall_distance);
-	ray->line_start_tmp = WIN_H * 0.5 - ray->line_height * 0.5;
+		ray->wall_distance = (ray->side_y - ray->delta_y);
+	ray->line_height = (int)(WIN_H / ray->wall_distance) * 1.25;
+	ray->line_start_tmp = (WIN_H >> 1) - (ray->line_height >> 1);
 	if (ray->line_start_tmp < 0)
 		ray->line_start = 0;
 	else
 		ray->line_start = ray->line_start_tmp;
-	ray->line_end = ray->line_height * 0.5 + WIN_H * 0.5;
+	ray->line_end = (ray->line_height >> 1) + (WIN_H >> 1);
 	if (ray->line_end >= WIN_H)
 		ray->line_end = WIN_H - 1;
-	if (ray->side == 0)
-		ray->wall_x = player->y + ray->wall_distance * ray->dir_y;
-	else
-		ray->wall_x = player->x + ray->wall_distance * ray->dir_x;
-	ray->wall_x -= (int)ray->wall_x;
 }
 
 void	handle_angle(t_player *player)
@@ -82,31 +75,31 @@ void	handle_angle(t_player *player)
 		player->angle = 360 + player->angle;
 }
 
-void	cast_ray(t_data *data)
+void	cast_ray(t_data *d)
 {
-	t_ray	ray;
-	int		i;
-	double	angle;
-	double	delta_angle;
-	double	end_angle;
+	t_ray			ray;
+	int				i;
+	t_ang			angles;
+	static double	delta_angle;
 
 	i = 0;
-	mlx_clear_window(data->game, data->window, (mlx_color){.rgba = 0x0000FFFF});
-	handle_angle(&data->player);
-	angle = data->player.angle - 30;
-	end_angle = data->player.angle + 30;
-	delta_angle = 60.0 / WIN_W;
-	render_bg(data);
-	while (angle <= end_angle)
+	mlx_clear_window(d->game, d->window, (mlx_color){.rgba = 0x0000FFFF});
+	handle_angle(&d->player);
+	angles.start_angle = d->player.angle - 30;
+	angles.end_angle = d->player.angle + 30;
+	if (!delta_angle)
+		delta_angle = 60.0 / WIN_W;
+	render_bg(d);
+	while (angles.start_angle <= angles.end_angle)
 	{
-		init(&ray, &data->player, angle);
-		if (main_while(&ray, &data->map))
+		init(&ray, &d->player, angles.start_angle);
+		if (main_while(&ray, &d->map, (int)d->player.x, (int)d->player.y))
 		{
-			line_handle(&ray, &(data->player), angle);
-			render_walls(data, &ray, i++);
+			line_handle(&ray);
+			render_walls(d, &ray, i++);
 		}
-		angle += delta_angle;
+		angles.start_angle += delta_angle;
 	}
-	mlx_put_image_to_window(data->game, data->window,
-		data->textures[4].texture, 0, 0);
+	mlx_put_image_to_window(d->game, d->window,
+		d->textures[4].texture, 0, 0);
 }
