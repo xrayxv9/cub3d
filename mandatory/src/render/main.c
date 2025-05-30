@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:27:28 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:27:29 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 13:50:40 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	ft_bzero((char *)&data, sizeof(t_data));
+	data.player.angle = -1;
 	init_window(&data);
 	data.textures[4].texture = mlx_new_image(data.game, WIN_W, WIN_H);
 	if (!parsing(&data, av[1]))

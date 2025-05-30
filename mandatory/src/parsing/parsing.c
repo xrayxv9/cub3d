@@ -6,13 +6,13 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:27:01 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:27:02 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:37:41 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include "cub3D.h"
 
-int	check_all_map(char *map_to_split, t_map *map)
+static int	check_all_map(char *map_to_split, t_map *map)
 {
 	int	i;
 	int	j;
@@ -38,12 +38,7 @@ int	check_all_map(char *map_to_split, t_map *map)
 	return (1);
 }
 
-int	is_position(int c)
-{
-	return (c == 'W' || c == 'E' || c == 'S' || c == 'N');
-}
-
-void	set_position(int c, t_player *player, int *counter, t_vector *vec)
+static void	set_position(int c, t_player *player, t_vector *vec)
 {
 	player->x = vec->j + 0.5f;
 	player->y = vec->i + 0.5f;
@@ -55,17 +50,14 @@ void	set_position(int c, t_player *player, int *counter, t_vector *vec)
 		player->angle = SPAWN_NORTH;
 	if (c == 'S')
 		player->angle = SPAWN_SOUTH;
-	(*counter)++;
 }
 
-int	set_angle(t_map *map, t_player *player)
+static int	set_angle(t_map *map, t_player *player)
 {
-	int			counter;
 	t_vector	vec;
 
 	ft_bzero((char *)&vec, sizeof(t_vector));
 	map->h = tab_len(map->map);
-	counter = 0;
 	while (map->map[vec.i])
 	{
 		vec.j = 0;
@@ -73,15 +65,38 @@ int	set_angle(t_map *map, t_player *player)
 		{
 			if (is_position(map->map[vec.i][vec.j]))
 			{
-				if (player->angle == -1 && !counter)
+				if (player->angle == -1)
 					set_position(map->map[vec.i][vec.j],
-						player, &counter, &vec);
-				else if (counter >= 2)
-					return (0);
+						player, &vec);
+				else
+					return (free_tab(map->map));
 			}
 			(vec.j)++;
 		}
 		(vec.i)++;
+	}
+	if (player->angle == -1)
+		return (free_tab(map->map));
+	return (1);
+}
+
+static int	check_player(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (is_position(map->map[i][j]))
+				if (!check_around(map->map, i, j))
+					return (free_tab(map->map));
+			j++;
+		}
+		i++;
 	}
 	return (1);
 }
@@ -90,12 +105,10 @@ int	parsing(t_data *data, char *filename)
 {
 	t_parse	parse;
 
-	data->player.angle = -1;
 	ft_bzero((char *)&parse, sizeof(t_parse));
 	if (!check_file(filename, &parse))
 		parsing_error(&parse, 0);
-	if (!create_textures(&parse, data)
-		&& parse.counter == 6)
+	if (!create_textures(&parse, data) && parse.counter == 6)
 		parsing_error(&parse, 1);
 	if (parse.counter == -1)
 		parsing_error(&parse, 8);
@@ -107,9 +120,10 @@ int	parsing(t_data *data, char *filename)
 		parsing_error(&parse, 6);
 	if (!create_map(&parse.map_to_split, parse.fd))
 		parsing_error(&parse, 4);
-	if (!check_all_map(parse.map_to_split, &data->map))
+	if (!check_all_map(parse.map_to_split, &data->map)
+		|| !check_player(&data->map))
 		parsing_error(&parse, 5);
-	if (!set_angle(&data->map, &data->player) || data->player.angle == -1)
+	if (!set_angle(&data->map, &data->player))
 		parsing_error(&parse, 7);
 	return (1);
 }

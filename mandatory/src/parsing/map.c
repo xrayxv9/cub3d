@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:26:19 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:26:19 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:35:36 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	create_map(char **map_to_split, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (ft_is_isspace(line[0]))
+		{
+			free_gnl(fd, line);
+			return (1);
+		}
 		if (!check_line_character(line))
 			return (free_gnl(fd, line));
 		tmp = ft_strjoin((*map_to_split), line);

@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:26:41 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/16 12:26:42 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:26:05 by mpendilh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ on the textures\n"
 : '0' or '1'\n"
 # define CLOSE_MAP_ERROR "Please ensure that the map is entirely close\n"
 # define NO_MAP_ERROR "Please ensure that there is a map\n"
-# define MULTI_SPAWN_ERROR "Please ensure that there is only one player spawn\n"
+# define MULTI_SPAWN_ERROR "Please ensure that there is at least and \
+only one player spawn\n"
 
 // typedef for structs
 
@@ -65,6 +66,7 @@ int			map_is_start(char *line);
 int			is_map_character(int c);
 int			check_textures(char **textures);
 int			check_color(char **split_rgba);
+int			is_position(int c);
 
 // map
 
