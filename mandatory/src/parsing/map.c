@@ -37,7 +37,7 @@ int	check_line(char *line)
 	{
 		if (line[i] == '0')
 			return (0);
-		if (line[i] == '1')
+		if (line[i] == '1' || ft_is_isspace(line[i]))
 			counter++;
 		i++;
 	}

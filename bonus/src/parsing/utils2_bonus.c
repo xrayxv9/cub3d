@@ -30,6 +30,8 @@ int	check_color(char **split_rgba)
 	while (split_rgba[i])
 	{
 		j = 0;
+		if (split_rgba[i][j] == '\n')
+			return (0);
 		if (ft_strlen(split_rgba[i]) > 3)
 			if (split_rgba[i][ft_strlen(split_rgba[i]) - 1] != '\n')
 				return (0);

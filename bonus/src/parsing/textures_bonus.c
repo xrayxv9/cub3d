@@ -17,6 +17,8 @@ static int	load_floor_sky(mlx_color *color, char *rgba,
 {
 	char	**split_rgba;
 
+	if (color->a != 0)
+		return (0);
 	split_rgba = ft_split(rgba, ',');
 	if (!split_rgba)
 		return (0);
@@ -54,8 +56,15 @@ static int	load_image(mlx_image *image, char *filename,
 
 static int	fill_with_textures2(t_data *data, int *counter, char **textures)
 {
+	if (!ft_strcmp(textures[0], "WE"))
+		if (data->textures[WEST].texture
+			|| !load_image(&data->textures[WEST].texture,
+				textures[1], data->game, counter))
+			return (destroy_textures_free_tab(data->textures,
+					textures, data->game));
 	if (!ft_strcmp(textures[0], "EA"))
-		if (!load_image(&data->textures[EAST].texture,
+		if (data->textures[EAST].texture
+			|| !load_image(&data->textures[EAST].texture,
 				textures[1], data->game, counter))
 			return (destroy_textures_free_tab(data->textures,
 					textures, data->game));
@@ -81,17 +90,14 @@ static int	fill_with_textures(char *line, t_data *data, int *counter)
 		return (destroy_textures_free_tab(data->textures,
 				textures, data->game));
 	if (!ft_strcmp(textures[0], "NO"))
-		if (!load_image(&data->textures[NORTH].texture,
+		if (data->textures[NORTH].texture
+			|| !load_image(&data->textures[NORTH].texture,
 				textures[1], data->game, counter))
 			return (destroy_textures_free_tab(data->textures,
 					textures, data->game));
 	if (!ft_strcmp(textures[0], "SO"))
-		if (!load_image(&data->textures[SOUTH].texture,
-				textures[1], data->game, counter))
-			return (destroy_textures_free_tab(data->textures,
-					textures, data->game));
-	if (!ft_strcmp(textures[0], "WE"))
-		if (!load_image(&data->textures[WEST].texture,
+		if (data->textures[SOUTH].texture
+			|| !load_image(&data->textures[SOUTH].texture,
 				textures[1], data->game, counter))
 			return (destroy_textures_free_tab(data->textures,
 					textures, data->game));

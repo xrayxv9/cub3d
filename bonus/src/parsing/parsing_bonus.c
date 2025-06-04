@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
-#include "parsing_bonus.h"
 
 static int	check_all_map(char *map_to_split, t_map *map)
 {
