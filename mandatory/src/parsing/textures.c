@@ -119,6 +119,8 @@ int	create_textures(t_parse *parse, t_data *data)
 		free(line);
 		line = get_next_line(parse->fd);
 	}
+	if (parse->counter != 6)
+		return (free_gnl(parse->fd, line));
 	parse->map_to_split = line;
 	return (1);
 }
