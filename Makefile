@@ -1,5 +1,5 @@
-CFLAGS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I mandatory/include -I libft -O2
-CFLAGS_BONUS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I bonus/include -I libft -O2
+CFLAGS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I mandatory/include -I libft -O2 -pg
+CFLAGS_BONUS = -g -Wall -Wextra -Werror -I MacroLibX/includes -I bonus/include -I libft -O2 -pg
 
 NAME = cub3D
 NAME_BONUS = cub3D_bonus

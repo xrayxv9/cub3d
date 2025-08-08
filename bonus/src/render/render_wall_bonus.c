@@ -6,7 +6,7 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:57:59 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/30 16:41:25 by cmorel           ###   ########.fr       */
+/*   Updated: 2025/08/08 02:48:16 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	show(t_ray *ray, t_data *data, t_save_info *save, t_current *current)
 	mlx_image	image;
 	int			dir;
 	double		delta;
+	int			bo;
 
 	dir = set_dir(ray);
 	image = check_portal_coo(ray, data, data->textures[dir].texture, dir);
+	bo = both(data->player.portals) && current->loop;
 	while (ray->line_end >= save->y_image)
 	{
 		delta = (save->y_image - ray->line_start_tmp)
@@ -28,8 +30,7 @@ void	show(t_ray *ray, t_data *data, t_save_info *save, t_current *current)
 				ray->touch_loc * 1000, delta).rgba;
 		if (current->loop)
 		{
-			if (!(both(data->player.portals)
-					&& is_black(&current->color)))
+			if (!(bo && is_black(&current->color)))
 				mlx_set_image_pixel(data->game, data->textures[4].texture,
 					save->x_image, save->y_image, current->color);
 		}

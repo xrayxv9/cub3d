@@ -6,7 +6,7 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:56:19 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/30 13:44:08 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/08/08 01:40:31 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	parsing_error(t_parse *parse, int i)
 	exit(EXIT_FAILURE);
 }
 
-int	destroy_textures_free_tab(t_image textures[5],
+int	destroy_textures_free_tab(t_image *textures,
 		char **tab, mlx_context game)
 {
 	int	i;

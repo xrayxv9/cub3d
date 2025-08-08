@@ -6,7 +6,7 @@
 /*   By: cmorel <cmorel@42angouleme.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:26:41 by cmorel            #+#    #+#             */
-/*   Updated: 2025/05/30 17:11:54 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/08/08 01:37:18 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			create_textures(t_parse *parse, t_data *data);
 
 void		parsing_error(t_parse *parse, int i);
 int			free_tab(char **tab);
-int			destroy_textures_free_tab(t_image textures[6],
+int			destroy_textures_free_tab(t_image *textures,
 				char **tab, mlx_context game);
 int			free_gnl(int fd, char *line);
 

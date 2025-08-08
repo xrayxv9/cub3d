@@ -6,12 +6,11 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:57:32 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/30 17:06:45 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/08/08 02:08:46 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
-#include "parsing_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 static void	init_window(t_data *data)
 {
@@ -23,6 +22,22 @@ static void	init_window(t_data *data)
 
 static void	update(t_data *data)
 {
+	t_player *player;
+    static unsigned long frame_count = 0;
+    static unsigned long last_fps = 0;
+    static time_t last_time = 0;
+    time_t now = time(NULL);
+
+    frame_count++;
+
+    // Affiche le FPS chaque seconde
+    if (now != last_time) {
+        printf("FPS: %lu\n", frame_count - last_fps);
+        last_fps = frame_count;
+        last_time = now;
+    }
+
+	player = &data->player;
 	if (data->is_game == MENU)
 		handle_scene(data);
 	else if (data->is_game == GAME)
@@ -31,13 +46,13 @@ static void	update(t_data *data)
 		if (!data->pause)
 		{
 			handle_mouse(data, 0);
-			handle_player_move(&data->player);
+			handle_player_move(player);
 			handle_move(data);
-			data->player.angle += data->player.move_angle;
-			teleport_collision(&data->player, &data->map);
+			player->angle += player->move_angle;
+			teleport_collision(player, &data->map);
 			handle_mouse(data, 1);
-			if (data->player.move_angle != 0
-				|| data->player.speed_x != 0 || data->player.speed_y != 0)
+			if (player->move_angle != 0
+				|| player->speed_x != 0 || player->speed_y != 0)
 				cast_ray(data);
 			if (data->minimap)
 				display_minimap(data);

@@ -6,11 +6,11 @@
 /*   By: mpendilh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:56:55 by mpendilh          #+#    #+#             */
-/*   Updated: 2025/05/26 16:56:55 by mpendilh         ###   ########.fr       */
+/*   Updated: 2025/08/08 01:49:52 by xray             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include <cub3D_bonus.h>
 
 void	init_step(t_ray *ray)
 {
